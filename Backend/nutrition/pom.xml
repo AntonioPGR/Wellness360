@@ -10,13 +10,14 @@
 	</parent>
 	<groupId>com.wellness360</groupId>
 	<artifactId>nutrition</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>nutrition</name>
-	<description>Demo project for Spring Boot</description>
+	<version>0.0.1</version>
+	<name>mvn clean flyway:migrate -Dflyway.configFiles=myFlywayConfig.confnutrition</name>
+	<description>A microsservice for wellness360 application that will handle the nutrition part</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
