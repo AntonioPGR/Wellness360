@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
-@Setter
+@Setter(value = AccessLevel.PRIVATE)
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
@@ -14,10 +14,10 @@ public class RecipeMediaEntity extends IdNUuidBasedEntity {
 
   // ATTRIBUTES
   @Column(name = "media_url", nullable = false, length = 150)
-  private String mediaUrl;
+  private String media_url;
   
   @Column(name = "media_type", nullable = false, length = 20)
-  private String mediaType;
+  private String media_type;
   
   // RELATIONSHIPS
   @ManyToOne

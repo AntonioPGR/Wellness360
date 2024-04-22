@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
-@Setter
+@Setter(value = AccessLevel.PRIVATE)
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
@@ -23,7 +23,7 @@ public class RecipeSectionEntity extends IdNUuidBasedEntity {
 
   @ManyToOne
   @JoinColumn(name = "included_recipe", referencedColumnName = "id", insertable = false, updatable = false)
-  private RecipeEntity includedRecipe;
+  private RecipeEntity included_recipe;
 
 }
 

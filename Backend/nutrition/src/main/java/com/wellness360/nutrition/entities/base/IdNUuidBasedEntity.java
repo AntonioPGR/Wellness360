@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.PrePersist;
+import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +17,7 @@ import lombok.Setter;
 @Inheritance
 @Entity
 @Getter
-@Setter
+@Setter(value = AccessLevel.PROTECTED)
 @EqualsAndHashCode
 public abstract class IdNUuidBasedEntity {
   

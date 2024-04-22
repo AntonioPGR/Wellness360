@@ -6,9 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Setter(value = AccessLevel.PRIVATE)
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "food")
 public class FoodEntity extends NameNDescriptionBasedEntity {
@@ -27,7 +25,7 @@ public class FoodEntity extends NameNDescriptionBasedEntity {
   private Float fats;
 
   @Column(name = "saturated_fats", nullable = false)
-  private Float saturatedFats;
+  private Float saturated_fats;
 
   @Column(name = "sodium", nullable = false)
   private Float sodium;
@@ -51,15 +49,19 @@ public class FoodEntity extends NameNDescriptionBasedEntity {
   )
   private Set<CategoryEntity> categories;
 
-  @OneToMany(mappedBy = "food")
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "food")
   private Set<RecipeEntity> recipes;
 
-  @OneToMany(mappedBy = "food")
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "food")
   private Set<PreferenceEntity> preferences;
 
-  @OneToMany(mappedBy = "food")
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "food")
   private Set<RestrictionEntity> restricions;
   
+  public FoodEntity(String name, String description) {
+    super(name, description);
+    //TODO Auto-generated constructor stub
+  }
 
 }
 

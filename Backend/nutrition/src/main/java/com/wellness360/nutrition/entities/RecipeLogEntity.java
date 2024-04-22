@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
-@Setter
+@Setter(value = AccessLevel.PRIVATE)
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
@@ -15,7 +15,7 @@ public class RecipeLogEntity extends IdNUuidBasedEntity {
 
   // ATTRIBUTES
   @Column(name = "user_id", nullable = false)
-  private Long userId;
+  private Long user_id;
 
   @Column(name = "date", nullable = false)
   private LocalDate date;

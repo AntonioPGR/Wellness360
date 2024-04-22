@@ -4,6 +4,7 @@ import java.util.Set;
 
 import com.wellness360.nutrition.entities.base.IdNUuidBasedEntity;
 import jakarta.persistence.Column;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -11,7 +12,7 @@ import jakarta.persistence.Table;
 import lombok.*;
 
 @Getter
-@Setter
+@Setter(value = AccessLevel.PRIVATE)
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
@@ -23,17 +24,17 @@ public class TagEntity extends IdNUuidBasedEntity {
   private String name;
 
   @Column(name = "image_url", nullable = false, length = 150)
-  private String imageUrl;
+  private String image_url;
 
   // RELASHIONSHIPS
   @ManyToOne
   @JoinColumn(name = "category_id", referencedColumnName = "id", insertable=false, updatable = false)
   private CategoryEntity category;
 
-  @OneToMany(mappedBy = "tag")
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "tag")
   private Set<FoodEntity> foods;
 
-  @OneToMany(mappedBy = "tag")
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "tag")
   private Set<RecipeEntity> recipes;
 
 }

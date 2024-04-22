@@ -6,16 +6,14 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Setter(value = AccessLevel.PRIVATE)
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "recipes")
 public class RecipeEntity extends NameNDescriptionBasedEntity {
 
   // ATTRIBUTES
   @Column(name = "post_user_id", nullable = false)
-  private Long postUserId;
+  private Long post_user_id;
   
   // RELATIONSHIPS
   @ManyToOne
@@ -30,26 +28,30 @@ public class RecipeEntity extends NameNDescriptionBasedEntity {
   )
   private Set<CategoryEntity> categories;
   
-  @OneToMany(mappedBy = "recipe")
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "recipe")
   private Set<FoodEntity> ingredients;
 
-  @OneToMany(mappedBy = "recipe")
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "recipe")
   private Set<PreferenceEntity> preferences;
 
-  @OneToMany(mappedBy = "recipe")
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "recipe")
   private Set<RestrictionEntity> restricions;
   
-  @OneToMany(mappedBy = "recipe")
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "recipe")
   private Set<RecipeLogEntity> logs;
 
-  @OneToMany(mappedBy = "recipe")
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "recipe")
   private Set<RecipeMediaEntity> media;
 
-  @OneToMany(mappedBy = "recipe")
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "recipe")
   private Set<RecipeSectionEntity> sections;
 
-  @OneToMany(mappedBy = "includedRecipe")
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "includedRecipe")
   private Set<RecipeSectionEntity> included_in_recipes;
+
+  public RecipeEntity(String name, String description) {
+    super(name, description);
+  }
 
 }
 

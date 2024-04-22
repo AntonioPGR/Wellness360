@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
-@Setter
+@Setter(value = AccessLevel.PRIVATE)
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode()
