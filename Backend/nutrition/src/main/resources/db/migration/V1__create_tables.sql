@@ -6,7 +6,6 @@ CREATE TABLE IF NOT EXISTS categories (
   description TEXT,
   image_url VARCHAR(150) NOT NULL
 );
-
 CREATE INDEX idx_uuid ON categories (uuid);
 
 -- TAGS
@@ -18,7 +17,6 @@ CREATE TABLE IF NOT EXISTS tags (
   image_url VARCHAR(150) NOT NULL,
   FOREIGN KEY (category_id) REFERENCES categories(id)
 );
-
 CREATE INDEX idx_uuid ON tags (uuid);
 
 -- FOOD
@@ -40,7 +38,6 @@ CREATE TABLE IF NOT EXISTS food (
   FOREIGN KEY (category_id) REFERENCES categories(id),
   FOREIGN KEY (tag_id) REFERENCES tags(id)
 );
-
 CREATE INDEX idx_uuid ON food (uuid);
 
 CREATE TABLE IF NOT EXISTS food_category (
@@ -61,7 +58,6 @@ CREATE TABLE IF NOT EXISTS recipes (
   description TEXT,
   FOREIGN KEY (tag_id) REFERENCES tags(id)
 );
-
 CREATE INDEX idx_uuid ON recipes (uuid);
 
 CREATE TABLE IF NOT EXISTS recipes_log (
@@ -72,7 +68,6 @@ CREATE TABLE IF NOT EXISTS recipes_log (
   date DATE NOT NULL,
   FOREIGN KEY (recipe_id) REFERENCES recipes(id)
 );
-
 CREATE INDEX idx_uuid ON recipes_log (uuid);
 
 CREATE TABLE IF NOT EXISTS recipes_media (
@@ -83,7 +78,6 @@ CREATE TABLE IF NOT EXISTS recipes_media (
   media_type VARCHAR(20) NOT NULL,
   FOREIGN KEY (recipe_id) REFERENCES recipes(id)
 );
-
 CREATE INDEX idx_uuid ON recipes_media (uuid);
 
 CREATE TABLE IF NOT EXISTS recipes_sections (
@@ -95,7 +89,6 @@ CREATE TABLE IF NOT EXISTS recipes_sections (
   FOREIGN KEY (recipe_id) REFERENCES recipes(id),
   FOREIGN KEY (included_recipe) REFERENCES recipes(id)
 );
-
 CREATE INDEX idx_uuid ON recipes_sections (uuid);
 
 CREATE TABLE IF NOT EXISTS recipe_category (
@@ -118,7 +111,6 @@ CREATE TABLE IF NOT EXISTS restrictions (
   FOREIGN KEY (food_id) REFERENCES food(id),
   FOREIGN KEY (category_id) REFERENCES categories(id)
 );
-
 CREATE INDEX idx_uuid ON restrictions (uuid);
 
 -- PREFERENCES
@@ -133,5 +125,4 @@ CREATE TABLE IF NOT EXISTS preferences (
   FOREIGN KEY (food_id) REFERENCES food(id),
   FOREIGN KEY (category_id) REFERENCES categories(id)
 );
-
 CREATE INDEX idx_uuid ON preferences (uuid);
