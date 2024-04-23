@@ -1,6 +1,7 @@
-package com.wellness360.nutrition.entities;
+package com.wellness360.nutrition.recipe;
 
-import com.wellness360.nutrition.serializers.IngredientsKey;
+import com.wellness360.nutrition.food.FoodEntity;
+import com.wellness360.nutrition.recipe.serializers.IngredientsKey;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -11,9 +12,10 @@ import lombok.*;
 @NoArgsConstructor
 @EqualsAndHashCode()
 @Table(name = "recipes_ingredients")
-public class RecipeIngredientEntity {
+@Entity
+public class RecipeIngredientEntity{
   
-  @Embedded
+  @EmbeddedId
   private IngredientsKey id;
 
   @ManyToOne

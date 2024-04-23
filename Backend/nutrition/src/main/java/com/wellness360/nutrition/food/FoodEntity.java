@@ -1,17 +1,41 @@
-package com.wellness360.nutrition.entities;
+package com.wellness360.nutrition.food;
 
 import java.util.Set;
-import com.wellness360.nutrition.entities.base.NameNDescriptionBasedEntity;
+import java.util.UUID;
+
+import com.wellness360.nutrition.category.CategoryEntity;
+import com.wellness360.nutrition.preference.PreferenceEntity;
+import com.wellness360.nutrition.recipe.RecipeEntity;
+import com.wellness360.nutrition.recipe.RecipeIngredientEntity;
+import com.wellness360.nutrition.restriction.RestrictionEntity;
+import com.wellness360.nutrition.tag.TagEntity;
+
 import jakarta.persistence.*;
 import lombok.*;
 
+@Entity
+@Table(name = "food")
 @Getter
 @Setter(value = AccessLevel.PRIVATE)
-@EqualsAndHashCode(callSuper = true)
-@Table(name = "food")
-public class FoodEntity extends NameNDescriptionBasedEntity {
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
+public class FoodEntity{
 
   // ATRIBUTES
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Integer id;
+  
+  @Column(name = "uuid", unique = true, nullable = false, length = 36)
+  private UUID uuid;
+
+  @Column(name = "name", unique = true, nullable = false, length = 50)
+  protected String name;
+
+  @Column(name = "description", columnDefinition = "TEXT")
+  private String description;
+
   @Column(name = "calories", nullable = false)
   private Short calories;
 
@@ -38,7 +62,7 @@ public class FoodEntity extends NameNDescriptionBasedEntity {
 
   // RELATIONSHIPS
   @ManyToOne
-  @JoinColumn(name = "tag_id", referencedColumnName = "id", insertable = false, updatable = false)
+  @JoinColumn(name = "tag_id",   insertable = false, updatable = false)
   private TagEntity tag;
 
   @ManyToMany
@@ -50,18 +74,19 @@ public class FoodEntity extends NameNDescriptionBasedEntity {
   private Set<CategoryEntity> categories;
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "food")
-  private Set<RecipeEntity> recipes;
+  private Set<RecipeIngredientEntity> recipes;
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "food")
   private Set<PreferenceEntity> preferences;
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "food")
   private Set<RestrictionEntity> restricions;
-  
-  public FoodEntity(String name, String description) {
-    super(name, description);
-    //TODO Auto-generated constructor stub
-  }
 
+  @PrePersist
+  private void initializeUUID(){
+    if(this.uuid == null){
+      this.uuid = UUID.randomUUID();
+    }
+  }
 }
 

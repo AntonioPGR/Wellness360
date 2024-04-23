@@ -1,4 +1,4 @@
-package com.wellness360.nutrition.serializers;
+package com.wellness360.nutrition.recipe.serializers;
 
 import java.io.Serializable;
 
@@ -18,9 +18,9 @@ import lombok.Setter;
 public class IngredientsKey implements Serializable {
 
   @Column
-  Long food_id;
+  Integer food_id;
 
   @Column
-  Long recipe_id;
+  Integer recipe_id;
   
 }
