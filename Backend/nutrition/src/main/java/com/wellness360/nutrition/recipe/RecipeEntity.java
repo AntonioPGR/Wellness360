@@ -4,8 +4,8 @@ import java.util.Set;
 import java.util.UUID;
 
 import com.wellness360.nutrition.category.CategoryEntity;
-import com.wellness360.nutrition.food.FoodEntity;
 import com.wellness360.nutrition.preference.PreferenceEntity;
+import com.wellness360.nutrition.recipe.recipe_logs.RecipeLogEntity;
 import com.wellness360.nutrition.restriction.RestrictionEntity;
 import com.wellness360.nutrition.tag.TagEntity;
 

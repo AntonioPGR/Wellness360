@@ -1,0 +1,2 @@
+ALTER TABLE recipes_log
+ADD amount SMALLINT NOT NULL;

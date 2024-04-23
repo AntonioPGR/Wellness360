@@ -3,6 +3,7 @@ package com.wellness360.nutrition.category;
 import java.util.Set;
 import java.util.UUID;
 
+import com.wellness360.nutrition.category.dtos.CategoryCreateDTO;
 import com.wellness360.nutrition.food.FoodEntity;
 import com.wellness360.nutrition.preference.PreferenceEntity;
 import com.wellness360.nutrition.recipe.RecipeEntity;
@@ -21,6 +22,13 @@ import lombok.*;
 @EqualsAndHashCode
 public class CategoryEntity{
 
+  // CONSTRUCTORS
+  public CategoryEntity(CategoryCreateDTO create_dto){
+    this.setName(create_dto.getName());
+    this.setDescription(create_dto.getDescription());
+    this.setImage_url(create_dto.getImage_url());
+  }
+
   // PROPERTIES
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +38,7 @@ public class CategoryEntity{
   private UUID uuid;
 
   @Column(name = "name", unique = true, nullable = false, length = 50)
-  protected String name;
+  private String name;
 
   @Column(name = "description", columnDefinition = "TEXT")
   private String description;

@@ -1,7 +1,9 @@
-package com.wellness360.nutrition.recipe;
+package com.wellness360.nutrition.recipe.recipe_logs;
 
 import java.time.LocalDate;
 import java.util.UUID;
+
+import com.wellness360.nutrition.recipe.RecipeEntity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -28,6 +30,9 @@ public class RecipeLogEntity{
 
   @Column(name = "date", nullable = false)
   private LocalDate date;
+
+  @Column(name = "amount", nullable = false)
+  private Short amount;
 
   // RELATIONSHIPS
   @ManyToOne
