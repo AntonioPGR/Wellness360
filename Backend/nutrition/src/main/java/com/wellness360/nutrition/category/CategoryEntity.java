@@ -3,6 +3,8 @@ package com.wellness360.nutrition.category;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
+
+import com.wellness360.common.crud_default.interfaces.CrudEntity;
 import com.wellness360.nutrition.category.dtos.CategoryCreateDTO;
 import com.wellness360.nutrition.category.dtos.CategoryUpdateDTO;
 import com.wellness360.nutrition.food.FoodEntity;
@@ -20,7 +22,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class CategoryEntity{
+public class CategoryEntity implements CrudEntity<CategoryUpdateDTO>{
 
   // CONSTRUCTORS
   public CategoryEntity(CategoryCreateDTO create_dto){
@@ -71,6 +73,7 @@ public class CategoryEntity{
   }
 
   // METHODS
+  @Override
   public void update(CategoryUpdateDTO update_dto) {
     this.name = Objects.requireNonNullElse(update_dto.getName(), this.getName());
     this.description = Objects.requireNonNullElse(update_dto.getDescription(), this.getDescription());
