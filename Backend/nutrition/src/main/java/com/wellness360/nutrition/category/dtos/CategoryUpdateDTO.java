@@ -11,11 +11,13 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CategoryCreateDTO {
+public class CategoryUpdateDTO {
   @Nonnull
+  private String uuid;
+  @Nullable
   private String name;
   @Nullable
   private String description;
-  @Nonnull
+  @Nullable
   private String image_url;
 }

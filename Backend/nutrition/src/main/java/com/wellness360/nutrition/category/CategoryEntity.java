@@ -1,15 +1,15 @@
 package com.wellness360.nutrition.category;
 
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
-
 import com.wellness360.nutrition.category.dtos.CategoryCreateDTO;
+import com.wellness360.nutrition.category.dtos.CategoryUpdateDTO;
 import com.wellness360.nutrition.food.FoodEntity;
 import com.wellness360.nutrition.preference.PreferenceEntity;
 import com.wellness360.nutrition.recipe.RecipeEntity;
 import com.wellness360.nutrition.restriction.RestrictionEntity;
 import com.wellness360.nutrition.tag.TagEntity;
-
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -35,7 +35,7 @@ public class CategoryEntity{
   private Integer id;
   
   @Column(name = "uuid", unique = true, nullable = false, length = 36)
-  private UUID uuid;
+  private String uuid;
 
   @Column(name = "name", unique = true, nullable = false, length = 50)
   private String name;
@@ -62,11 +62,19 @@ public class CategoryEntity{
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
   private Set<RestrictionEntity> restricions;
 
+  // DEFAULT METHODS
   @PrePersist
   private void initializeUUID(){
     if(this.uuid == null){
-      this.uuid = UUID.randomUUID();
+      this.uuid = UUID.randomUUID().toString();
     }
+  }
+
+  // METHODS
+  public void update(CategoryUpdateDTO update_dto) {
+    this.name = Objects.requireNonNullElse(update_dto.getName(), this.getName());
+    this.description = Objects.requireNonNullElse(update_dto.getDescription(), this.getDescription());
+    this.image_url = Objects.requireNonNullElse(update_dto.getImage_url(), this.getImage_url());
   }
 
 }
