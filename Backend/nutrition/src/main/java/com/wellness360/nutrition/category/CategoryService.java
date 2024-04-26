@@ -1,13 +1,13 @@
 package com.wellness360.nutrition.category;
 
-import com.wellness360.common.crud_default.CrudService;
+import com.wellness360.common.services.FullCrudService;
 import com.wellness360.nutrition.category.dtos.*;
 import org.springframework.stereotype.Service;
 import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
-public class CategoryService extends CrudService<
+public class CategoryService extends FullCrudService<
   CategoryRepository,
   CategoryCreateDTO,
   CategoryUpdateDTO,
@@ -24,7 +24,7 @@ public class CategoryService extends CrudService<
   };
 
   protected String getDefaultURL(){
-    return "https://localhost:8080";
+    return "http://localhost:8080/categories";
   };
 
 }

@@ -4,13 +4,11 @@ import com.wellness360.nutrition.category.CategoryEntity;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
-@Setter
-@NoArgsConstructor
+@Builder
 @AllArgsConstructor
 public class CategoryReturnDTO {
   @Nonnull

@@ -1,18 +1,12 @@
 package com.wellness360.nutrition.category.dtos;
 
-import com.wellness360.common.crud_default.interfaces.CrudUpdateDTO;
+import com.wellness360.common.interfaces.CrudUpdateDTO;
 
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class CategoryUpdateDTO implements CrudUpdateDTO {
   @Nonnull
   private String uuid;

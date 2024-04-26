@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
-import com.wellness360.common.crud_default.interfaces.CrudEntity;
+import com.wellness360.common.interfaces.CrudEntity;
 import com.wellness360.nutrition.category.dtos.CategoryCreateDTO;
 import com.wellness360.nutrition.category.dtos.CategoryUpdateDTO;
 import com.wellness360.nutrition.food.FoodEntity;
@@ -20,6 +20,7 @@ import lombok.*;
 @Getter
 @Setter(value = AccessLevel.PRIVATE)
 @AllArgsConstructor
+@Builder
 @NoArgsConstructor
 @EqualsAndHashCode
 public class CategoryEntity implements CrudEntity<CategoryUpdateDTO>{
