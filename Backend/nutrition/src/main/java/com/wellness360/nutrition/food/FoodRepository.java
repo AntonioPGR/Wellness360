@@ -1,8 +1,9 @@
 package com.wellness360.nutrition.food;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.wellness360.common.repositories.IdRepository;
+
 @Repository
-public interface FoodRepository extends JpaRepository<FoodEntity, Integer> {
+public interface FoodRepository extends IdRepository<FoodEntity> {
 }

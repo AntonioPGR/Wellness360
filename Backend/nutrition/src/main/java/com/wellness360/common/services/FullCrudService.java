@@ -25,7 +25,7 @@ public abstract class FullCrudService<
 > {
 
   @Autowired
-  Repository repository;
+  protected Repository repository;
 
   // Abstract Methods
   protected abstract ReturnDTO createReturnDTO(Entity entity);

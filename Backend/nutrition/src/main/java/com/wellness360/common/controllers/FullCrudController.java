@@ -2,6 +2,7 @@ package com.wellness360.common.controllers;
 
 import java.net.URI;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,17 +28,20 @@ public abstract class FullCrudController<
 >{
   
   @Autowired
-  private Service service;
+  protected Service service;
+
+  protected abstract Optional<URI> createEntity(CreateDTO create_dto);
+  protected abstract Optional<ReturnDTO> updateEntity(UpdateDTO update_dto);
 
   @GetMapping
-  public ResponseEntity<Page<CreateDTO>> getAll(Pageable pageable){
-    Page<CreateDTO> return_dto = service.getAll(pageable);
+  public ResponseEntity<Page<ReturnDTO>> getAll(Pageable pageable){
+    Page<ReturnDTO> return_dto = service.getAll(pageable);
     return ResponseEntity.ok().body(return_dto);
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<CreateDTO> getUnique(@PathVariable("id") String uuid) {
-    Optional<CreateDTO> return_dto = service.getByUuid(uuid);
+  public ResponseEntity<ReturnDTO> getUnique(@PathVariable("id") String uuid) {
+    Optional<ReturnDTO> return_dto = service.getByUuid(uuid);
     if(return_dto.isPresent()){
       return ResponseEntity.ok().body(return_dto.get());
     }
@@ -46,7 +50,7 @@ public abstract class FullCrudController<
   
   @PostMapping
   public ResponseEntity create(@RequestBody @Valid CreateDTO create_dto){
-    Optional<URI> item_location = service.create(create_dto);
+    Optional<URI> item_location = createEntity(create_dto);
     if(item_location.isPresent()){
       return ResponseEntity.created(item_location.get()).build();
     }
@@ -55,7 +59,7 @@ public abstract class FullCrudController<
 
   @PutMapping
   public ResponseEntity<ReturnDTO> edit(@RequestBody @Valid UpdateDTO update_dto){
-    Optional<ReturnDTO> return_dto = service.update(update_dto);
+    Optional<ReturnDTO> return_dto = updateEntity(update_dto);
     if(return_dto.isPresent()){
       return ResponseEntity.ok().body(return_dto.get());
     }

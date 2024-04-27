@@ -1,10 +1,15 @@
 package com.wellness360.nutrition.tag;
 
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
+
+import com.wellness360.common.interfaces.CrudEntity;
 import com.wellness360.nutrition.category.CategoryEntity;
 import com.wellness360.nutrition.food.FoodEntity;
 import com.wellness360.nutrition.recipe.RecipeEntity;
+import com.wellness360.nutrition.tag.dtos.TagCreateEntitiesDTO;
+import com.wellness360.nutrition.tag.dtos.TagUpdateEntitiesDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -25,15 +30,23 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class TagEntity{
+public class TagEntity implements CrudEntity<TagUpdateEntitiesDTO>{
+
+  public TagEntity(TagCreateEntitiesDTO dto) {
+    this.name = dto.getName();
+    this.description = dto.getDescription();
+    this.image_url = dto.getImage_url();
+    this.category = dto.getCategory();
+  }
 
   // ATTRIBUTES
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name="id")
   private Integer id;
   
   @Column(name = "uuid", unique = true, nullable = false, length = 36)
-  private UUID uuid;
+  private String uuid;
 
   @Column(name = "name", nullable = false, length = 50)
   private String name; 
@@ -46,7 +59,7 @@ public class TagEntity{
 
   // RELASHIONSHIPS
   @ManyToOne
-  @JoinColumn(name = "category_id", insertable=false, updatable = false)
+  @JoinColumn(name = "category_id", nullable=false)
   private CategoryEntity category;
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "tag")
@@ -58,8 +71,16 @@ public class TagEntity{
   @PrePersist
   private void initializeUUID(){
     if(this.uuid == null){
-      this.uuid = UUID.randomUUID();
+      this.uuid = UUID.randomUUID().toString();
     }
+  }
+
+  @Override
+  public void update(TagUpdateEntitiesDTO dto) {
+    this.name = Objects.requireNonNullElse(dto.getName(), this.name);
+    this.description = Objects.requireNonNullElse(dto.getDescription(), this.description);
+    this.image_url = Objects.requireNonNullElse(dto.getImage_url(), this.image_url);
+    this.category = Objects.requireNonNullElse(dto.getCategory(), this.category);
   }
 
 }

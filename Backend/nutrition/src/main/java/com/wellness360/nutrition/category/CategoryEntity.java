@@ -34,7 +34,7 @@ public class CategoryEntity implements CrudEntity<CategoryUpdateDTO>{
 
   // PROPERTIES
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer id;
   
   @Column(name = "uuid", unique = true, nullable = false, length = 36)
@@ -50,10 +50,10 @@ public class CategoryEntity implements CrudEntity<CategoryUpdateDTO>{
   private String image_url;
   
   // RELATIONSHIPS
-  @ManyToMany(mappedBy = "categories")
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
   private Set<RecipeEntity> recipes;
   
-  @ManyToMany(mappedBy = "categories")
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
   private Set<FoodEntity> food;
   
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
