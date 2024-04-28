@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 
 @RestController
-@RequestMapping("/tags")
+@RequestMapping("${path.tag}")
 public class TagController extends FullCrudController<
   TagService,
   TagCreateIdsDTO,
@@ -30,19 +30,16 @@ public class TagController extends FullCrudController<
   TagService service;
 
   protected Optional<URI> createEntity(TagCreateIdsDTO create_dto){
-    try{
-      return service.create(create_dto);
-    } catch (Exception e) {
-      return Optional.empty();
-    }
+    return service.create(create_dto);
   }
 
   protected Optional<TagReturnCategoryDTO> updateEntity(TagUpdateIdsDTO dto){
     return service.update(dto);
   }
 
+  // NEW METHODS
   @GetMapping("/category/{category_uuid}")
-  public ResponseEntity<Page<TagReturnOnlyDTO>> getMethodName(Pageable pageable, @PathVariable("category_uuid") String category_uuid) {
+  public ResponseEntity<Page<TagReturnOnlyDTO>> getByCategory(Pageable pageable, @PathVariable("category_uuid") String category_uuid) {
     Page<TagReturnOnlyDTO> results = this.service.getTagsByCategory(pageable, category_uuid);
     return ResponseEntity.ok().body(results);
   }

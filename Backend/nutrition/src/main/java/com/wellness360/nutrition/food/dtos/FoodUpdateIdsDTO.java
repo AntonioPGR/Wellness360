@@ -30,7 +30,7 @@ public class FoodUpdateIdsDTO implements CrudUpdateDTO{
   @Nullable
   String image_url;
   @Nullable
-  String tag_id;
+  String tag_uuid;
   @Nullable
-  String category_id;
+  String category_uuid;
 }

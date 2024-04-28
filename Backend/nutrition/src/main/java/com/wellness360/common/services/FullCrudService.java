@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.wellness360.common.interfaces.CrudEntity;
+import com.wellness360.common.Entities.BaseIdsEntity;
 import com.wellness360.common.interfaces.CrudUpdateDTO;
 import com.wellness360.common.repositories.IdRepository;
 
@@ -21,7 +21,7 @@ public abstract class FullCrudService<
   CreateDTO, 
   UpdateDTO extends CrudUpdateDTO,
   ReturnDTO,
-  Entity extends CrudEntity<UpdateDTO>
+  Entity extends BaseIdsEntity<UpdateDTO>
 > {
 
   @Autowired
@@ -30,7 +30,8 @@ public abstract class FullCrudService<
   // Abstract Methods
   protected abstract ReturnDTO createReturnDTO(Entity entity);
   protected abstract Entity createEntity(CreateDTO dto);
-  protected abstract String getDefaultURL();
+  protected abstract String getReturnURL(String uuid);
+
 
   // Default Methods
   public Optional<ReturnDTO> getByUuid(@Valid String uuid) {
@@ -53,7 +54,7 @@ public abstract class FullCrudService<
     repository.save(new_item);
     try{
       String uuid = new_item.getUuid();
-      URI return_uri = new URI(getDefaultURL()+"/"+uuid);
+      URI return_uri = new URI(this.getReturnURL(uuid));
       return Optional.of(return_uri);
     } catch(Exception e) {
       return Optional.empty();

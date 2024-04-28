@@ -30,8 +30,9 @@ public abstract class FullCrudController<
   @Autowired
   protected Service service;
 
-  protected abstract Optional<URI> createEntity(CreateDTO create_dto);
-  protected abstract Optional<ReturnDTO> updateEntity(UpdateDTO update_dto);
+  protected void setService(Service new_service){
+    this.service = new_service;
+  }
 
   @GetMapping
   public ResponseEntity<Page<ReturnDTO>> getAll(Pageable pageable){
@@ -58,7 +59,7 @@ public abstract class FullCrudController<
   }
 
   @PutMapping
-  public ResponseEntity<ReturnDTO> edit(@RequestBody @Valid UpdateDTO update_dto){
+  public ResponseEntity<ReturnDTO> update(@RequestBody @Valid UpdateDTO update_dto){
     Optional<ReturnDTO> return_dto = updateEntity(update_dto);
     if(return_dto.isPresent()){
       return ResponseEntity.ok().body(return_dto.get());
@@ -70,6 +71,13 @@ public abstract class FullCrudController<
   public ResponseEntity<None> delete(@PathVariable("id") String category_uuid){
     service.delete(category_uuid);
     return ResponseEntity.noContent().build();
+  }
+
+  protected Optional<URI> createEntity(CreateDTO create_dto){
+    return service.create(create_dto);
+  }
+  protected Optional<ReturnDTO> updateEntity(UpdateDTO update_dto){
+    return service.update(update_dto);
   }
 
 }

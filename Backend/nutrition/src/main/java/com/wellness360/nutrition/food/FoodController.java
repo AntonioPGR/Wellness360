@@ -5,14 +5,13 @@ import java.util.Optional;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.wellness360.common.controllers.FullCrudController;
 import com.wellness360.nutrition.food.dtos.FoodCreateIdsDTO;
 import com.wellness360.nutrition.food.dtos.FoodReturnDTO;
 import com.wellness360.nutrition.food.dtos.FoodUpdateIdsDTO;
 
 @RestController
-@RequestMapping("/food")
+@RequestMapping("${path.food}")
 public class FoodController extends FullCrudController<
   FoodService,
   FoodCreateIdsDTO,

@@ -27,7 +27,7 @@ public class FoodCreateIdsDTO{
   @Nonnull
   String image_url;
   @Nonnull
-  String tag_id;
+  String tag_uuid;
   @Nonnull
-  String category_id;
+  String category_uuid;
 }

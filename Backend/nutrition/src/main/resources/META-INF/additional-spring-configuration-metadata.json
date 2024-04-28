@@ -1,0 +1,47 @@
+{"properties": [
+  {
+    "name": "url.category",
+    "type": "java.lang.String",
+    "description": "A description for 'url.category'"
+  },
+  {
+    "name": "url.food",
+    "type": "java.lang.String",
+    "description": "A description for 'url.food'"
+  },
+  {
+    "name": "url.tag",
+    "type": "java.lang.String",
+    "description": "A description for 'url.tag'"
+  },
+  {
+    "name": "url.base",
+    "type": "java.lang.String",
+    "description": "A description for 'url.base'"
+  },
+  {
+    "name": "paths.category",
+    "type": "java.lang.String",
+    "description": "A description for 'paths.category'"
+  },
+  {
+    "name": "path.tag",
+    "type": "java.lang.String",
+    "description": "A description for 'path.tag'"
+  },
+  {
+    "name": "path.category",
+    "type": "java.lang.String",
+    "description": "A description for 'path.category'"
+  },
+  {
+    "name": "path.food",
+    "type": "java.lang.String",
+    "description": "A description for 'path.food'"
+  },
+  {
+    "name": "entities.food.default_serving_amount",
+    "type": "java.lang.String",
+    "description": "A description for 'entities.food.default_serving_amount'"
+  }
+]}
