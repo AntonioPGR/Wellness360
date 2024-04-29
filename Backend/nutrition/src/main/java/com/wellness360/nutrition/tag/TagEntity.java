@@ -3,6 +3,7 @@ package com.wellness360.nutrition.tag;
 import java.util.Objects;
 import java.util.Set;
 import com.wellness360.common.Entities.BaseNameDescImgEntity;
+import com.wellness360.common.interfaces.BaseCrudEntities;
 import com.wellness360.nutrition.category.CategoryEntity;
 import com.wellness360.nutrition.food.FoodEntity;
 import com.wellness360.nutrition.recipe.RecipeEntity;
@@ -22,7 +23,7 @@ import lombok.*;
 @Setter(value = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @NoArgsConstructor
-public class TagEntity extends BaseNameDescImgEntity<TagUpdateEntitiesDTO>{
+public class TagEntity extends BaseNameDescImgEntity implements BaseCrudEntities<TagUpdateEntitiesDTO>{
   
   // RELASHIONSHIPS
   @ManyToOne

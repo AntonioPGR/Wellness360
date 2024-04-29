@@ -3,10 +3,14 @@ package com.wellness360.nutrition.recipe;
 import java.util.Set;
 import java.util.UUID;
 
+import com.wellness360.common.Entities.BaseNameDescImgEntity;
 import com.wellness360.nutrition.category.CategoryEntity;
-import com.wellness360.nutrition.preference.PreferenceEntity;
-import com.wellness360.nutrition.recipe.recipe_logs.RecipeLogEntity;
-import com.wellness360.nutrition.restriction.RestrictionEntity;
+import com.wellness360.nutrition.recipe.ingredients.RecipeIngredientEntity;
+import com.wellness360.nutrition.recipe.logs.RecipeLogEntity;
+import com.wellness360.nutrition.recipe.media.RecipeMediaEntity;
+import com.wellness360.nutrition.recipe.section.RecipeSectionEntity;
+import com.wellness360.nutrition.selectivity.preference.PreferenceEntity;
+import com.wellness360.nutrition.selectivity.restriction.RestrictionEntity;
 import com.wellness360.nutrition.tag.TagEntity;
 
 import jakarta.persistence.*;
@@ -15,41 +19,24 @@ import lombok.*;
 @Entity
 @Table(name = "recipes")
 @Getter
-@Setter(value = AccessLevel.PRIVATE)
+@Setter(value = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
-public class RecipeEntity{
+public class RecipeEntity extends BaseNameDescImgEntity{
 
   // ATTRIBUTES
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer id;
-  
-  @Column(name = "uuid", unique = true, nullable = false, length = 36)
-  private UUID uuid;
-
-  @Column(name = "name", unique = true, nullable = false, length = 50)
-  protected String name;
-
-  @Column(name = "description", columnDefinition = "TEXT")
-  private String description;
-
   @Column(name = "post_user_id", nullable = false)
   private Long post_user_id;
   
   // RELATIONSHIPS
   @ManyToOne
-  @JoinColumn(name = "tag_id",   insertable = false, updatable = false)
+  @JoinColumn(name = "tag_id" )
   private TagEntity tag;
   
-  @ManyToMany
-  @JoinTable(
-    name = "recipe_category",
-    joinColumns = @JoinColumn(name="recipe_id"),
-    inverseJoinColumns = @JoinColumn(name="category_id")
-  )
-  private Set<CategoryEntity> categories;
+  @ManyToOne
+  @JoinColumn(name = "category_id")
+  @NonNull
+  private CategoryEntity category;
   
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "recipe")
   private Set<RecipeIngredientEntity> ingredients;
@@ -75,7 +62,7 @@ public class RecipeEntity{
   @PrePersist
   private void initializeUUID(){
     if(this.uuid == null){
-      this.uuid = UUID.randomUUID();
+      this.uuid = UUID.randomUUID().toString();
     }
   }
 

@@ -1,4 +1,4 @@
-package com.wellness360.nutrition.recipe.recipe_logs;
+package com.wellness360.nutrition.recipe.logs;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

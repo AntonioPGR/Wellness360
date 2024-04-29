@@ -7,12 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.wellness360.common.Entities.BaseIdsEntity;
+import com.wellness360.common.interfaces.BaseCrudEntities;
 import com.wellness360.common.interfaces.CrudUpdateDTO;
 import com.wellness360.common.repositories.IdRepository;
 
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 
 @Transactional
 @SuppressWarnings("hiding")
@@ -21,7 +20,7 @@ public abstract class FullCrudService<
   CreateDTO, 
   UpdateDTO extends CrudUpdateDTO,
   ReturnDTO,
-  Entity extends BaseIdsEntity<UpdateDTO>
+  Entity extends BaseCrudEntities<UpdateDTO>
 > {
 
   @Autowired
@@ -34,7 +33,7 @@ public abstract class FullCrudService<
 
 
   // Default Methods
-  public Optional<ReturnDTO> getByUuid(@Valid String uuid) {
+  public Optional<ReturnDTO> getByUuid(String uuid) {
     Optional<Entity> optional = repository.findByUuid(uuid);
     if(optional.isPresent()){
       ReturnDTO return_dto = this.createReturnDTO(optional.get());

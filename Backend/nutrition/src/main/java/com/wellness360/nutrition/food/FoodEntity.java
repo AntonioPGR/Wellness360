@@ -3,13 +3,14 @@ package com.wellness360.nutrition.food;
 import java.util.Objects;
 import java.util.Set;
 import com.wellness360.common.Entities.BaseNameDescImgEntity;
+import com.wellness360.common.interfaces.BaseCrudEntities;
 import com.wellness360.common.tools.MacroNutrientsCalculator;
 import com.wellness360.nutrition.category.CategoryEntity;
 import com.wellness360.nutrition.food.dtos.FoodCreateEntitiesDTO;
 import com.wellness360.nutrition.food.dtos.FoodUpdateEntitiesDTO;
-import com.wellness360.nutrition.preference.PreferenceEntity;
 import com.wellness360.nutrition.recipe.ingredients.RecipeIngredientEntity;
-import com.wellness360.nutrition.restriction.RestrictionEntity;
+import com.wellness360.nutrition.selectivity.preference.PreferenceEntity;
+import com.wellness360.nutrition.selectivity.restriction.RestrictionEntity;
 import com.wellness360.nutrition.tag.TagEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -20,7 +21,7 @@ import lombok.*;
 @Setter(value = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @NoArgsConstructor
-public class FoodEntity extends BaseNameDescImgEntity<FoodUpdateEntitiesDTO>{
+public class FoodEntity extends BaseNameDescImgEntity implements BaseCrudEntities<FoodUpdateEntitiesDTO>{
 
   // COLUMNS
   @Column(name = "calories", nullable = false)

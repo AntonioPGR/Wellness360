@@ -52,8 +52,6 @@ public class FoodService extends FullCrudService<
     Optional<TagEntity> tag_optional = tag_repository.findByUuid(tag_id);
     TagEntity tag_entity = tag_optional.isPresent()? tag_optional.get() : null;
 
-    System.out.println(ids_dto.getCategory_uuid());
-
     String category_id = ids_dto.getCategory_uuid();
     Optional<CategoryEntity> category_optional = category_repository.findByUuid(category_id);
     CategoryEntity category_entity = category_optional.isPresent()? category_optional.get() : null;

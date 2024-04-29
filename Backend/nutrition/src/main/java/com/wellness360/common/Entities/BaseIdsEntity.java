@@ -14,7 +14,7 @@ import lombok.Getter;
 @MappedSuperclass
 @Getter
 @EqualsAndHashCode
-public abstract class BaseIdsEntity<T> {
+public abstract class BaseIdsEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,7 +29,5 @@ public abstract class BaseIdsEntity<T> {
       this.uuid = UUID.randomUUID().toString();
     }
   }
-
-  public abstract void update(T dto);
 
 }

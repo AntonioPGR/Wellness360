@@ -3,12 +3,13 @@ package com.wellness360.nutrition.category;
 import java.util.Objects;
 import java.util.Set;
 import com.wellness360.common.Entities.BaseNameDescImgEntity;
+import com.wellness360.common.interfaces.BaseCrudEntities;
 import com.wellness360.nutrition.category.dtos.CategoryCreateDTO;
 import com.wellness360.nutrition.category.dtos.CategoryUpdateDTO;
 import com.wellness360.nutrition.food.FoodEntity;
-import com.wellness360.nutrition.preference.PreferenceEntity;
 import com.wellness360.nutrition.recipe.RecipeEntity;
-import com.wellness360.nutrition.restriction.RestrictionEntity;
+import com.wellness360.nutrition.selectivity.preference.PreferenceEntity;
+import com.wellness360.nutrition.selectivity.restriction.RestrictionEntity;
 import com.wellness360.nutrition.tag.TagEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -19,7 +20,7 @@ import lombok.*;
 @Setter(value = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @NoArgsConstructor
-public class CategoryEntity extends BaseNameDescImgEntity<CategoryUpdateDTO>{
+public class CategoryEntity extends BaseNameDescImgEntity implements BaseCrudEntities<CategoryUpdateDTO>{
 
   // RELATIONSHIPS
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")

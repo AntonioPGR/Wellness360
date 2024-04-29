@@ -1,6 +1,8 @@
-package com.wellness360.nutrition.recipe;
+package com.wellness360.nutrition.recipe.section;
 
 import java.util.UUID;
+
+import com.wellness360.nutrition.recipe.RecipeEntity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -20,7 +22,7 @@ public class RecipeSectionEntity{
   private Integer id;
   
   @Column(name = "uuid", unique = true, nullable = false, length = 36)
-  private UUID uuid;
+  private String uuid;
 
   @Column(name = "name", unique = true, nullable = false, length = 50)
   protected String name;
@@ -33,17 +35,17 @@ public class RecipeSectionEntity{
 
   // RELATIONSHIPS
   @ManyToOne
-  @JoinColumn(name = "recipe_id",   insertable = false, updatable = false)
+  @JoinColumn(name = "recipe_id" )
   private RecipeEntity recipe;
 
   @ManyToOne
-  @JoinColumn(name = "included_recipe",   insertable = false, updatable = false)
+  @JoinColumn(name = "included_recipe" )
   private RecipeEntity included_recipe;
 
   @PrePersist
   private void initializeUUID(){
     if(this.uuid == null){
-      this.uuid = UUID.randomUUID();
+      this.uuid = UUID.randomUUID().toString();
     }
   }
 

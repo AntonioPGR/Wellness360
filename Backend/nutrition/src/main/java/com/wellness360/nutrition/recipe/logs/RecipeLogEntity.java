@@ -1,4 +1,4 @@
-package com.wellness360.nutrition.recipe.recipe_logs;
+package com.wellness360.nutrition.recipe.logs;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -23,7 +23,7 @@ public class RecipeLogEntity{
   private Integer id;
   
   @Column(name = "uuid", unique = true, nullable = false, length = 36)
-  private UUID uuid;
+  private String uuid;
 
   @Column(name = "user_id", nullable = false)
   private Long user_id;
@@ -36,13 +36,13 @@ public class RecipeLogEntity{
 
   // RELATIONSHIPS
   @ManyToOne
-  @JoinColumn(name = "recipe_id",   insertable = false, updatable = false)
+  @JoinColumn(name = "recipe_id" )
   private RecipeEntity recipe;
 
   @PrePersist
   private void initializeUUID(){
     if(this.uuid == null){
-      this.uuid = UUID.randomUUID();
+      this.uuid = UUID.randomUUID().toString();
     }
   }
 

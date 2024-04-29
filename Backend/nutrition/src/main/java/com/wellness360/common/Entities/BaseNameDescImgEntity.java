@@ -9,7 +9,7 @@ import lombok.Setter;
 @MappedSuperclass
 @Getter
 @Setter(value = AccessLevel.PROTECTED)
-public abstract class BaseNameDescImgEntity<T> extends BaseIdsEntity<T> {
+public abstract class BaseNameDescImgEntity extends BaseIdsEntity {
 
   @Column(name = "name", unique = true, nullable = false, length = 50)
   protected String name;

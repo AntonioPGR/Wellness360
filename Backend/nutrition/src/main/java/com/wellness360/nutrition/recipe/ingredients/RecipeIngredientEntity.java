@@ -1,6 +1,7 @@
-package com.wellness360.nutrition.recipe;
+package com.wellness360.nutrition.recipe.ingredients;
 
 import com.wellness360.nutrition.food.FoodEntity;
+import com.wellness360.nutrition.recipe.RecipeEntity;
 import com.wellness360.nutrition.recipe.serializers.IngredientsKey;
 
 import jakarta.persistence.*;

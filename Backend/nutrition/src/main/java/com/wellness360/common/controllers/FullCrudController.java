@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators.None;
 import com.wellness360.common.interfaces.CrudUpdateDTO;
 import com.wellness360.common.services.FullCrudService;
-
 import jakarta.validation.Valid;
+
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public abstract class FullCrudController<
