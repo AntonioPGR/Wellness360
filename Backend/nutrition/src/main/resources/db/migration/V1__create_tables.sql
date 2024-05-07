@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS tags (
   category_id INT NOT NULL,
   name VARCHAR(50) NOT NULL,
   image_url VARCHAR(150) NOT NULL,
-  FOREIGN KEY (category_id) REFERENCES categories(id)
+  FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE
 );
 CREATE INDEX idx_uuid ON tags (uuid);
 
@@ -27,26 +27,19 @@ CREATE TABLE IF NOT EXISTS food (
   tag_id INT,
   name VARCHAR(50) UNIQUE NOT NULL,
   description TEXT,
+  image_url VARCHAR(150) NOT NULL,
   serving_amount SMALLINT NOT NULL DEFAULT 100,
-  calories SMALLINT NOT NULL,
-  carbs FLOAT NOT NULL,
-  proteins FLOAT NOT NULL,
-  fats FLOAT NOT NULL,
-  saturated_fats FLOAT NOT NULL,
-  sodium FLOAT NOT NULL,
-  dietary_fiber FLOAT NOT NULL,
-  FOREIGN KEY (category_id) REFERENCES categories(id),
-  FOREIGN KEY (tag_id) REFERENCES tags(id)
+  calories DECIMAL(8,2) NOT NULL,
+  carbs DECIMAL(8,2) NOT NULL,
+  proteins DECIMAL(8,2) NOT NULL,
+  fats DECIMAL(8,2) NOT NULL,
+  saturated_fats DECIMAL(8,2) NOT NULL,
+  sodium DECIMAL(8,2) NOT NULL,
+  dietary_fiber DECIMAL(8,2) NOT NULL,
+  FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE,
+  FOREIGN KEY (tag_id) REFERENCES tags(id) ON DELETE CASCADE
 );
 CREATE INDEX idx_uuid ON food (uuid);
-
-CREATE TABLE IF NOT EXISTS food_category (
-  category_id INT NOT NULL,
-  food_id INT NOT NULL,
-  PRIMARY KEY (category_id, food_id),
-  FOREIGN KEY (category_id) REFERENCES categories(id),
-  FOREIGN KEY (food_id) REFERENCES food(id)
-);
 
 -- RECIPES
 CREATE TABLE IF NOT EXISTS recipes (
@@ -54,9 +47,11 @@ CREATE TABLE IF NOT EXISTS recipes (
   uuid VARCHAR(36) UNIQUE NOT NULL,
   tag_id INT,
   post_user_id INT NOT NULL,
+  category_id INT NOT NULL,
   name VARCHAR(50) NOT NULL,
   description TEXT,
-  FOREIGN KEY (tag_id) REFERENCES tags(id)
+  FOREIGN KEY (tag_id) REFERENCES tags(id) ON DELETE SET NULL,
+  FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE
 );
 CREATE INDEX idx_uuid ON recipes (uuid);
 
@@ -66,7 +61,7 @@ CREATE TABLE IF NOT EXISTS recipes_log (
   recipe_id INT NOT NULL,
   user_id INT NOT NULL,
   date DATE NOT NULL,
-  FOREIGN KEY (recipe_id) REFERENCES recipes(id)
+  FOREIGN KEY (recipe_id) REFERENCES recipes(id) ON DELETE CASCADE
 );
 CREATE INDEX idx_uuid ON recipes_log (uuid);
 
@@ -75,8 +70,7 @@ CREATE TABLE IF NOT EXISTS recipes_media (
   uuid VARCHAR(36) UNIQUE NOT NULL,
   recipe_id INT NOT NULL,
   media_url VARCHAR(150) NOT NULL,
-  media_type VARCHAR(20) NOT NULL,
-  FOREIGN KEY (recipe_id) REFERENCES recipes(id)
+  FOREIGN KEY (recipe_id) REFERENCES recipes(id) ON DELETE CASCADE
 );
 CREATE INDEX idx_uuid ON recipes_media (uuid);
 
@@ -86,17 +80,19 @@ CREATE TABLE IF NOT EXISTS recipes_sections (
   recipe_id INT NOT NULL,
   text TEXT NOT NULL,
   included_recipe INT,
-  FOREIGN KEY (recipe_id) REFERENCES recipes(id),
-  FOREIGN KEY (included_recipe) REFERENCES recipes(id)
+  FOREIGN KEY (recipe_id) REFERENCES recipes(id) ON DELETE CASCADE,
+  FOREIGN KEY (included_recipe) REFERENCES recipes(id) ON DELETE CASCADE
 );
 CREATE INDEX idx_uuid ON recipes_sections (uuid);
 
-CREATE TABLE IF NOT EXISTS recipe_category (
-  category_id INT NOT NULL,
+CREATE TABLE IF NOT EXISTS recipes_ingredients(
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  uuid VARCHAR(36) UNIQUE NOT NULL,
   recipe_id INT NOT NULL,
-  PRIMARY KEY (category_id, recipe_id),
-  FOREIGN KEY (category_id) REFERENCES categories(id),
-  FOREIGN KEY (recipe_id) REFERENCES recipes(id)
+  food_id INT NOT NULL,
+  amount SMALLINT NOT NULL,
+  FOREIGN KEY (recipe_id) REFERENCES recipes(id) ON DELETE CASCADE,
+  FOREIGN KEY (food_id) REFERENCES food(id) ON DELETE CASCADE
 );
 
 -- RESTRICTIONS
@@ -107,9 +103,9 @@ CREATE TABLE IF NOT EXISTS restrictions (
   recipe_id INT,
   food_id INT,
   category_id INT,
-  FOREIGN KEY (recipe_id) REFERENCES recipes(id),
-  FOREIGN KEY (food_id) REFERENCES food(id),
-  FOREIGN KEY (category_id) REFERENCES categories(id)
+  FOREIGN KEY (recipe_id) REFERENCES recipes(id) ON DELETE CASCADE,
+  FOREIGN KEY (food_id) REFERENCES food(id) ON DELETE CASCADE,
+  FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE
 );
 CREATE INDEX idx_uuid ON restrictions (uuid);
 
@@ -121,8 +117,8 @@ CREATE TABLE IF NOT EXISTS preferences (
   recipe_id INT,
   food_id INT,
   category_id INT,
-  FOREIGN KEY (recipe_id) REFERENCES recipes(id),
-  FOREIGN KEY (food_id) REFERENCES food(id),
-  FOREIGN KEY (category_id) REFERENCES categories(id)
+  FOREIGN KEY (recipe_id) REFERENCES recipes(id) ON DELETE CASCADE,
+  FOREIGN KEY (food_id) REFERENCES food(id) ON DELETE CASCADE,
+  FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE
 );
 CREATE INDEX idx_uuid ON preferences (uuid);
