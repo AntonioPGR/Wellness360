@@ -22,9 +22,9 @@ public class SelectivityReturnDTO{
 
   public SelectivityReturnDTO(SelectivityBaseEntity entity){
     this.uuid = entity.getUuid();
-    this.recipe = new RecipeReturnDTO(entity.getRecipe());
-    this.food = new FoodReturnDTO(entity.getFood());
-    this.category = new CategoryReturnDTO(entity.getCategory());
+    this.recipe = entity.getRecipe() != null? new RecipeReturnDTO(entity.getRecipe()) : null;
+    this.food = entity.getFood() != null? new FoodReturnDTO(entity.getFood()) : null;
+    this.category = entity.getCategory() != null? new CategoryReturnDTO(entity.getCategory()) : null;
   }
 
 }

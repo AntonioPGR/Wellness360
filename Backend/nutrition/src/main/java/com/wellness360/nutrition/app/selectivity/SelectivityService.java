@@ -32,15 +32,15 @@ public abstract class SelectivityService<
   @Autowired
   CategoryRepository category_repository;
 
-  public abstract Entity create(SelectivityCreateEntitiesDTO dto);
-
+  public abstract Entity createDTOtoEntity(SelectivityCreateEntitiesDTO dto);
+  public abstract SelectivityReturnDTO entityToReturnDTO(Entity entity);
 
   public List<SelectivityReturnDTO> getByUserUuid(String uuid) {
     List<Entity> entities_list = repository.findAllByUserId(1L);
     return entities_list.stream().map(SelectivityReturnDTO::new).toList();
   }
 
-  public void create(SelectivityCreateIdsDTO id_dto) {
+  public SelectivityReturnDTO create(SelectivityCreateIdsDTO id_dto) {
     Optional<RecipeEntity> recipe_opt = recipe_repository.findByUuid(id_dto.getRecipe_uuid());
     RecipeEntity recipe = recipe_opt.isPresent()? recipe_opt.get() : null;
 
@@ -50,9 +50,13 @@ public abstract class SelectivityService<
     Optional<CategoryEntity> category_opt = category_repository.findByUuid(id_dto.getCategory_uuid());
     CategoryEntity category = category_opt.isPresent()? category_opt.get() : null;
 
+    System.out.println(category);
+
     SelectivityCreateEntitiesDTO entities_dto = new SelectivityCreateEntitiesDTO(1L, recipe, food, category);
-    Entity entity = create(entities_dto);
-    repository.save(entity);
+    Entity entity = createDTOtoEntity(entities_dto);
+    entity = repository.save(entity);
+
+    return entityToReturnDTO(entity);
   }
 
   public void deleteByUuid(String uuid) {

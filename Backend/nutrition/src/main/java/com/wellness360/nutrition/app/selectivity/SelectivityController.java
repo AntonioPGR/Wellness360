@@ -21,22 +21,22 @@ public abstract class SelectivityController<
   @Autowired
   SelectivityService<Entity> service;
 
-  @GetMapping("/{uuid}")
+  @GetMapping("/user/{uuid}")
   public ResponseEntity<List<SelectivityReturnDTO>> getByUserUUID(@PathVariable("uuid") String uuid) {
     List<SelectivityReturnDTO> return_dto = service.getByUserUuid(uuid);
     return ResponseEntity.ok().body(return_dto);
   }
 
   @PostMapping
-  public ResponseEntity<None> create(@RequestBody SelectivityCreateIdsDTO dto) {
-    service.create(dto);
-    return ResponseEntity.status(201).build();
+  public ResponseEntity<SelectivityReturnDTO> create(@RequestBody SelectivityCreateIdsDTO dto) {
+    SelectivityReturnDTO return_dto = service.create(dto);
+    return ResponseEntity.status(201).body(return_dto);
   }
 
   @DeleteMapping("/{uuid}")
   public ResponseEntity<None> delete(@PathVariable("uuid") String uuid) {
     service.deleteByUuid(uuid);
-    return ResponseEntity.status(201).build();
+    return ResponseEntity.noContent().build();
   }
 
 }

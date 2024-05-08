@@ -10,10 +10,14 @@ import jakarta.persistence.Column;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MappedSuperclass;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @MappedSuperclass
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public abstract class SelectivityBaseEntity extends UniqueIdentifierEntity {
 
   @Column(name = "user_id", nullable = false)
