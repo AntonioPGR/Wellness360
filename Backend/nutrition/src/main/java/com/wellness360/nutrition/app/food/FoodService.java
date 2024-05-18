@@ -6,50 +6,86 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wellness360.nutrition.app.category.CategoryEntity;
-import com.wellness360.nutrition.app.food.dtos.FoodCreateEntitiesDTO;
-import com.wellness360.nutrition.app.food.dtos.FoodCreateIdsDTO;
+import com.wellness360.nutrition.app.food.dtos.FoodCreatePersistenceDTO;
+import com.wellness360.nutrition.app.food.dtos.FoodCreateRequestDTO;
 import com.wellness360.nutrition.app.food.dtos.FoodReturnDTO;
-import com.wellness360.nutrition.app.food.dtos.FoodUpdateEntitiesDTO;
-import com.wellness360.nutrition.app.food.dtos.FoodUpdateIdsDTO;
+import com.wellness360.nutrition.app.food.dtos.FoodUpdatePersistenceDTO;
+import com.wellness360.nutrition.app.food.dtos.FoodUpdateRequestDTO;
 import com.wellness360.nutrition.app.tag.TagEntity;
-import com.wellness360.nutrition.common.CrudBases.CrudService;
+import com.wellness360.nutrition.common.crud_bases.CrudService;
+import com.wellness360.nutrition.common.media_storage.StorageEntityFileService;
+import com.wellness360.nutrition.common.media_storage.StorageFolders;
 import com.wellness360.nutrition.tools.EntityRetrieverByUUID;
+
+import jakarta.persistence.EntityNotFoundException;
+
 
 @Service
 public class FoodService extends CrudService<
   FoodRepository,
-  FoodCreateEntitiesDTO,
-  FoodUpdateEntitiesDTO,
+  FoodCreateRequestDTO,
+  FoodCreatePersistenceDTO,
+  FoodUpdateRequestDTO,
+  FoodUpdatePersistenceDTO,
   FoodReturnDTO,
   FoodEntity
 > {
 
-  @Autowired 
-  EntityRetrieverByUUID uuid_getter;
+  @Autowired
+  StorageEntityFileService store_service;
+  @Autowired
+  EntityRetrieverByUUID entity_retriever;
+  
+  StorageFolders folder = StorageFolders.food;
 
   // INHERIT
-  @Override
-  public FoodReturnDTO entityToReturnDTO(FoodEntity entity) {
+  public FoodReturnDTO getReturnDTO(FoodEntity entity) {
     return new FoodReturnDTO(entity);
   }
-  @Override
-  public FoodEntity createDTOtoEntity(FoodCreateEntitiesDTO dto) {
+  public FoodEntity getEntity(FoodCreatePersistenceDTO dto) {
     return new FoodEntity(dto);
   }
 
-  // ID to ENTITY dtos
-  public FoodReturnDTO create(FoodCreateIdsDTO ids_dto) {
-    TagEntity tag_entity = uuid_getter.getTagByUuid(ids_dto.getTag_uuid());
-    CategoryEntity category_entity = uuid_getter.getCategoryByUuid(ids_dto.getCategory_uuid());
-    FoodCreateEntitiesDTO entity_dto = new FoodCreateEntitiesDTO(ids_dto, tag_entity, category_entity);
-    return super.create(entity_dto);
+  public FoodCreatePersistenceDTO getPersistenceCreateDTO(FoodCreateRequestDTO request_dto) {
+    TagEntity tag_entity = entity_retriever.getTagByUuid(request_dto.getTag_uuid()).get();
+    CategoryEntity category_entity = entity_retriever.getCategoryByUuid(request_dto.getCategory_uuid()).get();
+
+    String image_url = store_service.create(
+      request_dto.getName(), 
+      folder.name(), 
+      request_dto.getImage()
+    );
+    return new FoodCreatePersistenceDTO(request_dto, image_url, tag_entity, category_entity);
   }
 
-  public Optional<FoodReturnDTO> update(FoodUpdateIdsDTO ids_dto) {
-    TagEntity tag_entity = uuid_getter.getTagByUuid(ids_dto.getTag_uuid());
-    CategoryEntity category_entity = uuid_getter.getCategoryByUuid(ids_dto.getCategory_uuid());
-    FoodUpdateEntitiesDTO entity_dto = new FoodUpdateEntitiesDTO(ids_dto, tag_entity, category_entity);
-    return super.update(entity_dto);
+  public FoodUpdatePersistenceDTO getPersistenceUpdateDTO(FoodUpdateRequestDTO request_dto) {
+    Optional<TagEntity> tag_entity_opt = entity_retriever.getTagByUuid(request_dto.getTag_uuid());
+    TagEntity tag_entity = null;
+    if(tag_entity_opt.isPresent()) tag_entity = tag_entity_opt.get();
+
+    Optional<CategoryEntity> category_entity_opt = entity_retriever.getCategoryByUuid(request_dto.getCategory_uuid());
+    CategoryEntity category_entity = null;
+    if(category_entity_opt.isPresent()) category_entity = category_entity_opt.get();
+
+    FoodEntity food = entity_retriever.getFoodByUuid(request_dto.getUuid()).get();
+    String media_path = store_service.update(
+      request_dto.getName(), 
+      folder.name(), 
+      request_dto.getImage(), 
+      food.getName()
+    );
+    return new FoodUpdatePersistenceDTO(request_dto, media_path, tag_entity, category_entity);
+  }
+
+  @Override
+  public void delete(String uuid) {
+    Optional<FoodEntity> food_entity_opt = entity_retriever.getFoodByUuid(uuid);
+    if(food_entity_opt.isEmpty()) throw new EntityNotFoundException("Unable to find category with uuid");
+    store_service.delete(
+      food_entity_opt.get().getName(),
+      folder.name()
+    );
+    super.delete(uuid);
   }
 
 }

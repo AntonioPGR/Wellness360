@@ -28,24 +28,20 @@ public class EntityRetrieverByUUID {
   @Autowired
   FoodRepository food_repository;
 
-  public CategoryEntity getCategoryByUuid(String uuid){
-    Optional<CategoryEntity> category_optional = category_repository.findByUuid(uuid);
-    return category_optional.isPresent()? category_optional.get() : null;
+  public Optional<CategoryEntity> getCategoryByUuid(String uuid){
+    return category_repository.findByUuid(uuid);
   }
 
-  public TagEntity getTagByUuid(String uuid){
-    Optional<TagEntity> tag_optional = tag_repository.findByUuid(uuid);
-    return tag_optional.isPresent()? tag_optional.get() : null;
+  public Optional<TagEntity> getTagByUuid(String uuid){
+    return tag_repository.findByUuid(uuid);
   }
 
-  public RecipeEntity getRecipeByUuid(@NonNull String uuid) {
-    Optional<RecipeEntity> recipe_optional = recipe_repository.findByUuid(uuid);
-    return recipe_optional.isPresent()? recipe_optional.get() : null;
+  public Optional<RecipeEntity> getRecipeByUuid(@NonNull String uuid) {
+    return recipe_repository.findByUuid(uuid);
   }
 
-  public FoodEntity getFoodByUuid(String uuid) {
-    Optional<FoodEntity> food_optional = food_repository.findByUuid(uuid);
-    return food_optional.isPresent()? food_optional.get() : null;
+  public Optional<FoodEntity> getFoodByUuid(String uuid) {
+    return food_repository.findByUuid(uuid);
   }
 
 }

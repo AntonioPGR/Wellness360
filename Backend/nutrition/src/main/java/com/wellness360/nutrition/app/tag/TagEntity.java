@@ -3,13 +3,13 @@ package com.wellness360.nutrition.app.tag;
 import java.util.Objects;
 import java.util.Set;
 
-import com.wellness360.nutrition.common.entities.NamedDescribedImageEntity;
-import com.wellness360.nutrition.common.interfaces.BaseEntity;
+import com.wellness360.nutrition.common.crud_bases.entities.NamedDescribedImageEntity;
+import com.wellness360.nutrition.common.crud_bases.interfaces.BaseEntity;
 import com.wellness360.nutrition.app.category.CategoryEntity;
 import com.wellness360.nutrition.app.food.FoodEntity;
 import com.wellness360.nutrition.app.recipe.RecipeEntity;
-import com.wellness360.nutrition.app.tag.dtos.TagCreateEntitiesDTO;
-import com.wellness360.nutrition.app.tag.dtos.TagUpdateEntitiesDTO;
+import com.wellness360.nutrition.app.tag.dtos.TagCreatePersistenceDTO;
+import com.wellness360.nutrition.app.tag.dtos.TagUpdatePersistenceDTO;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -25,7 +25,7 @@ import lombok.*;
 @Setter(value = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @NoArgsConstructor
-public class TagEntity extends NamedDescribedImageEntity implements BaseEntity<TagUpdateEntitiesDTO>{
+public class TagEntity extends NamedDescribedImageEntity implements BaseEntity<TagUpdatePersistenceDTO>{
   
   // RELASHIONSHIPS
   @ManyToOne
@@ -39,7 +39,7 @@ public class TagEntity extends NamedDescribedImageEntity implements BaseEntity<T
   protected Set<RecipeEntity> recipes;
 
   // CONSTRUCTORS
-  public TagEntity(TagCreateEntitiesDTO dto) {
+  public TagEntity(TagCreatePersistenceDTO dto) {
     this.name = dto.getName();
     this.description = dto.getDescription();
     this.image_url = dto.getImage_url();
@@ -48,7 +48,7 @@ public class TagEntity extends NamedDescribedImageEntity implements BaseEntity<T
 
   // INHERIT
   @Override
-  public void update(TagUpdateEntitiesDTO dto) {
+  public void update(TagUpdatePersistenceDTO dto) {
     this.name = Objects.requireNonNullElse(dto.getName(), this.name);
     this.description = Objects.requireNonNullElse(dto.getDescription(), this.description);
     this.image_url = Objects.requireNonNullElse(dto.getImage_url(), this.image_url);

@@ -50,8 +50,6 @@ public abstract class SelectivityService<
     Optional<CategoryEntity> category_opt = category_repository.findByUuid(id_dto.getCategory_uuid());
     CategoryEntity category = category_opt.isPresent()? category_opt.get() : null;
 
-    System.out.println(category);
-
     SelectivityCreateEntitiesDTO entities_dto = new SelectivityCreateEntitiesDTO(1L, recipe, food, category);
     Entity entity = createDTOtoEntity(entities_dto);
     entity = repository.save(entity);

@@ -7,61 +7,52 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wellness360.nutrition.app.recipe.RecipeEntity;
-import com.wellness360.nutrition.app.recipe.section.dtos.SectionCreateEntitiesDTO;
-import com.wellness360.nutrition.app.recipe.section.dtos.SectionCreateIdsDTO;
+import com.wellness360.nutrition.app.recipe.section.dtos.SectionCreatePersistenceDTO;
+import com.wellness360.nutrition.app.recipe.section.dtos.SectionCreateRequestDTO;
 import com.wellness360.nutrition.app.recipe.section.dtos.SectionReturnDTO;
-import com.wellness360.nutrition.app.recipe.section.dtos.SectionUpdateEntitiesDTO;
-import com.wellness360.nutrition.app.recipe.section.dtos.SectionUpdateIdsDTO;
-import com.wellness360.nutrition.common.CrudBases.CrudService;
+import com.wellness360.nutrition.app.recipe.section.dtos.SectionUpdatePersistenceDTO;
+import com.wellness360.nutrition.app.recipe.section.dtos.SectionUpdateRequestDTO;
 import com.wellness360.nutrition.tools.EntityRetrieverByUUID;
 
 import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
-public class SectionService extends CrudService<
-  SectionRepository,
-  SectionCreateEntitiesDTO,
-  SectionUpdateEntitiesDTO,
-  SectionReturnDTO,
-  SectionEntity
-> {
+public class SectionService{
 
   @Autowired
   SectionRepository repository;
   @Autowired
   EntityRetrieverByUUID uuid_getter;
   
-  public void createAll(List<SectionCreateIdsDTO> dto_list, RecipeEntity recipe){
+  public void createAll(List<SectionCreateRequestDTO> dto_list, RecipeEntity recipe){
     dto_list.stream().forEach((dto) -> create(dto, recipe));
   }
+  public SectionReturnDTO create(SectionCreateRequestDTO dto, RecipeEntity recipe){
+    String included_recipe_uuid = dto.getIncluded_recipe_uuid();
+    RecipeEntity included_recipe = null;
+    if(included_recipe_uuid != null){
+      Optional<RecipeEntity> included_recipe_opt = uuid_getter.getRecipeByUuid(included_recipe_uuid);
+      if(included_recipe_opt.isPresent()) included_recipe = included_recipe_opt.get();
+    }
 
-  public SectionReturnDTO create(SectionCreateIdsDTO dto, RecipeEntity recipe){
-    SectionCreateEntitiesDTO create_dto = new SectionCreateEntitiesDTO(dto, recipe);
-    return super.create(create_dto);
-  }
 
-  public void updateAll(List<SectionUpdateIdsDTO> dto_list, RecipeEntity recipe) {
-    dto_list.stream().forEach((dto) -> update(dto, recipe));
-  }
-
-  public Optional<SectionReturnDTO> update(SectionUpdateIdsDTO dto, RecipeEntity recipe){
-    RecipeEntity included_recipe = uuid_getter.getRecipeByUuid(dto.getIncluded_recipe_uuid());
-    SectionUpdateEntitiesDTO update_dto = new SectionUpdateEntitiesDTO(dto, recipe, included_recipe);
-    return super.update(update_dto);
-  }
-
-  // INHERIT
-  @Override
-  public SectionReturnDTO entityToReturnDTO(SectionEntity entity) {
+    SectionCreatePersistenceDTO create_dto = new SectionCreatePersistenceDTO(dto, recipe, included_recipe);
+    SectionEntity entity = new SectionEntity(create_dto);
+    entity = repository.save(entity);
     return new SectionReturnDTO(entity);
   }
 
-  @Override
-  public SectionEntity createDTOtoEntity(SectionCreateEntitiesDTO dto) {
-    return new SectionEntity(dto);
+  public void updateAll(List<SectionUpdateRequestDTO> dto_list, RecipeEntity recipe) {
+    dto_list.stream().forEach((dto) -> update(dto, recipe));
   }
-
-  
-
+  public Optional<SectionReturnDTO> update(SectionUpdateRequestDTO dto, RecipeEntity recipe){
+    RecipeEntity included_recipe = uuid_getter.getRecipeByUuid(dto.getIncluded_recipe_uuid()).get();
+    SectionUpdatePersistenceDTO update_dto = new SectionUpdatePersistenceDTO(dto, recipe, included_recipe);
+    Optional<SectionEntity> opt_entity = repository.findByUuid(dto.getUuid());
+    if(opt_entity.isEmpty()) return Optional.empty();
+    SectionEntity entity = opt_entity.get();
+    entity.update(update_dto);
+    return Optional.of(new SectionReturnDTO(entity));
+  }
 }

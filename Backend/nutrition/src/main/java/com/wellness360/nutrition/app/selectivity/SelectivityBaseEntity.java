@@ -4,7 +4,7 @@ import com.wellness360.nutrition.app.category.CategoryEntity;
 import com.wellness360.nutrition.app.food.FoodEntity;
 import com.wellness360.nutrition.app.recipe.RecipeEntity;
 import com.wellness360.nutrition.app.selectivity.dtos.SelectivityCreateEntitiesDTO;
-import com.wellness360.nutrition.common.entities.UniqueIdentifierEntity;
+import com.wellness360.nutrition.common.crud_bases.entities.UniqueIdentifierEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.JoinColumn;

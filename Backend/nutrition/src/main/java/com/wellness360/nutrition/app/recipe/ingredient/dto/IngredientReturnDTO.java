@@ -4,7 +4,9 @@ import com.wellness360.nutrition.app.food.dtos.FoodReturnDTO;
 import com.wellness360.nutrition.app.recipe.ingredient.IngredientEntity;
 
 import jakarta.annotation.Nonnull;
+import lombok.Getter;
 
+@Getter
 public class IngredientReturnDTO {
   @Nonnull
   String uuid;

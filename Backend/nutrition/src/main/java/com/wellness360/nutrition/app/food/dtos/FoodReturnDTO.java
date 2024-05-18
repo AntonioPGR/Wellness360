@@ -1,9 +1,9 @@
 package com.wellness360.nutrition.app.food.dtos;
 
-import com.wellness360.nutrition.common.interfaces.UuidDTO;
 import com.wellness360.nutrition.app.category.dtos.CategoryReturnDTO;
 import com.wellness360.nutrition.app.food.FoodEntity;
-import com.wellness360.nutrition.app.tag.dtos.TagReturnOnlyDTO;
+import com.wellness360.nutrition.app.tag.dtos.TagReturnSimplifiedDTO;
+import com.wellness360.nutrition.common.crud_bases.interfaces.UuidDTO;
 
 import io.micrometer.common.lang.Nullable;
 import jakarta.annotation.Nonnull;
@@ -36,7 +36,7 @@ public class FoodReturnDTO implements UuidDTO{
   @Nonnull
   CategoryReturnDTO category;
   @Nonnull
-  TagReturnOnlyDTO tag;
+  TagReturnSimplifiedDTO tag;
 
   public FoodReturnDTO(FoodEntity entity) {
     this.uuid = entity.getUuid();
@@ -51,7 +51,7 @@ public class FoodReturnDTO implements UuidDTO{
     this.serving_amount = entity.getServing_amount();
     this.image_url = entity.getImage_url();
     this.category = new CategoryReturnDTO(entity.getCategory());
-    this.tag = new TagReturnOnlyDTO(entity.getTag());
+    this.tag = new TagReturnSimplifiedDTO(entity.getTag());
   }
 
 }

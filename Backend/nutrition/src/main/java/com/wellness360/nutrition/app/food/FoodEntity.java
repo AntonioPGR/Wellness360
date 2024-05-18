@@ -3,12 +3,12 @@ package com.wellness360.nutrition.app.food;
 import java.util.Objects;
 import java.util.Set;
 
-import com.wellness360.nutrition.common.entities.NamedDescribedImageEntity;
-import com.wellness360.nutrition.common.interfaces.BaseEntity;
+import com.wellness360.nutrition.common.crud_bases.entities.NamedDescribedImageEntity;
+import com.wellness360.nutrition.common.crud_bases.interfaces.BaseEntity;
 import com.wellness360.nutrition.tools.MacroNutrientsCalculator;
 import com.wellness360.nutrition.app.category.CategoryEntity;
-import com.wellness360.nutrition.app.food.dtos.FoodCreateEntitiesDTO;
-import com.wellness360.nutrition.app.food.dtos.FoodUpdateEntitiesDTO;
+import com.wellness360.nutrition.app.food.dtos.FoodCreatePersistenceDTO;
+import com.wellness360.nutrition.app.food.dtos.FoodUpdatePersistenceDTO;
 import com.wellness360.nutrition.app.recipe.ingredient.IngredientEntity;
 import com.wellness360.nutrition.app.selectivity.preference.PreferenceEntity;
 import com.wellness360.nutrition.app.selectivity.restriction.RestrictionEntity;
@@ -23,7 +23,7 @@ import lombok.*;
 @Setter(value = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @NoArgsConstructor
-public class FoodEntity extends NamedDescribedImageEntity implements BaseEntity<FoodUpdateEntitiesDTO>{
+public class FoodEntity extends NamedDescribedImageEntity implements BaseEntity<FoodUpdatePersistenceDTO>{
 
   // COLUMNS
   @Column(name = "calories", nullable = false)
@@ -71,7 +71,7 @@ public class FoodEntity extends NamedDescribedImageEntity implements BaseEntity<
   protected Set<RestrictionEntity> restricions;
 
   // CONSTRUCTORS
-  public FoodEntity(FoodCreateEntitiesDTO dto) {
+  public FoodEntity(FoodCreatePersistenceDTO dto) {
     this.name = dto.getName();
     this.description = dto.getDescription();
     this.image_url = dto.getImage_url();
@@ -92,7 +92,7 @@ public class FoodEntity extends NamedDescribedImageEntity implements BaseEntity<
 
   // INHERIT
   @Override
-  public void update(FoodUpdateEntitiesDTO dto) {
+  public void update(FoodUpdatePersistenceDTO dto) {
     this.name = Objects.requireNonNullElse(dto.getName(), this.name);
     this.description = Objects.requireNonNullElse(dto.getDescription(), this.description);
     this.carbs = Objects.requireNonNullElse(dto.getCarbs(), this.carbs);

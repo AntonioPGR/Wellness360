@@ -3,12 +3,12 @@ package com.wellness360.nutrition.app.recipe;
 import java.util.Objects;
 import java.util.Set;
 
-import com.wellness360.nutrition.common.entities.UniqueIdentifierEntity;
-import com.wellness360.nutrition.common.interfaces.BaseEntity;
+import com.wellness360.nutrition.common.crud_bases.entities.UniqueIdentifierEntity;
+import com.wellness360.nutrition.common.crud_bases.interfaces.BaseEntity;
 import com.wellness360.nutrition.app.category.CategoryEntity;
 import com.wellness360.nutrition.app.logs.LogEntity;
-import com.wellness360.nutrition.app.recipe.dtos.RecipeCreateEntitiesDTO;
-import com.wellness360.nutrition.app.recipe.dtos.RecipeUpdateEntitiesDTO;
+import com.wellness360.nutrition.app.recipe.dtos.RecipeCreatePersistenceDTO;
+import com.wellness360.nutrition.app.recipe.dtos.RecipeUpdatePersistenceDTO;
 import com.wellness360.nutrition.app.recipe.ingredient.IngredientEntity;
 import com.wellness360.nutrition.app.recipe.media.MediaEntity;
 import com.wellness360.nutrition.app.recipe.section.SectionEntity;
@@ -25,7 +25,7 @@ import lombok.*;
 @Setter(value = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @NoArgsConstructor
-public class RecipeEntity extends UniqueIdentifierEntity implements BaseEntity<RecipeUpdateEntitiesDTO>{
+public class RecipeEntity extends UniqueIdentifierEntity implements BaseEntity<RecipeUpdatePersistenceDTO>{
 
   // ATTRIBUTES
   @Column(name = "name", unique = true, nullable = false, length = 50)
@@ -68,7 +68,7 @@ public class RecipeEntity extends UniqueIdentifierEntity implements BaseEntity<R
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "included_recipe")
   protected Set<SectionEntity> included_in_recipes;
 
-  public RecipeEntity(RecipeCreateEntitiesDTO dto) {
+  public RecipeEntity(RecipeCreatePersistenceDTO dto) {
     this.name = dto.getName();
     this.description = dto.getDescription();
     this.post_user_id = 1L;
@@ -80,7 +80,7 @@ public class RecipeEntity extends UniqueIdentifierEntity implements BaseEntity<R
   }
 
   @Override
-  public void update(RecipeUpdateEntitiesDTO dto) {
+  public void update(RecipeUpdatePersistenceDTO dto) {
     this.name = Objects.requireNonNullElse(dto.getName(), this.name);
     this.description = Objects.requireNonNullElse(dto.getDescription(), this.description);
     this.category = Objects.requireNonNullElse(dto.getCategory(), this.category);

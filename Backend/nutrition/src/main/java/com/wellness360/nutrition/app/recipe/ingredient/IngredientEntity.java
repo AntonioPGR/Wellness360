@@ -4,10 +4,10 @@ import java.util.Objects;
 
 import com.wellness360.nutrition.app.food.FoodEntity;
 import com.wellness360.nutrition.app.recipe.RecipeEntity;
-import com.wellness360.nutrition.app.recipe.ingredient.dto.IngredientCreateEntitiesDTO;
-import com.wellness360.nutrition.app.recipe.ingredient.dto.IngredientUpdateEntitiesDTO;
-import com.wellness360.nutrition.common.entities.UniqueIdentifierEntity;
-import com.wellness360.nutrition.common.interfaces.BaseEntity;
+import com.wellness360.nutrition.app.recipe.ingredient.dto.IngredientCreatePersistenceDTO;
+import com.wellness360.nutrition.app.recipe.ingredient.dto.IngredientUpdatePersistenceDTO;
+import com.wellness360.nutrition.common.crud_bases.entities.UniqueIdentifierEntity;
+import com.wellness360.nutrition.common.crud_bases.interfaces.BaseEntity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -18,7 +18,7 @@ import lombok.*;
 @NoArgsConstructor
 @Table(name = "recipes_ingredients")
 @Entity
-public class IngredientEntity extends UniqueIdentifierEntity implements BaseEntity<IngredientUpdateEntitiesDTO>{
+public class IngredientEntity extends UniqueIdentifierEntity implements BaseEntity<IngredientUpdatePersistenceDTO>{
   
   @ManyToOne
   @JoinColumn(name= "food_id")
@@ -31,13 +31,13 @@ public class IngredientEntity extends UniqueIdentifierEntity implements BaseEnti
   @Column(name = "amount", nullable = false)
   protected Short amount;
 
-  public IngredientEntity(IngredientCreateEntitiesDTO dto){
+  public IngredientEntity(IngredientCreatePersistenceDTO dto){
     this.food = dto.getFood();
     this.recipe = dto.getRecipe();
-    this.amount = dto.getAmount();
+    this.amount = dto.getAmount().shortValue();
   }
 
-  public void update(IngredientUpdateEntitiesDTO dto) {
+  public void update(IngredientUpdatePersistenceDTO dto) {
     this.food =  Objects.requireNonNullElse(dto.getFood(), this.food);
     this.recipe = Objects.requireNonNullElse(dto.getRecipe(), this.recipe);
     this.amount = Objects.requireNonNullElse(dto.getAmount(), this.amount);
