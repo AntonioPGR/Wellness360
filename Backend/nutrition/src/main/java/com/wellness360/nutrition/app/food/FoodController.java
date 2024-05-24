@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.wellness360.nutrition.app.food.dtos.FoodCreateRequestDTO;
 import com.wellness360.nutrition.app.food.dtos.FoodReturnDTO;
 import com.wellness360.nutrition.app.food.dtos.FoodUpdateRequestDTO;
-import com.wellness360.nutrition.common.crud_bases.CrudImageController;
+import com.wellness360.nutrition.common.controllers.CrudImageController;
 
 
 @RestController

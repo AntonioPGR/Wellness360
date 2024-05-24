@@ -5,8 +5,8 @@ import java.util.Objects;
 import com.wellness360.nutrition.app.recipe.RecipeEntity;
 import com.wellness360.nutrition.app.recipe.media.dtos.MediaCreatePersistenceDTO;
 import com.wellness360.nutrition.app.recipe.media.dtos.MediaUpdatePersistenceDTO;
-import com.wellness360.nutrition.common.crud_bases.entities.UniqueIdentifierEntity;
-import com.wellness360.nutrition.common.crud_bases.interfaces.BaseEntity;
+import com.wellness360.nutrition.common.entities.UniqueIdentifierEntity;
+import com.wellness360.nutrition.common.interfaces.IBaseEntity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -17,7 +17,7 @@ import lombok.*;
 @Setter(value = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @NoArgsConstructor
-public class MediaEntity extends UniqueIdentifierEntity implements BaseEntity<MediaUpdatePersistenceDTO>{
+public class MediaEntity extends UniqueIdentifierEntity implements IBaseEntity<MediaUpdatePersistenceDTO>{
 
   @Column(name = "media_url", nullable = false, length = 150)
   protected String media_url;

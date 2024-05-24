@@ -7,7 +7,7 @@ import com.wellness360.nutrition.app.tag.dtos.TagCreateRequestDTO;
 import com.wellness360.nutrition.app.tag.dtos.TagReturnCompleteDTO;
 import com.wellness360.nutrition.app.tag.dtos.TagReturnSimplifiedDTO;
 import com.wellness360.nutrition.app.tag.dtos.TagUpdateRequestDTO;
-import com.wellness360.nutrition.common.crud_bases.CrudImageController;
+import com.wellness360.nutrition.common.controllers.CrudImageController;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

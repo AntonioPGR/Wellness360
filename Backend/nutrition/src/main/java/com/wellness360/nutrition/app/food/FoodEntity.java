@@ -3,9 +3,9 @@ package com.wellness360.nutrition.app.food;
 import java.util.Objects;
 import java.util.Set;
 
-import com.wellness360.nutrition.common.crud_bases.entities.NamedDescribedImageEntity;
-import com.wellness360.nutrition.common.crud_bases.interfaces.BaseEntity;
-import com.wellness360.nutrition.tools.MacroNutrientsCalculator;
+import com.wellness360.nutrition.common.entities.NamedDescribedImageEntity;
+import com.wellness360.nutrition.common.interfaces.INameEntity;
+import com.wellness360.nutrition.common.tools.MacroNutrientsCalculator;
 import com.wellness360.nutrition.app.category.CategoryEntity;
 import com.wellness360.nutrition.app.food.dtos.FoodCreatePersistenceDTO;
 import com.wellness360.nutrition.app.food.dtos.FoodUpdatePersistenceDTO;
@@ -23,7 +23,7 @@ import lombok.*;
 @Setter(value = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @NoArgsConstructor
-public class FoodEntity extends NamedDescribedImageEntity implements BaseEntity<FoodUpdatePersistenceDTO>{
+public class FoodEntity extends NamedDescribedImageEntity implements INameEntity<FoodUpdatePersistenceDTO>{
 
   // COLUMNS
   @Column(name = "calories", nullable = false)

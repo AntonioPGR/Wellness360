@@ -6,8 +6,8 @@ import com.wellness360.nutrition.app.food.FoodEntity;
 import com.wellness360.nutrition.app.recipe.RecipeEntity;
 import com.wellness360.nutrition.app.recipe.ingredient.dto.IngredientCreatePersistenceDTO;
 import com.wellness360.nutrition.app.recipe.ingredient.dto.IngredientUpdatePersistenceDTO;
-import com.wellness360.nutrition.common.crud_bases.entities.UniqueIdentifierEntity;
-import com.wellness360.nutrition.common.crud_bases.interfaces.BaseEntity;
+import com.wellness360.nutrition.common.entities.UniqueIdentifierEntity;
+import com.wellness360.nutrition.common.interfaces.IBaseEntity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -18,7 +18,7 @@ import lombok.*;
 @NoArgsConstructor
 @Table(name = "recipes_ingredients")
 @Entity
-public class IngredientEntity extends UniqueIdentifierEntity implements BaseEntity<IngredientUpdatePersistenceDTO>{
+public class IngredientEntity extends UniqueIdentifierEntity implements IBaseEntity<IngredientUpdatePersistenceDTO>{
   
   @ManyToOne
   @JoinColumn(name= "food_id")

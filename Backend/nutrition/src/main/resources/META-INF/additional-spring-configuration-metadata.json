@@ -78,5 +78,45 @@
     "name": "files.upload_dir",
     "type": "java.lang.String",
     "description": "A description for 'files.upload_dir'"
+  },
+  {
+    "name": "properties.validation.name_lenght",
+    "type": "java.lang.String",
+    "description": "A description for 'properties.validation.name_lenght'"
+  },
+  {
+    "name": "properties.validation.text_lenght",
+    "type": "java.lang.String",
+    "description": "A description for 'properties.validation.text_lenght'"
+  },
+  {
+    "name": "properties.validation.image_extensions",
+    "type": "java.lang.String",
+    "description": "A description for 'properties.validation.image_extensions'"
+  },
+  {
+    "name": "properties.validation.image_size",
+    "type": "java.lang.String",
+    "description": "A description for 'properties.validation.image_size'"
+  },
+  {
+    "name": "validation.text_lenght",
+    "type": "java.lang.String",
+    "description": "A description for 'validation.text_lenght'"
+  },
+  {
+    "name": "validation.name_lenght",
+    "type": "java.lang.String",
+    "description": "A description for 'validation.name_lenght'"
+  },
+  {
+    "name": "validation.image_extensions",
+    "type": "java.lang.String",
+    "description": "A description for 'validation.image_extensions'"
+  },
+  {
+    "name": "validation.image_size",
+    "type": "java.lang.String",
+    "description": "A description for 'validation.image_size'"
   }
 ]}

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.fasterxml.jackson.annotation.ObjectIdGenerators.None;
-import com.wellness360.nutrition.app.selectivity.dtos.SelectivityCreateIdsDTO;
+import com.wellness360.nutrition.app.selectivity.dtos.SelectivityCreateRequestDTO;
 import com.wellness360.nutrition.app.selectivity.dtos.SelectivityReturnDTO;
 
 public abstract class SelectivityController<
@@ -28,7 +28,7 @@ public abstract class SelectivityController<
   }
 
   @PostMapping
-  public ResponseEntity<SelectivityReturnDTO> create(@RequestBody SelectivityCreateIdsDTO dto) {
+  public ResponseEntity<SelectivityReturnDTO> create(@RequestBody SelectivityCreateRequestDTO dto) {
     SelectivityReturnDTO return_dto = service.create(dto);
     return ResponseEntity.status(201).body(return_dto);
   }

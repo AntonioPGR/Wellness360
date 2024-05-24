@@ -12,7 +12,7 @@ import com.wellness360.nutrition.app.recipe.section.dtos.SectionCreateRequestDTO
 import com.wellness360.nutrition.app.recipe.section.dtos.SectionReturnDTO;
 import com.wellness360.nutrition.app.recipe.section.dtos.SectionUpdatePersistenceDTO;
 import com.wellness360.nutrition.app.recipe.section.dtos.SectionUpdateRequestDTO;
-import com.wellness360.nutrition.tools.EntityRetrieverByUUID;
+import com.wellness360.nutrition.common.tools.EntityRetrieverByUUID;
 
 import jakarta.transaction.Transactional;
 
@@ -36,7 +36,6 @@ public class SectionService{
       if(included_recipe_opt.isPresent()) included_recipe = included_recipe_opt.get();
     }
 
-
     SectionCreatePersistenceDTO create_dto = new SectionCreatePersistenceDTO(dto, recipe, included_recipe);
     SectionEntity entity = new SectionEntity(create_dto);
     entity = repository.save(entity);
@@ -46,13 +45,13 @@ public class SectionService{
   public void updateAll(List<SectionUpdateRequestDTO> dto_list, RecipeEntity recipe) {
     dto_list.stream().forEach((dto) -> update(dto, recipe));
   }
-  public Optional<SectionReturnDTO> update(SectionUpdateRequestDTO dto, RecipeEntity recipe){
+  public SectionReturnDTO update(SectionUpdateRequestDTO dto, RecipeEntity recipe){
     RecipeEntity included_recipe = uuid_getter.getRecipeByUuid(dto.getIncluded_recipe_uuid()).get();
     SectionUpdatePersistenceDTO update_dto = new SectionUpdatePersistenceDTO(dto, recipe, included_recipe);
     Optional<SectionEntity> opt_entity = repository.findByUuid(dto.getUuid());
-    if(opt_entity.isEmpty()) return Optional.empty();
+    if(opt_entity.isEmpty()) return null;
     SectionEntity entity = opt_entity.get();
     entity.update(update_dto);
-    return Optional.of(new SectionReturnDTO(entity));
+    return new SectionReturnDTO(entity);
   }
 }

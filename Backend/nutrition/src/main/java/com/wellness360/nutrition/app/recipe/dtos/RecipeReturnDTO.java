@@ -8,7 +8,7 @@ import com.wellness360.nutrition.app.recipe.ingredient.dto.IngredientReturnDTO;
 import com.wellness360.nutrition.app.recipe.media.dtos.MediaReturnDTO;
 import com.wellness360.nutrition.app.recipe.section.dtos.SectionReturnDTO;
 import com.wellness360.nutrition.app.tag.dtos.TagReturnSimplifiedDTO;
-import com.wellness360.nutrition.common.crud_bases.interfaces.UuidDTO;
+import com.wellness360.nutrition.common.dtos.UuidDTO;
 
 import jakarta.annotation.Nullable;
 import lombok.Getter;

@@ -2,7 +2,8 @@ package com.wellness360.nutrition.app.food.dtos;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.wellness360.nutrition.common.crud_bases.interfaces.UuidDTO;
+import com.wellness360.nutrition.common.dtos.UpdateRequestDTO;
+import com.wellness360.nutrition.common.services.ValidateService;
 
 import io.micrometer.common.lang.Nullable;
 import jakarta.annotation.Nonnull;
@@ -12,7 +13,7 @@ import lombok.Setter;
 
 @Getter
 @Setter(value = AccessLevel.PUBLIC)
-public class FoodUpdateRequestDTO implements UuidDTO{
+public class FoodUpdateRequestDTO implements UpdateRequestDTO{
   @Nonnull
   String uuid;
   @Nullable
@@ -39,4 +40,20 @@ public class FoodUpdateRequestDTO implements UuidDTO{
   String tag_uuid;
   @Nullable
   String category_uuid;
+
+  public void validate(ValidateService validator) {
+    validator.validateName(name, true);
+    validator.validateText(description);
+    validator.validateNutrient(carbs, true);
+    validator.validateNutrient(proteins, true);
+    validator.validateNutrient(fats, true);
+    validator.validateNutrient(saturated_fats, true);
+    validator.validateNutrient(sodium, true);
+    validator.validateNutrient(dietary_fiber, true);
+    validator.validateAmount(serving_amount, true);
+    validator.validateImage(image, true);
+    validator.validateUuid(tag_uuid, true);
+    validator.validateUuid(category_uuid, true);
+  }
+
 }

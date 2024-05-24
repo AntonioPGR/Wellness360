@@ -5,7 +5,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import com.wellness360.nutrition.common.media_storage.interfaces.IStorageService;
+import com.wellness360.nutrition.common.interfaces.IStorageService;
+
 
 @SpringBootApplication
 public class NutritionApplication {

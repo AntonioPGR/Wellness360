@@ -2,7 +2,7 @@ package com.wellness360.nutrition.app.recipe.ingredient.dto;
 
 import com.wellness360.nutrition.app.food.FoodEntity;
 import com.wellness360.nutrition.app.recipe.RecipeEntity;
-import com.wellness360.nutrition.common.crud_bases.interfaces.UuidDTO;
+import com.wellness360.nutrition.common.dtos.UuidDTO;
 
 import io.micrometer.common.lang.Nullable;
 import jakarta.annotation.Nonnull;

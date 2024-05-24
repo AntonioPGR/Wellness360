@@ -3,8 +3,8 @@ package com.wellness360.nutrition.app.tag;
 import java.util.Objects;
 import java.util.Set;
 
-import com.wellness360.nutrition.common.crud_bases.entities.NamedDescribedImageEntity;
-import com.wellness360.nutrition.common.crud_bases.interfaces.BaseEntity;
+import com.wellness360.nutrition.common.entities.NamedDescribedImageEntity;
+import com.wellness360.nutrition.common.interfaces.INameEntity;
 import com.wellness360.nutrition.app.category.CategoryEntity;
 import com.wellness360.nutrition.app.food.FoodEntity;
 import com.wellness360.nutrition.app.recipe.RecipeEntity;
@@ -25,7 +25,7 @@ import lombok.*;
 @Setter(value = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @NoArgsConstructor
-public class TagEntity extends NamedDescribedImageEntity implements BaseEntity<TagUpdatePersistenceDTO>{
+public class TagEntity extends NamedDescribedImageEntity implements INameEntity<TagUpdatePersistenceDTO>{
   
   // RELASHIONSHIPS
   @ManyToOne

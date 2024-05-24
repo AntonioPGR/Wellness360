@@ -6,8 +6,8 @@ import java.util.Objects;
 import com.wellness360.nutrition.app.logs.dtos.LogCreatePersistenceDTO;
 import com.wellness360.nutrition.app.logs.dtos.LogUpdatePersistenceDTO;
 import com.wellness360.nutrition.app.recipe.RecipeEntity;
-import com.wellness360.nutrition.common.crud_bases.entities.UniqueIdentifierEntity;
-import com.wellness360.nutrition.common.crud_bases.interfaces.BaseEntity;
+import com.wellness360.nutrition.common.entities.UniqueIdentifierEntity;
+import com.wellness360.nutrition.common.interfaces.IBaseEntity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -18,7 +18,7 @@ import lombok.*;
 @Setter(value = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @NoArgsConstructor
-public class LogEntity extends UniqueIdentifierEntity implements BaseEntity<LogUpdatePersistenceDTO>{
+public class LogEntity extends UniqueIdentifierEntity implements IBaseEntity<LogUpdatePersistenceDTO>{
 
   @Column(name = "user_id", nullable = false)
   protected Long user_id;

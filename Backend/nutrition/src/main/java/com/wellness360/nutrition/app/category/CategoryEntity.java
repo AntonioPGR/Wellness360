@@ -3,8 +3,8 @@ package com.wellness360.nutrition.app.category;
 import java.util.Objects;
 import java.util.Set;
 
-import com.wellness360.nutrition.common.crud_bases.entities.NamedDescribedImageEntity;
-import com.wellness360.nutrition.common.crud_bases.interfaces.BaseEntity;
+import com.wellness360.nutrition.common.entities.NamedDescribedImageEntity;
+import com.wellness360.nutrition.common.interfaces.INameEntity;
 import com.wellness360.nutrition.app.category.dtos.CategoryCreatePersistenceDTO;
 import com.wellness360.nutrition.app.category.dtos.CategoryUpdatePersistenceDTO;
 import com.wellness360.nutrition.app.food.FoodEntity;
@@ -22,7 +22,7 @@ import lombok.*;
 @Setter(value = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @NoArgsConstructor
-public class CategoryEntity extends NamedDescribedImageEntity implements BaseEntity<CategoryUpdatePersistenceDTO>{
+public class CategoryEntity extends NamedDescribedImageEntity implements INameEntity<CategoryUpdatePersistenceDTO>{
 
   // RELATIONSHIPS
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")

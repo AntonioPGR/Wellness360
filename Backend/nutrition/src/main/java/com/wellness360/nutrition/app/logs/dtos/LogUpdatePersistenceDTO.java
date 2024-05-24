@@ -3,7 +3,7 @@ package com.wellness360.nutrition.app.logs.dtos;
 import java.time.LocalDate;
 
 import com.wellness360.nutrition.app.recipe.RecipeEntity;
-import com.wellness360.nutrition.common.crud_bases.interfaces.UuidDTO;
+import com.wellness360.nutrition.common.dtos.UuidDTO;
 
 import jakarta.annotation.Nonnull;
 import lombok.Getter;

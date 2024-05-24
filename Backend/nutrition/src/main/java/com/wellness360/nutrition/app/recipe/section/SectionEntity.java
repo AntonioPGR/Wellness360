@@ -5,8 +5,8 @@ import java.util.Objects;
 import com.wellness360.nutrition.app.recipe.RecipeEntity;
 import com.wellness360.nutrition.app.recipe.section.dtos.SectionCreatePersistenceDTO;
 import com.wellness360.nutrition.app.recipe.section.dtos.SectionUpdatePersistenceDTO;
-import com.wellness360.nutrition.common.crud_bases.entities.UniqueIdentifierEntity;
-import com.wellness360.nutrition.common.crud_bases.interfaces.BaseEntity;
+import com.wellness360.nutrition.common.entities.UniqueIdentifierEntity;
+import com.wellness360.nutrition.common.interfaces.IBaseEntity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -17,7 +17,7 @@ import lombok.*;
 @Setter(value = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @NoArgsConstructor
-public class SectionEntity extends UniqueIdentifierEntity implements BaseEntity<SectionUpdatePersistenceDTO>{
+public class SectionEntity extends UniqueIdentifierEntity implements IBaseEntity<SectionUpdatePersistenceDTO>{
 
   @Column(name = "text", nullable = false)
   protected String text;

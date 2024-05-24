@@ -13,8 +13,8 @@ import com.wellness360.nutrition.app.recipe.media.dtos.MediaCreatePersistenceDTO
 import com.wellness360.nutrition.app.recipe.media.dtos.MediaReturnDTO;
 import com.wellness360.nutrition.app.recipe.media.dtos.MediaUpdateRequestDTO;
 import com.wellness360.nutrition.app.recipe.media.dtos.MediaUpdatePersistenceDTO;
-import com.wellness360.nutrition.common.media_storage.StorageEntityFileService;
-import com.wellness360.nutrition.common.media_storage.StorageFolders;
+import com.wellness360.nutrition.common.services.StorageEntityFileService;
+import com.wellness360.nutrition.configurations.StorageFolders;
 
 import jakarta.transaction.Transactional;
 
@@ -49,7 +49,7 @@ public class MediaService{
     IntStream.range(0, dto_list.size())
       .forEach(index -> update(dto_list.get(index), recipe, index, old_name));
   }
-  public Optional<MediaReturnDTO> update(MediaUpdateRequestDTO dto, RecipeEntity recipe, Integer id, String old_name){
+  public MediaReturnDTO update(MediaUpdateRequestDTO dto, RecipeEntity recipe, Integer id, String old_name){
     String media_url = storage_service.update(
       recipe.getName()+"_"+id,
       folder.name(),
@@ -58,10 +58,10 @@ public class MediaService{
     );
     MediaUpdatePersistenceDTO update_dto = new MediaUpdatePersistenceDTO(dto, media_url, recipe);
     Optional<MediaEntity> opt_entity = repository.findByUuid(dto.getUuid());
-    if(opt_entity == null) return Optional.empty();
+    if(opt_entity.isEmpty()) return null;
     MediaEntity entity = opt_entity.get();
     entity.update(update_dto);
-    return Optional.of(new MediaReturnDTO(entity));
+    return new MediaReturnDTO(entity);
   }
 
   public void delete(String name, int size) {

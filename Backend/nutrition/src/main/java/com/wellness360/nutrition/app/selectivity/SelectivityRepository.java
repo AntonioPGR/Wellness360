@@ -4,7 +4,7 @@ import java.util.List;
 import javax.swing.text.html.parser.Entity;
 import org.springframework.data.repository.NoRepositoryBean;
 
-import com.wellness360.nutrition.common.crud_bases.repositories.UUIDRepository;
+import com.wellness360.nutrition.common.repositories.UUIDRepository;
 
 @SuppressWarnings("hiding")
 @NoRepositoryBean

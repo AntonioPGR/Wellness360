@@ -3,8 +3,8 @@ package com.wellness360.nutrition.app.recipe;
 import java.util.Objects;
 import java.util.Set;
 
-import com.wellness360.nutrition.common.crud_bases.entities.UniqueIdentifierEntity;
-import com.wellness360.nutrition.common.crud_bases.interfaces.BaseEntity;
+import com.wellness360.nutrition.common.entities.UniqueIdentifierEntity;
+import com.wellness360.nutrition.common.interfaces.IBaseEntity;
 import com.wellness360.nutrition.app.category.CategoryEntity;
 import com.wellness360.nutrition.app.logs.LogEntity;
 import com.wellness360.nutrition.app.recipe.dtos.RecipeCreatePersistenceDTO;
@@ -25,7 +25,7 @@ import lombok.*;
 @Setter(value = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @NoArgsConstructor
-public class RecipeEntity extends UniqueIdentifierEntity implements BaseEntity<RecipeUpdatePersistenceDTO>{
+public class RecipeEntity extends UniqueIdentifierEntity implements IBaseEntity<RecipeUpdatePersistenceDTO>{
 
   // ATTRIBUTES
   @Column(name = "name", unique = true, nullable = false, length = 50)

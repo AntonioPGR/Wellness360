@@ -1,7 +1,6 @@
 package com.wellness360.nutrition.app.selectivity;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -11,9 +10,10 @@ import com.wellness360.nutrition.app.food.FoodEntity;
 import com.wellness360.nutrition.app.food.FoodRepository;
 import com.wellness360.nutrition.app.recipe.RecipeEntity;
 import com.wellness360.nutrition.app.recipe.RecipeRepository;
-import com.wellness360.nutrition.app.selectivity.dtos.SelectivityCreateEntitiesDTO;
-import com.wellness360.nutrition.app.selectivity.dtos.SelectivityCreateIdsDTO;
+import com.wellness360.nutrition.app.selectivity.dtos.SelectivityCreatePersistenceDTO;
+import com.wellness360.nutrition.app.selectivity.dtos.SelectivityCreateRequestDTO;
 import com.wellness360.nutrition.app.selectivity.dtos.SelectivityReturnDTO;
+import com.wellness360.nutrition.common.services.ValidateService;
 
 import jakarta.transaction.Transactional;
 
@@ -32,7 +32,10 @@ public abstract class SelectivityService<
   @Autowired
   CategoryRepository category_repository;
 
-  public abstract Entity createDTOtoEntity(SelectivityCreateEntitiesDTO dto);
+  @Autowired
+  ValidateService validate_service;
+
+  public abstract Entity createDTOtoEntity(SelectivityCreatePersistenceDTO dto);
   public abstract SelectivityReturnDTO entityToReturnDTO(Entity entity);
 
   public List<SelectivityReturnDTO> getByUserUuid(String uuid) {
@@ -40,17 +43,19 @@ public abstract class SelectivityService<
     return entities_list.stream().map(SelectivityReturnDTO::new).toList();
   }
 
-  public SelectivityReturnDTO create(SelectivityCreateIdsDTO id_dto) {
-    Optional<RecipeEntity> recipe_opt = recipe_repository.findByUuid(id_dto.getRecipe_uuid());
-    RecipeEntity recipe = recipe_opt.isPresent()? recipe_opt.get() : null;
+  public SelectivityReturnDTO create(SelectivityCreateRequestDTO id_dto) {
+    id_dto.validate(validate_service);
 
-    Optional<FoodEntity> food_opt = food_repository.findByUuid(id_dto.getFood_uuid());
-    FoodEntity food = food_opt.isPresent()? food_opt.get() : null;
+    RecipeEntity recipe = recipe_repository.findByUuid(id_dto.getRecipe_uuid())
+      .orElse(null);
 
-    Optional<CategoryEntity> category_opt = category_repository.findByUuid(id_dto.getCategory_uuid());
-    CategoryEntity category = category_opt.isPresent()? category_opt.get() : null;
+    FoodEntity food = food_repository.findByUuid(id_dto.getFood_uuid())
+      .orElse(null);
 
-    SelectivityCreateEntitiesDTO entities_dto = new SelectivityCreateEntitiesDTO(1L, recipe, food, category);
+    CategoryEntity category = category_repository.findByUuid(id_dto.getCategory_uuid())
+      .orElse(null);
+
+    SelectivityCreatePersistenceDTO entities_dto = new SelectivityCreatePersistenceDTO(1L, recipe, food, category);
     Entity entity = createDTOtoEntity(entities_dto);
     entity = repository.save(entity);
 
