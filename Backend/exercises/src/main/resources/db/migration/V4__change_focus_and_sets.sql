@@ -1,0 +1,2 @@
+ALTER TABLE sets
+DROP COLUMN category;
