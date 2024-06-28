@@ -1,10 +1,12 @@
 package com.wellness360.exercises.packages.storage.tools;
 
+import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.wellness360.exercises.packages.validation.ErrorsThrower;
 
+@Service
 public class FileUtils {
 
   public String createFilePath(MultipartFile file, String dir, String name) {

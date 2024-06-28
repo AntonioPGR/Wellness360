@@ -1,5 +1,9 @@
 package com.wellness360.exercises.app.injuries;
 
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import com.wellness360.exercises.app.injuries.dtos.InjuryCreatePersistenceDTO;
 import com.wellness360.exercises.app.injuries.dtos.InjuryCreateRequestDTO;
 import com.wellness360.exercises.app.injuries.dtos.InjuryReturnDTO;
@@ -8,6 +12,7 @@ import com.wellness360.exercises.app.injuries.dtos.InjuryUpdateRequestDTO;
 import com.wellness360.exercises.enums.BodyMusclesEnum;
 import com.wellness360.exercises.packages.crud.service.CrudDtoTransformService;
 
+@Service
 public class InjuryService extends CrudDtoTransformService<
   InjuryRepository,
   InjuryCreateRequestDTO,
@@ -18,28 +23,28 @@ public class InjuryService extends CrudDtoTransformService<
   InjuryEntity
 > {
 
-  @Override
   public InjuryReturnDTO getReturnDTO(InjuryEntity entity) {
     return new InjuryReturnDTO(entity);
   }
 
-  @Override
   public InjuryEntity getEntity(InjuryCreatePersistenceDTO dto) {
     return new InjuryEntity(dto);
   }
 
-  @Override
   public InjuryCreatePersistenceDTO getPersistenceCreateDTO(InjuryCreateRequestDTO request_dto) {
-    String body_muscle_name = request_dto.getBody_muscle().toUpperCase().trim();
+    String body_muscle_name = request_dto.getBody_part().toUpperCase().strip();
     BodyMusclesEnum body_muscle = BodyMusclesEnum.valueOf(body_muscle_name);
     return new InjuryCreatePersistenceDTO(request_dto, body_muscle);
   }
 
-  @Override
   public InjuryUpdatePersistenceDTO getPersistenceUpdateDTO(InjuryUpdateRequestDTO request_dto) {
-    String body_muscle_name = request_dto.getBody_muscle().toUpperCase().trim();
-    BodyMusclesEnum body_muscle = body_muscle_name != null? BodyMusclesEnum.valueOf(body_muscle_name) : null;
+    BodyMusclesEnum body_muscle = request_dto.getBody_part() != null? BodyMusclesEnum.valueOf(request_dto.getBody_part().toUpperCase().trim()) : null;
     return new InjuryUpdatePersistenceDTO(request_dto, body_muscle);
+  }
+
+  // METHODS
+  public List<InjuryReturnDTO> getByUserUuid(String uuid) {
+    return repository.findAllByUserUuid(uuid).stream().map((entity) -> new InjuryReturnDTO(entity)).toList();
   }
   
 }

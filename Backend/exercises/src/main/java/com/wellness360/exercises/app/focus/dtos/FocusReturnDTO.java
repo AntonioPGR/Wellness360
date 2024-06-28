@@ -16,12 +16,12 @@ import lombok.Setter;
 public class FocusReturnDTO extends CrudReturnDTO {
   
   String uuid;
-  String body_muscle;
+  String body_part;
   Short priority;
 
   public FocusReturnDTO(FocusEntity entity) {
     this.uuid = entity.getUuid();
-    this.body_muscle = entity.getBody_muscle();
+    this.body_part = entity.getBody_part();
     this.priority = entity.getPriority();
   }
 

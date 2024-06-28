@@ -26,13 +26,13 @@ public class ExerciseUpdatePersistenceDTO extends CrudUpdatePersistenceDTO {
   List<MuscleEntity> muscle;
   List<EquipmentEntity> equipment;
 
-  public ExerciseUpdatePersistenceDTO(ExerciseUpdateRequestDTO request_dto, String file_name, List<MuscleEntity> muscles, List<EquipmentEntity> equipments) {
+  public ExerciseUpdatePersistenceDTO(ExerciseUpdateRequestDTO request_dto, String image_url, String video_url, List<MuscleEntity> muscles, List<EquipmentEntity> equipments) {
     this.uuid = request_dto.uuid;
     this.name = request_dto.name;
     this.description = request_dto.description;
-    this.image_url = file_name;
+    this.image_url = image_url;
     this.category = request_dto.category;
-    this.video_url = "";
+    this.video_url = video_url;
     this.muscle = muscles;
     this.equipment = equipments;
   }

@@ -15,14 +15,14 @@ import lombok.Setter;
 public class FocusUpdatePersistenceDTO extends CrudUpdatePersistenceDTO {
 
   String uuid;
-  BodyMusclesEnum body_muscle;
-  short priority;
+  BodyMusclesEnum body_part;
+  Short priority;
   String user_uuid;
   
-  public FocusUpdatePersistenceDTO(FocusUpdateRequestDTO request_dto, BodyMusclesEnum body_muscle) {
+  public FocusUpdatePersistenceDTO(FocusUpdateRequestDTO request_dto, BodyMusclesEnum body_muscle, Short priority) {
     this.uuid = request_dto.uuid;
-    this.body_muscle = body_muscle;
-    this.priority = request_dto.getPriority().shortValue();
+    this.body_part = body_muscle;
+    this.priority = priority;
     this.user_uuid = request_dto.user_uuid;
   }
 

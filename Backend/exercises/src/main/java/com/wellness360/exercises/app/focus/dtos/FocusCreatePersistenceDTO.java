@@ -14,13 +14,13 @@ import lombok.Setter;
 @Getter
 public class FocusCreatePersistenceDTO extends CrudCreatePersistenceDTO {
   
-  BodyMusclesEnum body_muscle;
+  BodyMusclesEnum body_part;
   Short priority;
   String user_uuid;
 
-  public FocusCreatePersistenceDTO(FocusCreateRequestDTO request_dto, BodyMusclesEnum body_muscle) {
-    this.body_muscle = body_muscle;
-    this.priority = request_dto.getPriority().shortValue();
+  public FocusCreatePersistenceDTO(FocusCreateRequestDTO request_dto, BodyMusclesEnum body_muscle, Short priority) {
+    this.body_part = body_muscle;
+    this.priority = priority;
     this.user_uuid = request_dto.getUser_uuid();
   }
 

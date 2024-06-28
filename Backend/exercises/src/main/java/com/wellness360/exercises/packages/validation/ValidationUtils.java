@@ -39,12 +39,12 @@ public class ValidationUtils {
     return string == "";
   }
 
-  public boolean isImageExtensionSupported(MultipartFile file, String[] supported_extensions) {
+  public boolean isMediaExtensionSupported(MultipartFile file, String[] supported_extensions) {
     String file_extension = file_utils.getFileExtension(file);
     return Arrays.asList(supported_extensions).contains(file_extension);
   }
 
-  public boolean isImageBiggerThanInMb(MultipartFile file, Integer max_size) {
+  public boolean isMediaBiggerThanInMb(MultipartFile file, Integer max_size) {
     Double bytes_multiplier = 0.00000095367432;
     return file.getSize() * bytes_multiplier > max_size;
   }

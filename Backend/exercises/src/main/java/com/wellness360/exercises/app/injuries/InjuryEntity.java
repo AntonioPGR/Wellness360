@@ -28,7 +28,7 @@ public class InjuryEntity extends UniqueIdentifierEntity implements IBaseEntity<
   
   @Nonnull
   @Size(max = 25)
-  String body_muscle;
+  String body_part;
 
   @Nullable
   String description;
@@ -45,7 +45,7 @@ public class InjuryEntity extends UniqueIdentifierEntity implements IBaseEntity<
   String user_uuid;
 
   public InjuryEntity(InjuryCreatePersistenceDTO dto) {
-    body_muscle = dto.getBody_muscle().name();
+    body_part = dto.getBody_part().name();
     description = dto.getDescription();
     initial_date = dto.getInitial_date();
     end_date = dto.getEnd_date();
@@ -53,8 +53,11 @@ public class InjuryEntity extends UniqueIdentifierEntity implements IBaseEntity<
   }
 
   public void update(InjuryUpdatePersistenceDTO dto) {
-    body_muscle = Objects.requireNonNullElse(dto.getBody_muscle().name(), body_muscle);
+    String passed_body_part = dto.getBody_part() != null? dto.getBody_part().name() : null;
+    body_part = Objects.requireNonNullElse(passed_body_part, body_part);
+
     description = Objects.requireNonNullElse(dto.getDescription(), description);
+    
     initial_date = Objects.requireNonNullElse(dto.getInitial_date(), initial_date);
     end_date = Objects.requireNonNullElse(dto.getEnd_date(), end_date);
     user_uuid = Objects.requireNonNullElse(dto.getUser_uuid(), user_uuid);

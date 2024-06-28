@@ -27,7 +27,13 @@ public class ExerciseCreateRequestDTO extends CrudStorageCreateRequestDTO {
   List<String> equipments_uuid;
 
   public void validate(ValidateService validator) {
-    throw new UnsupportedOperationException("Unimplemented method 'validate'");
+    validator.validateName(name);
+    validator.validateDescription(description, true);
+    validator.validateImage(file);
+    validator.validateExerciseCategory(category);
+    validator.validateVideo(video);
+    muscles.stream().forEach(muscle -> validator.validateBodyMuscle(muscle));
+    equipments_uuid.stream().forEach(uuid -> validator.validateUuid(uuid));
   }
 
 }

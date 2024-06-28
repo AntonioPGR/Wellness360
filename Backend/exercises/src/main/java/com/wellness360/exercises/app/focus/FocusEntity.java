@@ -25,10 +25,10 @@ import lombok.NoArgsConstructor;
 @Getter
 public class FocusEntity extends UniqueIdentifierEntity implements IBaseEntity<FocusUpdatePersistenceDTO> {
   
-  @Column(unique = true, name = "body_part")
+  @Column(unique = true)
   @Nonnull
   @Size(max = 25)
-  String body_muscle;
+  String body_part;
 
   @Column(unique = true)
   @Nonnull
@@ -40,13 +40,13 @@ public class FocusEntity extends UniqueIdentifierEntity implements IBaseEntity<F
   String user_uuid;
 
   public FocusEntity(FocusCreatePersistenceDTO dto) {
-    body_muscle = dto.getBody_muscle().name();
+    body_part = dto.getBody_part().name();
     priority = dto.getPriority();
     user_uuid = dto.getUser_uuid();
   }
 
   public void update(FocusUpdatePersistenceDTO dto) {
-    body_muscle = Objects.requireNonNullElse(dto.getBody_muscle().name(), body_muscle);
+    body_part = Objects.requireNonNullElse(dto.getBody_part().name(), body_part);
     priority = Objects.requireNonNullElse(dto.getPriority(), priority);
     user_uuid = Objects.requireNonNullElse(dto.getUser_uuid(), user_uuid);
   }

@@ -33,5 +33,40 @@
     "name": "files.files_api_url",
     "type": "java.lang.String",
     "description": "A description for 'files.files_api_url'"
+  },
+  {
+    "name": "path.storage",
+    "type": "java.lang.String",
+    "description": "A description for 'path.storage'"
+  },
+  {
+    "name": "path.equipments",
+    "type": "java.lang.String",
+    "description": "A description for 'path.equipments'"
+  },
+  {
+    "name": "path.injuries",
+    "type": "java.lang.String",
+    "description": "A description for 'path.injuries'"
+  },
+  {
+    "name": "path.exercises",
+    "type": "java.lang.String",
+    "description": "A description for 'path.exercises'"
+  },
+  {
+    "name": "path.focus",
+    "type": "java.lang.String",
+    "description": "A description for 'path.focus'"
+  },
+  {
+    "name": "urls.base_url",
+    "type": "java.lang.String",
+    "description": "A description for 'urls.base_url'"
+  },
+  {
+    "name": "validation.video_size",
+    "type": "java.lang.String",
+    "description": "A description for 'validation.video_size'"
   }
 ]}

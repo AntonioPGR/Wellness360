@@ -22,7 +22,10 @@ public class EquipmentUpdateRequestDTO extends CrudStorageUpdateRequestDTO {
   MultipartFile file;
 
   public void validate(ValidateService validator) {
-    throw new UnsupportedOperationException("Unimplemented method 'validate'");
+    validator.validateUuid(uuid);
+    validator.validateName(name, true);
+    validator.validateDescription(description, true);
+    validator.validateImage(file, true);
   }
 
 }

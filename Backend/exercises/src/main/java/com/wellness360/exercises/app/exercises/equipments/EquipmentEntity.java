@@ -7,19 +7,21 @@ import com.wellness360.exercises.app.exercises.ExerciseEntity;
 import com.wellness360.exercises.app.exercises.equipments.dtos.EquipmentCreatePersistenceDTO;
 import com.wellness360.exercises.app.exercises.equipments.dtos.EquipmentUpdatePersistenceDTO;
 import com.wellness360.exercises.packages.crud.entities.NamedDescribedImageEntity;
-import com.wellness360.exercises.packages.storage.services.interfaces.INameEntity;
+import com.wellness360.exercises.packages.storage.services.interfaces.IStorageEntity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "equipments")
 @AllArgsConstructor
 @NoArgsConstructor
-public class EquipmentEntity extends NamedDescribedImageEntity implements INameEntity<EquipmentUpdatePersistenceDTO> {
+@Getter
+public class EquipmentEntity extends NamedDescribedImageEntity implements IStorageEntity<EquipmentUpdatePersistenceDTO> {
 
   @ManyToMany(mappedBy = "equipments")
   List<ExerciseEntity> exercises;
@@ -32,7 +34,7 @@ public class EquipmentEntity extends NamedDescribedImageEntity implements INameE
 
   public void update(EquipmentUpdatePersistenceDTO dto) {
     name = Objects.requireNonNullElse(dto.getName(), name);
-    description = Objects.requireNonNullElse(dto.getDescription(), description);
+    description = dto.getDescription() != null? dto.getDescription() :  description;
     image_url = Objects.requireNonNullElse(dto.getImage_url(), image_url);
   }
 

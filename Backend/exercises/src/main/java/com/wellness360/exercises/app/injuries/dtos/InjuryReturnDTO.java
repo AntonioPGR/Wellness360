@@ -17,14 +17,14 @@ import lombok.Setter;
 public class InjuryReturnDTO extends CrudReturnDTO {
   
   String uuid;
-  String body_muscle;
+  String body_part;
   String description;
   Date initial_date;
   Date end_date;
   
   public InjuryReturnDTO(InjuryEntity entity) {
     this.uuid = entity.getUuid();
-    this.body_muscle = entity.getBody_muscle();
+    this.body_part = entity.getBody_part();
     this.description = entity.getDescription();
     this.initial_date = entity.getInitial_date();
     this.end_date = entity.getEnd_date();

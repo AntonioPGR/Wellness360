@@ -22,17 +22,17 @@ public class ExerciseCreatePersistenceDTO extends CrudCreatePersistenceDTO {
   String image_url;
   String category;
   String video_url;
-  List<MuscleEntity> muscle;
-  List<EquipmentEntity> equipment;
+  List<MuscleEntity> muscles;
+  List<EquipmentEntity> equipments;
   
-  public ExerciseCreatePersistenceDTO(ExerciseCreateRequestDTO request_dto, String file_name, List<MuscleEntity> muscles, List<EquipmentEntity> equipments) {
+  public ExerciseCreatePersistenceDTO(ExerciseCreateRequestDTO request_dto, String image_url, String video_url, List<MuscleEntity> muscles, List<EquipmentEntity> equipments) {
     this.name = request_dto.name;
     this.description = request_dto.description;
-    this.image_url = file_name;
+    this.image_url = image_url;
     this.category = request_dto.category;
-    this.video_url = "";
-    this.muscle = muscles;
-    this.equipment = equipments;
+    this.video_url = video_url;
+    this.muscles = muscles;
+    this.equipments = equipments;
   }
 
 }

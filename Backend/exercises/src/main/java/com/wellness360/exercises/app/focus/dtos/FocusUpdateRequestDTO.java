@@ -15,12 +15,15 @@ import lombok.Setter;
 public class FocusUpdateRequestDTO extends CrudUpdateRequestDTO {
   
   String uuid;
-  String body_muscle;
+  String body_part;
   Integer priority;
   String user_uuid;
 
   public void validate(ValidateService validator) {
-    throw new UnsupportedOperationException("Unimplemented method 'validate'");
+    validator.validateUuid(uuid);
+    validator.validateBodyMuscle(body_part, true);
+    validator.validatePriority(priority, true);
+    validator.validateUuid(user_uuid, true);
   }
 
 }

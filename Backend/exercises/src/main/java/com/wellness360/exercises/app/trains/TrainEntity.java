@@ -67,6 +67,8 @@ public class TrainEntity extends UniqueIdentifierEntity implements IBaseEntity<T
   @CreationTimestamp
   Date updated_at;
 
+  Boolean is_visible;
+
   // RELATIONSHIPS
   @OneToMany(mappedBy = "train")
   List<TrainLogEntity> train_logs;

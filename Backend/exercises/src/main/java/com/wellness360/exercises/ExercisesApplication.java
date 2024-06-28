@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import com.wellness360.exercises.packages.storage.services.StorageService;
+import com.wellness360.exercises.packages.storage.StorageService;
 
 
 @SpringBootApplication

@@ -16,14 +16,18 @@ import lombok.Setter;
 @Setter
 public class InjuryCreateRequestDTO extends CrudCreateRequestDTO {
   
-  String body_muscle;
+  String body_part;
   String description;
+  String user_uuid;
   Date initial_date;
   Date end_date;
-  String user_uuid;
 
   public void validate(ValidateService validator) {
-    throw new UnsupportedOperationException("Unimplemented method 'validate'");
+    validator.validateBodyMuscle(body_part);
+    validator.validateDescription(description, true);
+    validator.validateUuid(user_uuid);
+    validator.validateInitialDate(initial_date);
+    validator.validateEndDate(end_date, initial_date);
   }
 
 }

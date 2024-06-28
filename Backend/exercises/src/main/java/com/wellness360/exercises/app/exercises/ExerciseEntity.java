@@ -11,12 +11,12 @@ import com.wellness360.exercises.app.train_log.exercise.ExerciseLogEntity;
 import com.wellness360.exercises.app.trains.TrainEntity;
 import com.wellness360.exercises.app.trains.sets.SetEntity;
 import com.wellness360.exercises.packages.crud.entities.NamedDescribedImageEntity;
-import com.wellness360.exercises.packages.storage.services.interfaces.INameEntity;
+import com.wellness360.exercises.packages.storage.services.interfaces.IStorageEntity;
 
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
@@ -26,13 +26,15 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "exercises")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class ExerciseEntity extends NamedDescribedImageEntity implements INameEntity<ExerciseUpdatePersistenceDTO> {
+@Setter
+public class ExerciseEntity extends NamedDescribedImageEntity implements IStorageEntity<ExerciseUpdatePersistenceDTO> {
   
   @Nonnull
   @Size(max = 25)
@@ -52,8 +54,7 @@ public class ExerciseEntity extends NamedDescribedImageEntity implements INameEn
   @OneToMany(mappedBy = "exercise")
   List<ExerciseLogEntity> exercise_logs;
 
-  @OneToMany(mappedBy = "exercise")
-  @Column(name = "exercise_muscles")
+  @OneToMany(mappedBy = "exercise", fetch = FetchType.EAGER)
   List<MuscleEntity> muscles;
 
   @ManyToMany
@@ -70,8 +71,8 @@ public class ExerciseEntity extends NamedDescribedImageEntity implements INameEn
     image_url = dto.getImage_url();
     category = dto.getCategory();
     video_url = dto.getVideo_url();
-    muscles = dto.getMuscle();
-    equipments = dto.getEquipment();
+    muscles = dto.getMuscles();
+    equipments = dto.getEquipments();
   }
 
   public void update(ExerciseUpdatePersistenceDTO dto) {

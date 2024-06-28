@@ -14,12 +14,14 @@ import lombok.Setter;
 @Getter
 public class FocusCreateRequestDTO extends CrudCreateRequestDTO {
   
-  String body_muscle;
+  String body_part;
   Integer priority;
   String user_uuid;
 
   public void validate(ValidateService validator) {
-    throw new UnsupportedOperationException("Unimplemented method 'validate'");
+    validator.validateBodyMuscle(body_part);
+    validator.validatePriority(priority);
+    validator.validateUuid(user_uuid);
   }
 
 }

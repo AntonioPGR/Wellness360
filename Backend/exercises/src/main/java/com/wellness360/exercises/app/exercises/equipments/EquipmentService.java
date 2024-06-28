@@ -1,5 +1,7 @@
 package com.wellness360.exercises.app.exercises.equipments;
 
+import org.springframework.stereotype.Service;
+
 import com.wellness360.exercises.app.exercises.equipments.dtos.EquipmentCreatePersistenceDTO;
 import com.wellness360.exercises.app.exercises.equipments.dtos.EquipmentCreateRequestDTO;
 import com.wellness360.exercises.app.exercises.equipments.dtos.EquipmentReturnDTO;
@@ -8,7 +10,7 @@ import com.wellness360.exercises.app.exercises.equipments.dtos.EquipmentUpdateRe
 import com.wellness360.exercises.packages.storage.services.CrudStorageService;
 import com.wellness360.exercises.packages.storage.settings.StorageFolders;
 
-
+@Service
 public class EquipmentService extends CrudStorageService<
   EquipmentRepository,
   EquipmentCreateRequestDTO,

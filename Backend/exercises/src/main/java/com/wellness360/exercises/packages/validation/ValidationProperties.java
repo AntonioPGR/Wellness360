@@ -13,19 +13,24 @@ import lombok.Setter;
 @Setter
 public class ValidationProperties {
   
+  // TEXTS
   @Value("${validation.name_lenght}")
   private Integer name_lenght;
-
   @Value("${validation.text_lenght}")
   private Integer text_lenght;
 
+  // IMAGES
   @Value("${validation.image_extensions}")
   private String[] image_extensions;
-
   @Value("${validation.image_size}")
   private Integer image_size;
   
+
+  // VIDEOS
   @Value("${validation.video_extensions}")
   private String[] video_extensions;
+  @Value("${validation.video_size}")
+  private Integer video_size;
+  
 
 }

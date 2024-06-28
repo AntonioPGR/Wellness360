@@ -14,15 +14,15 @@ import lombok.NoArgsConstructor;
 public class InjuryUpdatePersistenceDTO extends CrudUpdatePersistenceDTO {
   
   String uuid;
-  BodyMusclesEnum body_muscle;
+  BodyMusclesEnum body_part;
   String description;
   Date initial_date;
   Date end_date;
   String user_uuid;
 
-  public InjuryUpdatePersistenceDTO(InjuryUpdateRequestDTO request_dto, BodyMusclesEnum body_muscle) {
+  public InjuryUpdatePersistenceDTO(InjuryUpdateRequestDTO request_dto, BodyMusclesEnum body_part) {
     this.uuid = request_dto.uuid;
-    this.body_muscle = body_muscle;
+    this.body_part = body_part;
     this.description = request_dto.getDescription();
     this.initial_date = request_dto.getInitial_date();
     this.end_date = request_dto.getEnd_date();
