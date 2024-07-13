@@ -4,10 +4,14 @@ import com.wellness360.exercises.app.exercises.muscles.MuscleEntity;
 import com.wellness360.exercises.enums.BodyMusclesEnum;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class MuscleReturnDTO {
   
   String muscle;

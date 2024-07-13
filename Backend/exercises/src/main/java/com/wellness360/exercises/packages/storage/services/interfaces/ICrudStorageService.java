@@ -30,7 +30,7 @@ public interface ICrudStorageService<
 
   public abstract ReturnDTO getReturnDTO(Entity entity);
   public abstract Entity getEntity(PersistenceCreateDTO dto);
-  public abstract PersistenceCreateDTO getPersistenceCreateDTO(RequestCreateDTO request_dto, String file_name);
-  public abstract PersistenceUpdateDTO getPersistenceUpdateDTO(RequestUpdateDTO request_dto, String file_name);
+  public abstract PersistenceCreateDTO getPersistenceCreateDTO(RequestCreateDTO request_dto, String image_url);
+  public abstract PersistenceUpdateDTO getPersistenceUpdateDTO(RequestUpdateDTO request_dto, String image_url);
 
 }

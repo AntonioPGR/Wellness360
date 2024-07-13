@@ -95,8 +95,9 @@ public class TrainEntity extends UniqueIdentifierEntity implements IBaseEntity<T
   public TrainEntity(TrainCreatePersistenceDTO dto) {
     user_uuid = dto.getUser_uuid();
     week_day = dto.getWeek_day().shortValue();
-    name = dto.getDescription();
+    name = dto.getName();
     description = dto.getDescription();
+    exercises = dto.getExercises();
   }
 
 

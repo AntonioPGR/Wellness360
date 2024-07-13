@@ -1,7 +1,7 @@
 package com.wellness360.exercises.app.exercises.equipments;
 
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import com.wellness360.exercises.app.exercises.ExerciseEntity;
 import com.wellness360.exercises.app.exercises.equipments.dtos.EquipmentCreatePersistenceDTO;
@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 public class EquipmentEntity extends NamedDescribedImageEntity implements IStorageEntity<EquipmentUpdatePersistenceDTO> {
 
   @ManyToMany(mappedBy = "equipments")
-  List<ExerciseEntity> exercises;
+  Set<ExerciseEntity> exercises;
 
   public EquipmentEntity(EquipmentCreatePersistenceDTO dto) {
     name = dto.getName();

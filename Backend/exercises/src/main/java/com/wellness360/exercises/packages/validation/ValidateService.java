@@ -155,4 +155,27 @@ public class ValidateService {
     if(utils.isMediaBiggerThanInMb(video, properties.getVideo_size())) ErrorsThrower.validationError(label + " size is large than allowed");
   }
 
+
+  // SHORT
+  public void validateShort(Integer number) {
+    validateShort(number, true);
+  }
+  public void validateShort(Integer number, boolean nullable) {
+    String label = "Short"; 
+    if(nullable && utils.isNull(number)) return;
+    if(number >= 32767) ErrorsThrower.validationError(label + "s values can't be more than 32.766");
+  }
+
+
+  // WEEK DAY
+  public void validateWeekDay(Integer week_day) {
+    validateWeekDay(week_day, true);
+  }
+  public void validateWeekDay(Integer week_day, boolean nullable) {
+    String label = "Week day"; 
+    if(nullable && utils.isNull(week_day)) return;
+    if(week_day > 7) ErrorsThrower.validationError(label + " must be less or equal 7");
+    if(week_day < 1) ErrorsThrower.validationError(label + " must be more or equal 1");
+  }
+
 }

@@ -71,7 +71,7 @@ public class ExerciseEntity extends NamedDescribedImageEntity implements IStorag
     image_url = dto.getImage_url();
     category = dto.getCategory();
     video_url = dto.getVideo_url();
-    muscles = dto.getMuscles();
+    System.out.println(dto.getEquipments());
     equipments = dto.getEquipments();
   }
 
@@ -81,8 +81,6 @@ public class ExerciseEntity extends NamedDescribedImageEntity implements IStorag
     image_url = Objects.requireNonNullElse(dto.getImage_url(), image_url);
     category = Objects.requireNonNullElse(dto.getCategory(), category);
     video_url = Objects.requireNonNullElse(dto.getVideo_url(), video_url);
-    muscles = Objects.requireNonNullElse(dto.getMuscle(), muscles);
-    equipments = Objects.requireNonNullElse(dto.getEquipment(), equipments);
   }
 
 

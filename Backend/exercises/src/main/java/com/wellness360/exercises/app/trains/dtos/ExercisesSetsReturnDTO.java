@@ -5,9 +5,13 @@ import java.util.List;
 import com.wellness360.exercises.app.trains.sets.SetEntity;
 import com.wellness360.exercises.app.trains.sets.dtos.SetReturnDTO;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor
+@Setter
+@Getter
 public class ExercisesSetsReturnDTO {
 
   String exercise_uuid;
@@ -15,7 +19,7 @@ public class ExercisesSetsReturnDTO {
   
   public ExercisesSetsReturnDTO(String exercise_uuid, List<SetEntity> sets) {
     this.exercise_uuid = exercise_uuid;
-    this.sets = sets.stream().map((set) -> new SetReturnDTO(set)).toList();
+    this.sets = sets != null? sets.stream().map((set) -> new SetReturnDTO(set)).toList() : null;
   }
   
 }
