@@ -21,7 +21,11 @@ public class TrainLogCreateRequestDTO extends CrudCreateRequestDTO {
   List<ExerciseLogCreateDTO> exercise_sets;
 
   public void validate(ValidateService validator) {
-    throw new UnsupportedOperationException("Unimplemented method 'validate'");
+    validator.validateUuid(user_uuid);
+    validator.validatePastDate(date);
+    validator.validateShort(time);
+    validator.validateUuid(train_uuid);
+    exercise_sets.forEach(exercise -> exercise.validate(validator));
   }
   
 }

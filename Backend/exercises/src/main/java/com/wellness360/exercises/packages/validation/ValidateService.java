@@ -158,7 +158,7 @@ public class ValidateService {
 
   // SHORT
   public void validateShort(Integer number) {
-    validateShort(number, true);
+    validateShort(number, false);
   }
   public void validateShort(Integer number, boolean nullable) {
     String label = "Short"; 
@@ -169,13 +169,24 @@ public class ValidateService {
 
   // WEEK DAY
   public void validateWeekDay(Integer week_day) {
-    validateWeekDay(week_day, true);
+    validateWeekDay(week_day, false);
   }
   public void validateWeekDay(Integer week_day, boolean nullable) {
     String label = "Week day"; 
     if(nullable && utils.isNull(week_day)) return;
     if(week_day > 7) ErrorsThrower.validationError(label + " must be less or equal 7");
     if(week_day < 1) ErrorsThrower.validationError(label + " must be more or equal 1");
+  }
+
+
+  public void validatePastDate(Date date) {
+    validatePresentOrFutureDate(date, false);
+  }
+  public void validatePresentOrFutureDate(Date date, boolean nullable) {
+    String label = "Date";
+    if(nullable == true && utils.isNull(date)) return;
+    if(utils.isNull(date)) ErrorsThrower.cantBeNull(label);
+    if(date.after(new Date())) ErrorsThrower.validationError(label + " can't be in the future");
   }
 
 }

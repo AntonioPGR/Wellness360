@@ -7,8 +7,10 @@ import com.wellness360.exercises.app.train_log.TrainLogEntity;
 import com.wellness360.exercises.app.train_log.exercise.dtos.ExerciseLogReturnDTO;
 import com.wellness360.exercises.packages.crud.dtos.CrudReturnDTO;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 public class TrainLogReturnDTO extends CrudReturnDTO{
   
   String uuid;
@@ -24,7 +26,7 @@ public class TrainLogReturnDTO extends CrudReturnDTO{
     date = entity.getDate();
     time = entity.getTime_spent().intValue();
     train_uuid = entity.getTrain().getUuid();
-    exercise_sets = entity.getExercises_logs().stream().map((exercise) -> new ExerciseLogReturnDTO(exercise)).toList();
+    exercise_sets = entity.getExercises_logs() != null? entity.getExercises_logs().stream().map((exercise) -> new ExerciseLogReturnDTO(exercise)).toList() : null;
   }
   
 }

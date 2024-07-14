@@ -20,10 +20,10 @@ public class SetUpdatePersistenceDTO{
   ExerciseEntity exercise;
 
   public SetUpdatePersistenceDTO(SetUpdateRequestDTO dto, TrainEntity train, ExerciseEntity exercise){
-    this.uuid = dto.uuid;
-    this.weight = dto.weight.shortValue();
-    this.reps = dto.reps.shortValue();
-    this.minutes = dto.minutes.shortValue();
+    this.uuid = dto.getUuid();
+    weight = dto.getWeight() != null? dto.getWeight().shortValue() : null;
+    reps = dto.getReps() != null? dto.getReps().shortValue() : null;
+    minutes = dto.getMinutes() != null? dto.getMinutes().shortValue() : null;
     this.train = train;
     this.exercise = exercise;
   }

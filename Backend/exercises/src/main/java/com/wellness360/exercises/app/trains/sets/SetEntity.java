@@ -51,7 +51,7 @@ public class SetEntity extends UniqueIdentifierEntity {
   )
   ExerciseEntity exercise;
 
-  @OneToMany(mappedBy = "sets")
+  @OneToMany(mappedBy = "set")
   List<SetLogEntity> set_log;
 
   public SetEntity(SetCreatePersistenceDTO create_dto) {

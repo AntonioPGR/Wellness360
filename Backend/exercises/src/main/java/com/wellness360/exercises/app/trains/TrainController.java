@@ -9,7 +9,7 @@ import com.wellness360.exercises.app.trains.dtos.TrainUpdateRequestDTO;
 import com.wellness360.exercises.packages.crud.controllers.CrudController;
 
 @RestController
-@RequestMapping("/trains")
+@RequestMapping("${path.train}")
 public class TrainController extends CrudController<
   TrainCreateRequestDTO,
   TrainUpdateRequestDTO,

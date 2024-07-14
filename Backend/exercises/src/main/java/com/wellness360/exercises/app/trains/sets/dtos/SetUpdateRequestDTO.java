@@ -4,10 +4,14 @@ import com.wellness360.exercises.packages.crud.dtos.interfaces.ValidatableDTO;
 import com.wellness360.exercises.packages.validation.ValidateService;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class SetUpdateRequestDTO implements ValidatableDTO {
   
   String uuid;

@@ -12,11 +12,15 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "exercises_logs")
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ExerciseLogEntity extends UniqueIdentifierEntity{
   
   @ManyToOne
@@ -35,5 +39,10 @@ public class ExerciseLogEntity extends UniqueIdentifierEntity{
 
   @OneToMany(mappedBy = "exercise_log")
   List<SetLogEntity> set_logs;
+
+  public ExerciseLogEntity(ExerciseEntity exercise, TrainLogEntity train_log){
+    this.exercise = exercise;
+    this.train_log = train_log;
+  }
 
 }
