@@ -1,4 +1,4 @@
-package com.wellness360.exercises.packages.storage;
+package com.wellness360.community.packages.storage;
 
 
 import java.io.File;
@@ -13,12 +13,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.wellness360.exercises.packages.storage.settings.StorageFolders;
-import com.wellness360.exercises.packages.storage.settings.StorageProperties;
-import com.wellness360.exercises.packages.storage.tools.FileUtils;
-import com.wellness360.exercises.packages.storage.tools.StorageUtils;
-import com.wellness360.exercises.packages.storage.validations.custom.StorageException;
-import com.wellness360.exercises.packages.validation.ErrorsThrower;
+import com.wellness360.community.packages.storage.settings.StorageFolders;
+import com.wellness360.community.packages.storage.settings.StorageProperties;
+import com.wellness360.community.packages.storage.tools.FileUtils;
+import com.wellness360.community.packages.storage.tools.StorageUtils;
+import com.wellness360.community.packages.storage.validations.custom.StorageException;
+import com.wellness360.community.packages.validation.ErrorsThrower;
 
 import jakarta.validation.ValidationException;
 

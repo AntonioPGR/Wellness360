@@ -1,4 +1,4 @@
-package com.wellness360.exercises.packages.crud.controllers;
+package com.wellness360.community.packages.crud.controllers;
 
 import java.net.URI;
 
@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
-import com.wellness360.exercises.packages.crud.dtos.CrudCreateRequestDTO;
-import com.wellness360.exercises.packages.crud.dtos.CrudReturnDTO;
-import com.wellness360.exercises.packages.crud.dtos.CrudUpdateRequestDTO;
-import com.wellness360.exercises.packages.crud.service.interfaces.ICrudServiceBase;
+import com.wellness360.community.packages.crud.dtos.CrudCreateRequestDTO;
+import com.wellness360.community.packages.crud.dtos.CrudReturnDTO;
+import com.wellness360.community.packages.crud.dtos.CrudUpdateRequestDTO;
+import com.wellness360.community.packages.crud.service.interfaces.ICrudServiceBase;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;

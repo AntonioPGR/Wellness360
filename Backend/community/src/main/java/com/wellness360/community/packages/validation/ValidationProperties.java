@@ -1,4 +1,4 @@
-package com.wellness360.exercises.packages.validation;
+package com.wellness360.community.packages.validation;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;

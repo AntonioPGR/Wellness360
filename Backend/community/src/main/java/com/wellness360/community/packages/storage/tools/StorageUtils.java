@@ -1,4 +1,4 @@
-package com.wellness360.exercises.packages.storage.tools;
+package com.wellness360.community.packages.storage.tools;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,8 +12,8 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.wellness360.exercises.packages.storage.validations.custom.StorageFileNotFoundException;
-import com.wellness360.exercises.packages.validation.ErrorsThrower;
+import com.wellness360.community.packages.storage.validations.custom.StorageFileNotFoundException;
+import com.wellness360.community.packages.validation.ErrorsThrower;
 
 public class StorageUtils {
   

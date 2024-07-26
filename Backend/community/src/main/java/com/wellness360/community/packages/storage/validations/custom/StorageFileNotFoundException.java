@@ -1,4 +1,4 @@
-package com.wellness360.exercises.packages.storage.validations.custom;
+package com.wellness360.community.packages.storage.validations.custom;
 
 public class StorageFileNotFoundException extends StorageException {
   

@@ -1,13 +1,13 @@
-package com.wellness360.exercises.packages.crud.service.interfaces;
+package com.wellness360.community.packages.crud.service.interfaces;
 
 import java.util.Optional;
 
-import com.wellness360.exercises.packages.crud.dtos.CrudCreatePersistenceDTO;
-import com.wellness360.exercises.packages.crud.dtos.CrudCreateRequestDTO;
-import com.wellness360.exercises.packages.crud.dtos.CrudReturnDTO;
-import com.wellness360.exercises.packages.crud.dtos.CrudUpdatePersistenceDTO;
-import com.wellness360.exercises.packages.crud.dtos.CrudUpdateRequestDTO;
-import com.wellness360.exercises.packages.crud.entities.interfaces.IBaseEntity;
+import com.wellness360.community.packages.crud.dtos.CrudCreatePersistenceDTO;
+import com.wellness360.community.packages.crud.dtos.CrudCreateRequestDTO;
+import com.wellness360.community.packages.crud.dtos.CrudReturnDTO;
+import com.wellness360.community.packages.crud.dtos.CrudUpdatePersistenceDTO;
+import com.wellness360.community.packages.crud.dtos.CrudUpdateRequestDTO;
+import com.wellness360.community.packages.crud.entities.interfaces.ICrudEntity;
 
 public interface ICrudDtoTransformService<
   RequestCreateDTO extends CrudCreateRequestDTO,
@@ -15,7 +15,7 @@ public interface ICrudDtoTransformService<
   RequestUpdateDTO extends CrudUpdateRequestDTO,
   PersistenceUpdateDTO extends CrudUpdatePersistenceDTO,
   ReturnDTO extends CrudReturnDTO,
-  Entity extends IBaseEntity<PersistenceUpdateDTO>
+  Entity extends ICrudEntity<PersistenceUpdateDTO>
 > extends ICrudServiceBase<
   RequestCreateDTO,
   RequestUpdateDTO,

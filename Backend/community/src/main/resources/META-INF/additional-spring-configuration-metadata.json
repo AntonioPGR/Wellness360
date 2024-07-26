@@ -1,0 +1,72 @@
+{"properties": [
+  {
+    "name": "urls.base_url",
+    "type": "java.lang.String",
+    "description": "A description for 'urls.base_url'"
+  },
+  {
+    "name": "path.post",
+    "type": "java.lang.String",
+    "description": "A description for 'path.post'"
+  },
+  {
+    "name": "path.like",
+    "type": "java.lang.String",
+    "description": "A description for 'path.like'"
+  },
+  {
+    "name": "path.view",
+    "type": "java.lang.String",
+    "description": "A description for 'path.view'"
+  },
+  {
+    "name": "path.follow",
+    "type": "java.lang.String",
+    "description": "A description for 'path.follow'"
+  },
+  {
+    "name": "files.upload_dir",
+    "type": "java.lang.String",
+    "description": "A description for 'files.upload_dir'"
+  },
+  {
+    "name": "files.files_api_url",
+    "type": "java.lang.String",
+    "description": "A description for 'files.files_api_url'"
+  },
+  {
+    "name": "validation.text_lenght",
+    "type": "java.lang.String",
+    "description": "A description for 'validation.text_lenght'"
+  },
+  {
+    "name": "validation.name_lenght",
+    "type": "java.lang.String",
+    "description": "A description for 'validation.name_lenght'"
+  },
+  {
+    "name": "validation.image_extensions",
+    "type": "java.lang.String",
+    "description": "A description for 'validation.image_extensions'"
+  },
+  {
+    "name": "validation.video_extensions",
+    "type": "java.lang.String",
+    "description": "A description for 'validation.video_extensions'"
+  },
+  {
+    "name": "validation.video_size",
+    "type": "java.lang.String",
+    "description": "A description for 'validation.video_size'"
+  },
+  {
+    "name": "validation.image_size",
+    "type": "java.lang.String",
+    "description": "A description for 'validation.image_size'"
+  },
+  {
+    "name": "path.storage",
+    "type": "java.lang.String",
+    "description": "A description for 'path.storage'"
+  }
+]}

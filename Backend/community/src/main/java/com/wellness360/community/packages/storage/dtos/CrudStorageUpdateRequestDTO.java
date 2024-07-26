@@ -1,8 +1,8 @@
-package com.wellness360.exercises.packages.storage.dtos;
+package com.wellness360.community.packages.storage.dtos;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.wellness360.exercises.packages.crud.dtos.CrudUpdateRequestDTO;
+import com.wellness360.community.packages.crud.dtos.CrudUpdateRequestDTO;
 
 public abstract class CrudStorageUpdateRequestDTO extends CrudUpdateRequestDTO{
 

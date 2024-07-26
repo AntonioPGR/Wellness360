@@ -1,11 +1,11 @@
-package com.wellness360.exercises.packages.crud.service.interfaces;
+package com.wellness360.community.packages.crud.service.interfaces;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.wellness360.exercises.packages.crud.dtos.CrudCreateRequestDTO;
-import com.wellness360.exercises.packages.crud.dtos.CrudReturnDTO;
-import com.wellness360.exercises.packages.crud.dtos.CrudUpdateRequestDTO;
+import com.wellness360.community.packages.crud.dtos.CrudCreateRequestDTO;
+import com.wellness360.community.packages.crud.dtos.CrudReturnDTO;
+import com.wellness360.community.packages.crud.dtos.CrudUpdateRequestDTO;
 
 public interface ICrudServiceBase <
   RequestCreateDTO extends CrudCreateRequestDTO,

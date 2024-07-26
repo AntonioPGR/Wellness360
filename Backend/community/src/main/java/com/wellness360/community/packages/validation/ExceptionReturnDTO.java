@@ -1,4 +1,4 @@
-package com.wellness360.exercises.packages.validation;
+package com.wellness360.community.packages.validation;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

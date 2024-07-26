@@ -1,4 +1,4 @@
-package com.wellness360.exercises.packages.crud.validations;
+package com.wellness360.community.packages.crud.validations;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.wellness360.exercises.packages.validation.ExceptionReturnDTO;
+import com.wellness360.community.packages.validation.ExceptionReturnDTO;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.ValidationException;

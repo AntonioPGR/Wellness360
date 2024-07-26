@@ -1,4 +1,4 @@
-package com.wellness360.exercises.packages.validation;
+package com.wellness360.community.packages.validation;
 
 import java.util.Arrays;
 
@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.wellness360.exercises.packages.storage.tools.FileUtils;
+import com.wellness360.community.packages.storage.tools.FileUtils;
 
 @Service
 public class ValidationUtils {

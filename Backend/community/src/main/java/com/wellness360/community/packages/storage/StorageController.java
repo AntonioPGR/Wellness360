@@ -1,4 +1,4 @@
-package com.wellness360.exercises.packages.storage;
+package com.wellness360.community.packages.storage;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

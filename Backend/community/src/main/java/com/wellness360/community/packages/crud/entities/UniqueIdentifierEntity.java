@@ -1,4 +1,4 @@
-package com.wellness360.exercises.packages.crud.entities;
+package com.wellness360.community.packages.crud.entities;
 
 import java.util.UUID;
 

@@ -1,8 +1,8 @@
-package com.wellness360.exercises.packages.validation;
+package com.wellness360.community.packages.validation;
 
 
-import com.wellness360.exercises.packages.storage.validations.custom.StorageException;
-import com.wellness360.exercises.packages.storage.validations.custom.StorageFileNotFoundException;
+import com.wellness360.community.packages.storage.validations.custom.StorageException;
+import com.wellness360.community.packages.storage.validations.custom.StorageFileNotFoundException;
 
 import jakarta.validation.ValidationException;
 

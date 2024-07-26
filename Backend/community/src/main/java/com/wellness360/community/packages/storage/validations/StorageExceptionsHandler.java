@@ -1,4 +1,4 @@
-package com.wellness360.exercises.packages.storage.validations;
+package com.wellness360.community.packages.storage.validations;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.wellness360.exercises.packages.storage.validations.custom.StorageException;
-import com.wellness360.exercises.packages.storage.validations.custom.StorageFileNotFoundException;
-import com.wellness360.exercises.packages.validation.ExceptionReturnDTO;
+import com.wellness360.community.packages.storage.validations.custom.StorageException;
+import com.wellness360.community.packages.storage.validations.custom.StorageFileNotFoundException;
+import com.wellness360.community.packages.validation.ExceptionReturnDTO;
 
 @ControllerAdvice
 public class StorageExceptionsHandler {

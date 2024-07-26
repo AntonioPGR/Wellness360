@@ -1,4 +1,4 @@
-package com.wellness360.exercises.docs;
+package com.wellness360.community.docs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

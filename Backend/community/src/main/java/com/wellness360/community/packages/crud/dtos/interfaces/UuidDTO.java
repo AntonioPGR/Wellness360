@@ -1,4 +1,4 @@
-package com.wellness360.exercises.packages.crud.dtos.interfaces;
+package com.wellness360.community.packages.crud.dtos.interfaces;
 
 public abstract interface UuidDTO {
   

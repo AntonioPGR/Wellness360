@@ -1,4 +1,4 @@
-package com.wellness360.exercises.packages.crud.repositories;
+package com.wellness360.community.packages.crud.repositories;
 
 import java.util.Optional;
 

@@ -1,10 +1,10 @@
-package com.wellness360.exercises.packages.storage.tools;
+package com.wellness360.community.packages.storage.tools;
 
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.wellness360.exercises.packages.validation.ErrorsThrower;
+import com.wellness360.community.packages.validation.ErrorsThrower;
 
 @Service
 public class FileUtils {

@@ -1,4 +1,4 @@
-package com.wellness360.exercises.packages.storage.services;
+package com.wellness360.community.packages.storage.services;
 
 import java.util.Optional;
 
@@ -7,16 +7,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.wellness360.exercises.packages.crud.dtos.CrudCreatePersistenceDTO;
-import com.wellness360.exercises.packages.crud.dtos.CrudReturnDTO;
-import com.wellness360.exercises.packages.crud.dtos.CrudUpdatePersistenceDTO;
-import com.wellness360.exercises.packages.crud.repositories.CrudRepository;
-import com.wellness360.exercises.packages.storage.StorageService;
-import com.wellness360.exercises.packages.storage.dtos.CrudStorageCreateRequestDTO;
-import com.wellness360.exercises.packages.storage.dtos.CrudStorageUpdateRequestDTO;
-import com.wellness360.exercises.packages.storage.services.interfaces.ICrudStorageService;
-import com.wellness360.exercises.packages.storage.services.interfaces.IStorageEntity;
-import com.wellness360.exercises.packages.validation.ValidateService;
+import com.wellness360.community.packages.crud.dtos.CrudCreatePersistenceDTO;
+import com.wellness360.community.packages.crud.dtos.CrudReturnDTO;
+import com.wellness360.community.packages.crud.dtos.CrudUpdatePersistenceDTO;
+import com.wellness360.community.packages.crud.repositories.CrudRepository;
+import com.wellness360.community.packages.storage.StorageService;
+import com.wellness360.community.packages.storage.dtos.CrudStorageCreateRequestDTO;
+import com.wellness360.community.packages.storage.dtos.CrudStorageUpdateRequestDTO;
+import com.wellness360.community.packages.storage.services.interfaces.ICrudStorageService;
+import com.wellness360.community.packages.storage.services.interfaces.IStorageEntity;
+import com.wellness360.community.packages.validation.ValidateService;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;

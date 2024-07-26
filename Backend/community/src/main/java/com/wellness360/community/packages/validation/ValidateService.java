@@ -1,13 +1,10 @@
-package com.wellness360.exercises.packages.validation;
+package com.wellness360.community.packages.validation;
 
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.wellness360.exercises.enums.BodyMusclesEnum;
-import com.wellness360.exercises.enums.CategoriesEnum;
 
 @Service
 public class ValidateService {
@@ -75,22 +72,6 @@ public class ValidateService {
     if(!utils.isUuidValid(uuid)) ErrorsThrower.validationError(label + " format is invalid");
   }
 
-  // BODY MUSCLE
-  public void validateBodyMuscle(String body_muscle) {
-    validateBodyMuscle(body_muscle, false);
-  }
-  public void validateBodyMuscle(String body_muscle, boolean nullable) {
-    String label = "Body Muscle";
-    if(nullable == true && utils.isNullOrEmpty(body_muscle)) return;
-    if(utils.isNullOrEmpty(body_muscle)) ErrorsThrower.cantBeNull(label);
-    try{
-      BodyMusclesEnum.valueOf(body_muscle.strip().toUpperCase());
-    } catch ( Exception e) {
-      ErrorsThrower.validationError("Passed " + label + " invalid: could not find any correspondent to " + body_muscle);
-    }
-  }
-
-
   // PRIORITY
   public void validatePriority(Integer priority) {
     validatePriority(priority, false);
@@ -124,22 +105,6 @@ public class ValidateService {
     if(nullable == true && utils.isNull(initial_date)) return;
     if(utils.isNull(initial_date)) ErrorsThrower.cantBeNull(label);
     if(end_date.before(initial_date)) ErrorsThrower.validationError(label + " must have occured after initial date");
-  }
-
-
-  // CATEGORY
-  public void validateExerciseCategory(String category) {
-    validateExerciseCategory(category, false);
-  }
-  public void validateExerciseCategory(String category, boolean nullable) {
-    String label = "Exercise category";
-    if(nullable == true && utils.isNullOrEmpty(category)) return;
-    if(utils.isNullOrEmpty(category)) ErrorsThrower.cantBeNull(label);
-    try{
-      CategoriesEnum.valueOf(category.strip().toUpperCase());
-    } catch ( Exception e) {
-      ErrorsThrower.validationError("Passed " + label + " invalid: could not find any correspondent to " + category);
-    }
   }
 
 

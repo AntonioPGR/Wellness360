@@ -1,4 +1,4 @@
-package com.wellness360.exercises.packages.crud.entities;
+package com.wellness360.community.packages.crud.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;

@@ -1,19 +1,19 @@
-package com.wellness360.exercises.packages.crud.service;
+package com.wellness360.community.packages.crud.service;
 
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.wellness360.exercises.packages.crud.dtos.CrudCreatePersistenceDTO;
-import com.wellness360.exercises.packages.crud.dtos.CrudCreateRequestDTO;
-import com.wellness360.exercises.packages.crud.dtos.CrudReturnDTO;
-import com.wellness360.exercises.packages.crud.dtos.CrudUpdatePersistenceDTO;
-import com.wellness360.exercises.packages.crud.dtos.CrudUpdateRequestDTO;
-import com.wellness360.exercises.packages.crud.entities.interfaces.IBaseEntity;
-import com.wellness360.exercises.packages.crud.repositories.CrudRepository;
-import com.wellness360.exercises.packages.crud.service.interfaces.ICrudDtoTransformService;
-import com.wellness360.exercises.packages.validation.ValidateService;
+import com.wellness360.community.packages.crud.dtos.CrudCreatePersistenceDTO;
+import com.wellness360.community.packages.crud.dtos.CrudCreateRequestDTO;
+import com.wellness360.community.packages.crud.dtos.CrudReturnDTO;
+import com.wellness360.community.packages.crud.dtos.CrudUpdatePersistenceDTO;
+import com.wellness360.community.packages.crud.dtos.CrudUpdateRequestDTO;
+import com.wellness360.community.packages.crud.entities.interfaces.ICrudEntity;
+import com.wellness360.community.packages.crud.repositories.CrudRepository;
+import com.wellness360.community.packages.crud.service.interfaces.ICrudDtoTransformService;
+import com.wellness360.community.packages.validation.ValidateService;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -26,7 +26,7 @@ public abstract class CrudDtoTransformService<
   RequestUpdateDTO extends CrudUpdateRequestDTO,
   PersistenceUpdateDTO extends CrudUpdatePersistenceDTO,
   ReturnDTO extends CrudReturnDTO,
-  Entity extends IBaseEntity<PersistenceUpdateDTO>
+  Entity extends ICrudEntity<PersistenceUpdateDTO>
 > implements ICrudDtoTransformService<
   RequestCreateDTO,
   PersistenceCreateDTO, 
