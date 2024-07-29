@@ -15,14 +15,17 @@ import lombok.Setter;
 public class PostUpdateRequestDTO extends CrudUpdateRequestDTO {
 
   String uuid;
-  String user_uuid;
   String content;
   String replying_to;
-  boolean visible;
+  int visible;
   List<MultipartFile> media;
 
   public void validate(ValidateService validator) {
-    a
+    validator.validateUuid(uuid);
+    validator.validateText(content, true);
+    validator.validateUuid(replying_to, true);
+    validator.validateBoolean(visible, true);
+    if(media != null) media.forEach((item) -> validator.validateMedia(item));
   }
 
 }

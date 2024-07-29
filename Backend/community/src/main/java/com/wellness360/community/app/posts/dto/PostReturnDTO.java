@@ -17,8 +17,8 @@ public class PostReturnDTO extends CrudReturnDTO {
   String content;
   String replying_to;
   int visible;
-  int views;
-  int likes;
+  long views;
+  long likes;
   List<String> media;
   
   public PostReturnDTO(PostEntity entity) {

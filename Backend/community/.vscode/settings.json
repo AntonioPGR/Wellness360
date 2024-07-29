@@ -1,0 +1,20 @@
+{
+  "hidefiles.configurationType": "global",
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    ".vscode/": true,
+    "src/main/java/com/wellness360/community/app/posts/PostService.java": true,
+    "mvnw.cmd": true,
+    "mvnw": true,
+    "pom.xml": true,
+    ".mvn/": true,
+    "target/": true,
+    "src/test/": true
+  },
+  "hidefiles.selectedProfile": "Default",
+  "java.configuration.updateBuildConfiguration": "automatic"
+}

@@ -25,7 +25,11 @@ public class PostCreateRequestDTO extends CrudCreateRequestDTO {
   List<MultipartFile> media;
 
   public void validate(ValidateService validator) {
-    a
+    validator.validateUuid(user_uuid);
+    validator.validateText(content);
+    validator.validateUuid(replying_to);
+    validator.validateBoolean(visible);
+    media.forEach((item) -> validator.validateMedia(item));
   }
 
 }

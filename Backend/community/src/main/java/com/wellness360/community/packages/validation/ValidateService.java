@@ -1,6 +1,7 @@
 package com.wellness360.community.packages.validation;
 
 import java.util.Date;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,11 +36,11 @@ public class ValidateService {
 
 
   // TEXT
-  public void validateDescription(String text) {
-    validateDescription(text, false);
+  public void validateText(String text) {
+    validateText(text, false);
   }
-  public void validateDescription(String text, boolean nullable) {
-    String label = "Description";
+  public void validateText(String text, boolean nullable) {
+    String label = "Text";
     if(nullable && utils.isNullOrEmpty(text)) return;
     if(utils.isNullOrEmpty(text)) ErrorsThrower.cantBeNull(label);
     Integer max_lenght = properties.getText_lenght();
@@ -144,7 +145,8 @@ public class ValidateService {
   }
 
 
-  public void validatePastDate(Date date) {
+  // DATE
+  public void validatePresentOrFutureDate(Date date) {
     validatePresentOrFutureDate(date, false);
   }
   public void validatePresentOrFutureDate(Date date, boolean nullable) {
@@ -152,6 +154,33 @@ public class ValidateService {
     if(nullable == true && utils.isNull(date)) return;
     if(utils.isNull(date)) ErrorsThrower.cantBeNull(label);
     if(date.after(new Date())) ErrorsThrower.validationError(label + " can't be in the future");
+  }
+
+
+  // BOOLEAN
+  public void validateBoolean(int bool){
+    validateBoolean(bool, false);
+  }
+  public void validateBoolean(int bool, boolean nullable){
+    String label = "Boolean";
+    if(nullable == true && utils.isNull(bool)) return;
+    if(utils.isNull(bool)) ErrorsThrower.cantBeNull(label);
+    if(bool != 1 && bool != 0 ) ErrorsThrower.validationError(label + " must be 0 or 1");
+  }
+
+  // MEDIA
+  public void validateMedia(MultipartFile media){
+    validateMedia(media, false);
+  }
+  public void validateMedia(MultipartFile media, boolean nullable){
+    String label = "Media";
+    if(nullable == true && utils.isNull(media)) return;
+    if(utils.isNull(media)) ErrorsThrower.cantBeNull(label);
+
+    Stream<String> video_extensions = Stream.of(properties.getVideo_extensions());
+    Stream<String> image_extensions = Stream.of(properties.getImage_extensions());
+    String[] media_extensions = (String[]) Stream.concat(video_extensions, image_extensions).toArray();
+    if(!utils.isMediaExtensionSupported(media, media_extensions)) ErrorsThrower.validationError(label + " unsuported type");
   }
 
 }

@@ -11,13 +11,11 @@ import lombok.Setter;
 public class PostUpdatePersistenceDTO extends CrudUpdatePersistenceDTO{
 
   String uuid;
-  String user_uuid;
   String content;
   PostEntity replying_to;
   int visible;
 
-  public PostUpdatePersistenceDTO(PostCreateRequestDTO request_dto, PostEntity replying_entity) {
-    user_uuid = request_dto.getUser_uuid();
+  public PostUpdatePersistenceDTO(PostUpdateRequestDTO request_dto, PostEntity replying_entity) {
     content = replying_entity.getContent();
     replying_to = replying_entity;
     visible = request_dto.getVisible();

@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "media")
+@Table(name = "medias")
 @Getter
 @Setter
 @AllArgsConstructor
