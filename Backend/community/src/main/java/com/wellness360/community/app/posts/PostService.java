@@ -40,7 +40,15 @@ public class PostService extends CrudDtoTransformService<
   MediaService media_service;
 
   public PostReturnDTO getReturnDTO(PostEntity entity) {
-    return new PostReturnDTO(entity);
+    PostReturnDTO return_dto = new PostReturnDTO(entity);
+
+    long likes = like_service.getNumberOf(entity);
+    return_dto.setLikes(likes);
+
+    long views = view_service.getNumberOf(entity);
+    return_dto.setViews(views);
+
+    return return_dto;
   }
 
   public PostEntity getEntity(PostCreatePersistenceDTO dto) {
@@ -66,14 +74,9 @@ public class PostService extends CrudDtoTransformService<
 
     PostEntity entity = entity_retriever.getPost(return_dto.getUuid());
     List<String> media_list = media_service.create(request_dto.getMedia(), entity);
+
+    return_dto = getReturnDTO(entity);
     return_dto.setMedia(media_list);
-
-    long likes = like_service.getNumberOf(entity);
-    return_dto.setLikes(likes);
-
-    long views = view_service.getNumberOf(entity);
-    return_dto.setViews(views);
-
     return return_dto;
   }
 
@@ -82,19 +85,18 @@ public class PostService extends CrudDtoTransformService<
 
     PostEntity entity = entity_retriever.getPost(return_dto.getUuid());
     List<String> media_list = media_service.update(request_dto.getMedia(), entity);
+
+    return_dto = getReturnDTO(entity);
     return_dto.setMedia(media_list);
-
-    long likes = like_service.getNumberOf(entity);
-    return_dto.setLikes(likes);
-
-    long views = view_service.getNumberOf(entity);
-    return_dto.setViews(views);
-
     return return_dto;
   }
 
-  public String getPath(){
-    return "pots/";
+  public void delete(String uuid) {
+    PostEntity entity = entity_retriever.getPost(uuid);
+    like_service.deleteAllByPost(entity);
+    media_service.deleteAllByPost(entity);
+    view_service.deleteAllByPost(entity);
+    super.delete(uuid);
   }
 
 }

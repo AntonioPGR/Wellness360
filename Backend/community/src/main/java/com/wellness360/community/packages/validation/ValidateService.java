@@ -179,7 +179,7 @@ public class ValidateService {
 
     Stream<String> video_extensions = Stream.of(properties.getVideo_extensions());
     Stream<String> image_extensions = Stream.of(properties.getImage_extensions());
-    String[] media_extensions = (String[]) Stream.concat(video_extensions, image_extensions).toArray();
+    String[] media_extensions = Stream.concat(video_extensions, image_extensions).toArray(String[]::new);
     if(!utils.isMediaExtensionSupported(media, media_extensions)) ErrorsThrower.validationError(label + " unsuported type");
   }
 

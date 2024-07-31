@@ -25,8 +25,9 @@ public class PostReturnDTO extends CrudReturnDTO {
     this.uuid = entity.getUuid();
     this.user_uuid = entity.getUser_uuid();
     this.content = entity.getContent();
-    this.replying_to = entity.getReplying_to().getUuid();
+    this.replying_to = entity.getReplying_to() != null? entity.getReplying_to().getUuid() : "";
     this.visible = entity.getVisible();
+    this.media = entity.getMedia() != null? entity.getMedia().stream().map((media) -> media.getUrl()).toList() : null;
   }
 
 }

@@ -19,7 +19,7 @@ public class MediaService {
 
   public List<String> create(List<MultipartFile> media, PostEntity post_entity) {
     List<String> media_list = media.stream().map((file) -> {
-      String path = storage_service.store(file, "posts");
+      String path = storage_service.store(file, "posts", post_entity.getUuid()+file.hashCode());
       MediaEntity media_entity = new MediaEntity(path, post_entity);
       repository.saveAndFlush(media_entity);
       return path;
@@ -28,16 +28,16 @@ public class MediaService {
   }
 
   public List<String> update(List<MultipartFile> media, PostEntity post_entity) {
-    List<String> media_list = media.stream().map((file) -> {
-      post_entity.getMedia().forEach((old_file) -> {
-        storage_service.delete(old_file.getUrl());
-      });
-      String path = storage_service.store(file, "posts");
-      MediaEntity media_entity = new MediaEntity(path, post_entity);
-      repository.saveAndFlush(media_entity);
-      return path;
-    }).toList();
-    return media_list;
+    post_entity.getMedia().forEach((old_media) -> {
+      storage_service.delete(old_media.getUrl());
+      repository.delete(old_media);
+    });
+    return create(media, post_entity);
+  }
+
+  public void deleteAllByPost(PostEntity entity) {
+    entity.getMedia().stream().forEach((media) -> storage_service.delete(media.getUrl()));
+    repository.deleteAllByPost_id(entity.getId());
   }
   
 }

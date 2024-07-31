@@ -16,7 +16,7 @@ public class PostUpdatePersistenceDTO extends CrudUpdatePersistenceDTO{
   int visible;
 
   public PostUpdatePersistenceDTO(PostUpdateRequestDTO request_dto, PostEntity replying_entity) {
-    content = replying_entity.getContent();
+    content = request_dto.getContent();
     replying_to = replying_entity;
     visible = request_dto.getVisible();
   }

@@ -67,18 +67,6 @@ public abstract class CrudStorageService<
     PersistenceCreateDTO create_dto = getPersistenceCreateDTO(request_dto, file_name);
     Entity entity = getEntity(create_dto);
     entity = saveEntity(entity);
-
-    // store_service.delete(file_name);
-    // String uuid_file_name = store_service.store(request_dto.getFile(), getFolderName(), entity.getUuid());
-    // entity = getEntityByUuid(entity.getUuid()).orElseThrow(() -> new ValidationException("VAI TOMA NO CU"));
-    // entity.setImage_url(uuid_file_name);
-    // ERRO AQUI! APENAS PARA EXERCÍCIOS
-    // EQUIPMENTS FUNCIONANDO NORMAL
-    // GOOGLE DIZ QUE È ALGO A VER COM ARRYS E LISTAS
-    // System.out.println(entity.getImage_url());
-    // System.out.println(entity.getUuid());
-    // entity = saveEntity(entity);
-
     return getReturnDTO(entity);
   }
 

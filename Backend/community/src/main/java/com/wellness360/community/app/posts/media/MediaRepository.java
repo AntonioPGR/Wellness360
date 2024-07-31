@@ -6,5 +6,7 @@ import com.wellness360.community.packages.crud.repositories.CrudRepository;
 
 @Repository
 public interface MediaRepository extends CrudRepository<MediaEntity>  {
+
+  void deleteAllByPost_id(Integer id);
   
 }

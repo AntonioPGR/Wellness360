@@ -69,7 +69,6 @@ public abstract class CrudDtoTransformService<
     request_dto.validate(validator_service);
     Entity entity = getEntityByUuid(request_dto.getUuid())
       .orElseThrow(() -> new EntityNotFoundException("Unable to find object with passed uuid"));
-
     PersistenceUpdateDTO persistence_dto = getPersistenceUpdateDTO(request_dto);
     entity.update(persistence_dto);
     saveEntity(entity);

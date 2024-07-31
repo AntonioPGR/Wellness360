@@ -50,18 +50,18 @@ public class PostEntity extends UniqueIdentifierEntity implements ICrudEntity<Po
   @OneToMany(mappedBy = "post")
   List<LikeEntity> like;
 
-  public void update(PostUpdatePersistenceDTO dto) {
-    content = Objects.requireNonNullElse(dto.getContent(), content);
-    replying_to = Objects.requireNonNullElse(dto.getReplying_to(), replying_to);
-    visible = Objects.requireNonNullElse(dto.getVisible(), visible);
-  }
 
   public PostEntity(PostCreatePersistenceDTO dto) {
     content = dto.getContent();
     replying_to = dto.getReplying_to();
     user_uuid = dto.getUser_uuid();
-    visible = dto.getVisible();
     created_at = Date.valueOf(LocalDate.now());
+  }
+
+  public void update(PostUpdatePersistenceDTO dto) {
+    content = Objects.requireNonNullElse(dto.getContent(), content);
+    replying_to = dto.getReplying_to() != null? dto.getReplying_to() : replying_to;
+    visible = Objects.requireNonNullElse(dto.getVisible(), visible);
   }
 
 }

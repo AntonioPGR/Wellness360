@@ -52,7 +52,7 @@ public class StorageService {
     }
   }
 
-
+  
   // STORE
   public String store(MultipartFile file, String folder, String name) {
     file_utils.checkFileExists(file);

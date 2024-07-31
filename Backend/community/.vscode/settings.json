@@ -7,7 +7,6 @@
     "**/CVS": true,
     "**/.DS_Store": true,
     ".vscode/": true,
-    "src/main/java/com/wellness360/community/app/posts/PostService.java": true,
     "mvnw.cmd": true,
     "mvnw": true,
     "pom.xml": true,

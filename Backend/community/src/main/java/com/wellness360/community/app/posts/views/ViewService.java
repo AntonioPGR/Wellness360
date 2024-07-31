@@ -12,7 +12,11 @@ public class ViewService {
   ViewRepository repository;
 
   public long getNumberOf(PostEntity entity) {
-    return repository.countByPost_id(entity);
+    return repository.countByPost_id(entity.getId());
+  }
+
+  public void deleteAllByPost(PostEntity entity) {
+    repository.deleteAllByPost_id(entity.getId());
   }
   
 }

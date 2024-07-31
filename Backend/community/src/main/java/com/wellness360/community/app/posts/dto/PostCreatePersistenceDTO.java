@@ -17,13 +17,11 @@ public class PostCreatePersistenceDTO extends CrudCreatePersistenceDTO {
   String user_uuid;
   String content;
   PostEntity replying_to;
-  int visible;
 
   public PostCreatePersistenceDTO(PostCreateRequestDTO request_dto, PostEntity replying_entity) {
     user_uuid = request_dto.getUser_uuid();
-    content = replying_entity.getContent();
+    content = request_dto.getContent();
     replying_to = replying_entity;
-    visible = request_dto.getVisible();
   }
 
 }
