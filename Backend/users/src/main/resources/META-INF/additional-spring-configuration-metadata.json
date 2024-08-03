@@ -1,0 +1,57 @@
+{"properties": [
+  {
+    "name": "urls.base_url",
+    "type": "java.lang.String",
+    "description": "A description for 'urls.base_url'"
+  },
+  {
+    "name": "files.upload_dir",
+    "type": "java.lang.String",
+    "description": "A description for 'files.upload_dir'"
+  },
+  {
+    "name": "path.users",
+    "type": "java.lang.String",
+    "description": "A description for 'path.users'"
+  },
+  {
+    "name": "path.settings",
+    "type": "java.lang.String",
+    "description": "A description for 'path.settings'"
+  },
+  {
+    "name": "files.files_api_url",
+    "type": "java.lang.String",
+    "description": "A description for 'files.files_api_url'"
+  },
+  {
+    "name": "validation.name_lenght",
+    "type": "java.lang.String",
+    "description": "A description for 'validation.name_lenght'"
+  },
+  {
+    "name": "validation.image_extensions",
+    "type": "java.lang.String",
+    "description": "A description for 'validation.image_extensions'"
+  },
+  {
+    "name": "validation.text_lenght",
+    "type": "java.lang.String",
+    "description": "A description for 'validation.text_lenght'"
+  },
+  {
+    "name": "validation.video_size",
+    "type": "java.lang.String",
+    "description": "A description for 'validation.video_size'"
+  },
+  {
+    "name": "validation.video_extensions",
+    "type": "java.lang.String",
+    "description": "A description for 'validation.video_extensions'"
+  },
+  {
+    "name": "validation.image_size",
+    "type": "java.lang.String",
+    "description": "A description for 'validation.image_size'"
+  }
+]}
