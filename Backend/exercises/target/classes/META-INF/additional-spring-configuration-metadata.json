@@ -1,0 +1,82 @@
+{"properties": [
+  {
+    "name": "files.upload_dir",
+    "type": "java.lang.String",
+    "description": "A description for 'files.upload_dir'"
+  },
+  {
+    "name": "validation.name_lenght",
+    "type": "java.lang.String",
+    "description": "A description for 'validation.name_lenght'"
+  },
+  {
+    "name": "validation.text_lenght",
+    "type": "java.lang.String",
+    "description": "A description for 'validation.text_lenght'"
+  },
+  {
+    "name": "validation.image_extensions",
+    "type": "java.lang.String",
+    "description": "A description for 'validation.image_extensions'"
+  },
+  {
+    "name": "validation.image_size",
+    "type": "java.lang.String",
+    "description": "A description for 'validation.image_size'"
+  },
+  {
+    "name": "validation.video_extensions",
+    "type": "java.lang.String",
+    "description": "A description for 'validation.video_extension'"
+  },
+  {
+    "name": "files.files_api_url",
+    "type": "java.lang.String",
+    "description": "A description for 'files.files_api_url'"
+  },
+  {
+    "name": "path.storage",
+    "type": "java.lang.String",
+    "description": "A description for 'path.storage'"
+  },
+  {
+    "name": "path.equipments",
+    "type": "java.lang.String",
+    "description": "A description for 'path.equipments'"
+  },
+  {
+    "name": "path.injuries",
+    "type": "java.lang.String",
+    "description": "A description for 'path.injuries'"
+  },
+  {
+    "name": "path.exercises",
+    "type": "java.lang.String",
+    "description": "A description for 'path.exercises'"
+  },
+  {
+    "name": "path.focus",
+    "type": "java.lang.String",
+    "description": "A description for 'path.focus'"
+  },
+  {
+    "name": "urls.base_url",
+    "type": "java.lang.String",
+    "description": "A description for 'urls.base_url'"
+  },
+  {
+    "name": "validation.video_size",
+    "type": "java.lang.String",
+    "description": "A description for 'validation.video_size'"
+  },
+  {
+    "name": "path.train",
+    "type": "java.lang.String",
+    "description": "A description for 'path.train'"
+  },
+  {
+    "name": "path.logs",
+    "type": "java.lang.String",
+    "description": "A description for 'path.logs'"
+  }
+]}

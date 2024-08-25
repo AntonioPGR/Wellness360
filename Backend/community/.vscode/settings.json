@@ -14,6 +14,6 @@
     "target/": true,
     "src/test/": true
   },
-  "hidefiles.selectedProfile": "Default",
+  "hidefiles.selectedProfile": "Show All Files",
   "java.configuration.updateBuildConfiguration": "automatic"
 }
