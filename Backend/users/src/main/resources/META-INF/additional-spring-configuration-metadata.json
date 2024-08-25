@@ -53,5 +53,15 @@
     "name": "validation.image_size",
     "type": "java.lang.String",
     "description": "A description for 'validation.image_size'"
+  },
+  {
+    "name": "path.storage",
+    "type": "java.lang.String",
+    "description": "A description for 'path.storage'"
+  },
+  {
+    "name": "security.jwt.token_secret",
+    "type": "java.lang.String",
+    "description": "A description for 'security.jwt.token_secret'"
   }
 ]}

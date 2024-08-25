@@ -15,11 +15,17 @@ public class StorageProperties {
   
   @Value("${files.upload_dir}")
   private String location;
-
   @Value("${files.files_api_url}")
   private String files_api_url;
 
   @Value("${validation.image_extensions}")
-  private String[] image_extensions;
+  private String[] allowed_image_extensions;
+  @Value("${validation.video_extensions}")
+  private String[] allowed_video_extensions;
+
+  @Value("${validation.image_size}")
+  private int max_image_size;
+  @Value("${validation.video_size}")
+  private int max_video_size;
 
 }

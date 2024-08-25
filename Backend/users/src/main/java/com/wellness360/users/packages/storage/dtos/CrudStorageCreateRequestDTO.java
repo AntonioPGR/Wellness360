@@ -4,7 +4,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.wellness360.users.packages.crud.dtos.CrudCreateRequestDTO;
 
-public abstract class CrudStorageCreateRequestDTO extends CrudCreateRequestDTO {
+public abstract interface CrudStorageCreateRequestDTO extends CrudCreateRequestDTO {
 
   public abstract MultipartFile getFile();
   public abstract String getName();

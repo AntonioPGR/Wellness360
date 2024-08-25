@@ -16,7 +16,7 @@ import com.wellness360.users.packages.storage.dtos.CrudStorageCreateRequestDTO;
 import com.wellness360.users.packages.storage.dtos.CrudStorageUpdateRequestDTO;
 import com.wellness360.users.packages.storage.services.interfaces.ICrudStorageService;
 import com.wellness360.users.packages.storage.services.interfaces.IStorageEntity;
-import com.wellness360.users.packages.validation.ValidateService;
+import com.wellness360.users.validation.Validator;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -46,7 +46,7 @@ public abstract class CrudStorageService<
   @Autowired
   protected Repository repository;
   @Autowired
-  protected ValidateService validator_service;
+  protected Validator validator_service;
 
   public ReturnDTO getByUuid(String uuid) {
     Entity entity = getEntityByUuid(uuid)
@@ -68,15 +68,6 @@ public abstract class CrudStorageService<
     Entity entity = getEntity(create_dto);
     entity = saveEntity(entity);
 
-    // store_service.delete(file_name);
-    // String uuid_file_name = store_service.store(request_dto.getFile(), getFolderName(), entity.getUuid());
-    // entity = getEntityByUuid(entity.getUuid()).orElseThrow(() -> new ValidationException("VAI TOMA NO CU"));
-    // entity.setImage_url(uuid_file_name);
-    // ERRO AQUI! APENAS PARA EXERCÍCIOS
-    // EQUIPMENTS FUNCIONANDO NORMAL
-    // GOOGLE DIZ QUE È ALGO A VER COM ARRYS E LISTAS
-    // System.out.println(entity.getImage_url());
-    // System.out.println(entity.getUuid());
     // entity = saveEntity(entity);
 
     return getReturnDTO(entity);
@@ -84,7 +75,7 @@ public abstract class CrudStorageService<
 
   public ReturnDTO update(RequestUpdateDTO request_dto) {
     request_dto.validate(validator_service);
-    Entity entity = getEntityByUuid(request_dto.getUuid())
+    Entity entity = getEntityByUuid(request_dto.uuid())
       .orElseThrow(() -> new EntityNotFoundException("Unable to find object with passed uuid"));
     String file_name = store_service.update(request_dto.getFile(), entity.getImage_url());
     PersistenceUpdateDTO persistence_dto = getPersistenceUpdateDTO(request_dto, file_name);

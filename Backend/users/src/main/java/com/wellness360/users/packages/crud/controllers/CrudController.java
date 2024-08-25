@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators.None;
 import com.wellness360.users.packages.crud.dtos.CrudCreateRequestDTO;
 import com.wellness360.users.packages.crud.dtos.CrudReturnDTO;
 import com.wellness360.users.packages.crud.dtos.CrudUpdateRequestDTO;
-import com.wellness360.users.packages.crud.service.interfaces.ICrudServiceBase;
+import com.wellness360.users.packages.crud.service.interfaces.ICrudBaseService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -27,7 +27,7 @@ public abstract class CrudController<
   RequestCreateDTO extends CrudCreateRequestDTO,
   RequestUpdateDTO extends CrudUpdateRequestDTO,
   ReturnDTO extends CrudReturnDTO,
-  Service extends ICrudServiceBase<
+  Service extends ICrudBaseService<
     RequestCreateDTO,
     RequestUpdateDTO,
     ReturnDTO
@@ -45,14 +45,14 @@ public abstract class CrudController<
 
   @GetMapping("/{id}")
   public ResponseEntity<ReturnDTO> getUnique(@PathVariable("id") String uuid) {
-    ReturnDTO return_dto = (ReturnDTO) service.getByUuid(uuid);
+    ReturnDTO return_dto = service.getByUuid(uuid);
     return ResponseEntity.ok().body(return_dto);
   }
   
   @PostMapping
   public ResponseEntity<ReturnDTO> create(@Valid @RequestBody RequestCreateDTO request_dto, HttpServletRequest http ){
     ReturnDTO return_dto = (ReturnDTO) service.create(request_dto);
-    URI item_location = URI.create(http.getRequestURL() + "/" + return_dto.getUuid());
+    URI item_location = URI.create(http.getRequestURL() + "/" + return_dto.uuid());
     return ResponseEntity
       .status(201)
       .header("Location", item_location.toString())
@@ -66,8 +66,8 @@ public abstract class CrudController<
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<None> delete(@PathVariable("id") String category_uuid){
-    service.delete(category_uuid);
+  public ResponseEntity<None> delete(@PathVariable("id") String uuid){
+    service.delete(uuid);
     return ResponseEntity.noContent().build();
   }
 
