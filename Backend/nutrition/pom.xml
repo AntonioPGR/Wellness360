@@ -9,7 +9,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.2.6</version>
+		<version>3.3.3</version>
 		<relativePath/> 
 	</parent>
 
@@ -44,44 +44,6 @@
 			<optional>true</optional>
     </dependency>
 
-		<!-- TESTINGS -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-    </dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-
-		<!-- BANCO DE DADOS H2 EM MEMÓRIA -->
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<!-- junit -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-
-
-		<!-- API -->
-		<dependency>
-			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-			<version>2.3.0</version>
-		</dependency>
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger2</artifactId>
-			<version>3.0.0</version>
-		</dependency>
-
 		<!-- BANCO DE DADOS -->
 		<!-- flyway -->
     <dependency>
@@ -101,18 +63,17 @@
 
 		<!-- ENTITIES -->
 		<!-- hibernate -->
-    <dependency>
-			<groupId>org.hibernate</groupId>
+    <!--~~(No version provided)~~>--><!--~~(No version provided)~~>--><dependency>
+			<groupId>org.hibernate.orm</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>6.4.4.Final</version>
 			<type>pom</type>
     </dependency>
-		<!-- lombok annotations -->
-    <dependency>
+    <!--~~(No version provided)~~>--><!--~~(No version provided)~~>--><dependency>
+			<groupId>org.hibernate.orm</groupId>
 			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
 			<optional>true</optional>
     </dependency>
+
 
 	</dependencies>
 
