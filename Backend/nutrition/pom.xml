@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.3.3</version>
+		<version>3.3.4</version>
 		<relativePath/> 
 	</parent>
 	<groupId>com.wellness360</groupId>
@@ -31,6 +31,7 @@
 		<spring-security.version>6.3.1</spring-security.version>
 	</properties>
 	<dependencies>
+
 		<!-- SPRING STARTERS -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -49,6 +50,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
 		<!-- DATABASE -->
 		<dependency>
 			<groupId>org.flywaydb</groupId>
@@ -63,24 +65,13 @@
 			<artifactId>mysql-connector-j</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.derby</groupId>
-			<artifactId>derby</artifactId>
-			<version>10.17.1.0</version>
-			<scope>test</scope>
-		</dependency>
-		<!-- DOCS -->
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger2</artifactId>
-			<version>3.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.restdocs</groupId>
-			<artifactId>spring-restdocs-mockmvc</artifactId>
-			<scope>test</scope>
-		</dependency>
+
 		<!-- TOOLS -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
 		
 		<!-- DEV TOOLS -->
 		<dependency>
@@ -88,6 +79,7 @@
 			<artifactId>spring-boot-devtools</artifactId>
 			<optional>true</optional>
 		</dependency>
+
 		<!-- SECURITY -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -98,17 +90,12 @@
 			<artifactId>java-jwt</artifactId>
 			<version>4.4.0</version>
 		</dependency>
-		<!-- MAPSTRUCT -->
 
+		<!-- MAPSTRUCT -->
 		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.mapstruct</groupId>
-			<artifactId>mapstruct</artifactId>
-			<version>1.6.0.Beta1</version> 
+				<groupId>org.mapstruct</groupId>
+				<artifactId>mapstruct</artifactId>
+				<version>1.6.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.mapstruct</groupId>
@@ -116,9 +103,7 @@
 			<version>1.5.5.Final</version>
 			<scope>provided</scope>
 		</dependency>
-
 	</dependencies>
-
 	<build>
 		<plugins>
 		<!-- MAPSTRUCT -->
@@ -137,6 +122,7 @@
 					</annotationProcessorPaths>
 				</configuration>
 			</plugin>
+
 			<!-- MAVEN ASCII -->
 			<plugin>
 				<groupId>org.asciidoctor</groupId>
@@ -163,12 +149,14 @@
 					</dependency>
 				</dependencies>
 			</plugin>
+
 			<!-- MAVEN BOOT -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		
 		<finalName>nutrition_application</finalName>
 	</build>
 </project>
