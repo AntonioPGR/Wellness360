@@ -6,7 +6,7 @@ import com.wellness360.users.packages.crud.dtos.CrudCreatePersistenceDTO;
 import com.wellness360.users.packages.crud.dtos.CrudReturnDTO;
 import com.wellness360.users.packages.crud.dtos.CrudUpdatePersistenceDTO;
 import com.wellness360.users.packages.crud.entities.interfaces.ICrudEntity;
-import com.wellness360.users.packages.crud.service.interfaces.ICrudBaseService;
+import com.wellness360.users.packages.crud.service.interfaces.ICrudServiceBase;
 import com.wellness360.users.packages.storage.dtos.CrudStorageCreateRequestDTO;
 import com.wellness360.users.packages.storage.dtos.CrudStorageUpdateRequestDTO;
 
@@ -17,7 +17,7 @@ public interface ICrudStorageService<
   PersistenceUpdateDTO extends CrudUpdatePersistenceDTO,
   ReturnDTO extends CrudReturnDTO,
   Entity extends ICrudEntity<PersistenceUpdateDTO>
-> extends ICrudBaseService<
+> extends ICrudServiceBase<
   RequestCreateDTO,
   RequestUpdateDTO,
   ReturnDTO

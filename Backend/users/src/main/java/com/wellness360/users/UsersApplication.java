@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import com.wellness360.users.packages.storage.StorageService;
-import com.wellness360.users.settings.storage.StorageFolders;
 
 @SpringBootApplication
 public class UsersApplication {
@@ -18,7 +17,7 @@ public class UsersApplication {
 	@Bean
 	CommandLineRunner init(StorageService service){
 		return (args) -> {
-			service.init(StorageFolders.class);
+			service.init();
 		};
 	}
 

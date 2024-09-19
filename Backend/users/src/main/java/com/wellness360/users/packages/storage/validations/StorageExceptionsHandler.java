@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.wellness360.users.packages.storage.validations.custom.StorageException;
 import com.wellness360.users.packages.storage.validations.custom.StorageFileNotFoundException;
-import com.wellness360.users.packages.validation.dtos.ExceptionReturnDTO;
+import com.wellness360.users.packages.validation.ExceptionReturnDTO;
 
 @ControllerAdvice
 public class StorageExceptionsHandler {

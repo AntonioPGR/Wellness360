@@ -15,9 +15,6 @@ public class ErrorsThrower {
   public static void maxCharactersExceeded(String label, Integer lenght){
     validationError(label + " cannot have more than " + lenght + " characters");
   }
-  public static void cantBeEmpty(String label) {
-    validationError(label + " cannot be empty");
-  }
 
   // ERRORS
   public static void validationError(String message){

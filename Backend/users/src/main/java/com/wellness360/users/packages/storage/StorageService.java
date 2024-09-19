@@ -13,26 +13,23 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.wellness360.users.packages.storage.settings.StorageFolders;
 import com.wellness360.users.packages.storage.settings.StorageProperties;
 import com.wellness360.users.packages.storage.tools.FileUtils;
 import com.wellness360.users.packages.storage.tools.StorageUtils;
 import com.wellness360.users.packages.storage.validations.custom.StorageException;
 import com.wellness360.users.packages.validation.ErrorsThrower;
-import com.wellness360.users.validation.Validator;
 
 import jakarta.validation.ValidationException;
 
 @Service
-public class StorageService{
+public class StorageService {
 
   @Autowired
   private FileUtils file_utils;
 
   private final StorageProperties properties;
-  private Path root_location;
-
-  @Autowired
-  Validator validator;
+  private final Path root_location;
 
   public StorageService(StorageProperties properties){
     this.properties = properties;
@@ -41,11 +38,12 @@ public class StorageService{
     this.root_location = Paths.get(location);
   }
 
+
   // INIT
-  public <T extends Enum<T>> void init(Class<T> folders) {
+  public void init() {
     try{
       Files.createDirectories(root_location);
-      for(T folder : folders.getEnumConstants()){
+      for(StorageFolders folder : StorageFolders.values()){
         Path new_folder = new File(root_location.toString(), folder.name()).toPath();
         Files.createDirectories(new_folder);
       }

@@ -57,15 +57,7 @@ public class ValidationUtils {
     String regex = "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$";
     return uuid.matches(regex);
   }
-
-  public boolean isBoolean(int bool){
-    return bool != 0 && bool != 1;
-  }
-
-  public boolean isNullableAndNull(boolean nullable, Object obj){
-    return nullable && isNull(obj);
-  }
-
   
-  
+
+
 }
