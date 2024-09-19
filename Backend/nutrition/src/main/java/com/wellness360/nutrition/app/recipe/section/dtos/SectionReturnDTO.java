@@ -1,28 +1,11 @@
 package com.wellness360.nutrition.app.recipe.section.dtos;
 
-import com.wellness360.nutrition.app.recipe.RecipeEntity;
 import com.wellness360.nutrition.app.recipe.dtos.RecipeReturnDTO;
-import com.wellness360.nutrition.app.recipe.section.SectionEntity;
+import com.wellness360.nutrition.packages.crud.dtos.CrudReturnDTO;
 
-import io.micrometer.common.lang.Nullable;
-import lombok.Getter;
-import lombok.NonNull;
-
-@Getter
-public class SectionReturnDTO {
-  @NonNull
-  String uuid;
-  @Nullable
-  String text;
-  @Nullable
-  RecipeReturnDTO included_recipe_uuid;
-
-  public SectionReturnDTO(SectionEntity entity){
-    this.uuid = entity.getUuid();
-    this.text = entity.getText();
-    RecipeEntity included_recipe = entity.getIncluded_recipe();
-    if(included_recipe != null) this.included_recipe_uuid = new RecipeReturnDTO(entity.getIncluded_recipe());
-    else this.included_recipe_uuid = null;
-  }
-
+public record SectionReturnDTO(
+  String uuid,
+  String text,
+  RecipeReturnDTO included_recipe_uuid
+) implements CrudReturnDTO {
 }

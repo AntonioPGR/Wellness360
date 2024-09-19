@@ -1,15 +1,14 @@
 package com.wellness360.nutrition.app.tag;
 
-import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
-import com.wellness360.nutrition.common.entities.NamedDescribedImageEntity;
-import com.wellness360.nutrition.common.interfaces.INameEntity;
 import com.wellness360.nutrition.app.category.CategoryEntity;
 import com.wellness360.nutrition.app.food.FoodEntity;
 import com.wellness360.nutrition.app.recipe.RecipeEntity;
-import com.wellness360.nutrition.app.tag.dtos.TagCreatePersistenceDTO;
 import com.wellness360.nutrition.app.tag.dtos.TagUpdatePersistenceDTO;
+import com.wellness360.nutrition.packages.crud.entities.NamedDescribedImageEntity;
+import com.wellness360.nutrition.packages.storage.services.interfaces.StorageEntity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -22,37 +21,29 @@ import lombok.*;
 @Entity
 @Table(name = "tags")
 @Getter
-@Setter(value = AccessLevel.PROTECTED)
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TagEntity extends NamedDescribedImageEntity implements INameEntity<TagUpdatePersistenceDTO>{
+public class TagEntity extends NamedDescribedImageEntity implements StorageEntity<TagUpdatePersistenceDTO> {
   
   // RELASHIONSHIPS
   @ManyToOne
   @JoinColumn(name = "category_id", nullable=false)
-  protected CategoryEntity category;
+  CategoryEntity category;
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "tag")
-  protected Set<FoodEntity> foods;
+  Set<FoodEntity> foods;
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "tag")
-  protected Set<RecipeEntity> recipes;
-
-  // CONSTRUCTORS
-  public TagEntity(TagCreatePersistenceDTO dto) {
-    this.name = dto.getName();
-    this.description = dto.getDescription();
-    this.image_url = dto.getImage_url();
-    this.category = dto.getCategory();
-  }
+  Set<RecipeEntity> recipes;
 
   // INHERIT
   @Override
   public void update(TagUpdatePersistenceDTO dto) {
-    this.name = Objects.requireNonNullElse(dto.getName(), this.name);
-    this.description = Objects.requireNonNullElse(dto.getDescription(), this.description);
-    this.image_url = Objects.requireNonNullElse(dto.getImage_url(), this.image_url);
-    this.category = Objects.requireNonNullElse(dto.getCategory(), this.category);
+    name = Optional.ofNullable(dto.name()).orElse(name);
+    description = Optional.ofNullable(dto.description()).orElse(description);
+    image_url = Optional.ofNullable(dto.image_url()).orElse(image_url);
+    category = Optional.ofNullable(dto.category()).orElse(category);
   }
 
 }

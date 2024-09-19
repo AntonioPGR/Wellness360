@@ -1,29 +1,23 @@
 package com.wellness360.nutrition.app.selectivity.dtos;
 
-import com.wellness360.nutrition.common.dtos.ValidatableDTO;
-import com.wellness360.nutrition.common.services.ValidateService;
+import com.wellness360.nutrition.packages.crud.dtos.CrudCreateRequestDTO;
+import com.wellness360.nutrition.validation.Validator;
 
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
-import lombok.Getter;
+public record SelectivityCreateRequestDTO(
+  String user_uuid,
+  String recipe_uuid,
+  String food_uuid,
+  String category_uuid
+) implements CrudCreateRequestDTO{
 
+  public void validate(Validator validator) {
+    validator.string.validateUuid(user_uuid);
+    validator.string.validateUuid(recipe_uuid, true);
+    validator.string.validateUuid(food_uuid, true);
+    validator.string.validateUuid(category_uuid, true);
 
-@Getter
-public class SelectivityCreateRequestDTO implements ValidatableDTO{
-  @Nonnull
-  String user_uuid;
-  @Nullable
-  String recipe_uuid;
-  @Nullable
-  String food_uuid;
-  @Nullable
-  String category_uuid;
-
-  public void validate(ValidateService validator) {
-    validator.validateUuid(user_uuid, true);
-    validator.validateUuid(recipe_uuid, true);
-    validator.validateUuid(food_uuid, true);
-    validator.validateUuid(category_uuid, true);
+    String[] uuids = {user_uuid, recipe_uuid, category_uuid};
+    validator.array.validateAllNotNull(uuids);
   }
 
 }

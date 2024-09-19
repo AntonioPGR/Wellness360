@@ -1,22 +1,16 @@
 package com.wellness360.nutrition.app.recipe.ingredient.dto;
 
-import com.wellness360.nutrition.common.dtos.ValidatableDTO;
-import com.wellness360.nutrition.common.services.ValidateService;
+import com.wellness360.nutrition.packages.crud.dtos.CrudCreateRequestDTO;
+import com.wellness360.nutrition.validation.Validator;
 
-import jakarta.annotation.Nonnull;
-import lombok.Getter;
-import lombok.Setter;
+public record IngredientCreateRequestDTO(
+  String food_uuid,
+  int amount
+) implements CrudCreateRequestDTO {
 
-@Getter
-@Setter
-public class IngredientCreateRequestDTO implements ValidatableDTO {
-  @Nonnull
-  String food_uuid;
-  @Nonnull
-  String amount;
-
-  public void validate(ValidateService validator) {
-    validator.validateUuid(food_uuid);
-    validator.validateAmount((short) Integer.parseUnsignedInt(amount));
+  public void validate(Validator validator) {
+    validator.string.validateUuid(food_uuid);
+    validator.number.validateShort(amount);
+    validator.validateAmount((short) amount);
   }
 }

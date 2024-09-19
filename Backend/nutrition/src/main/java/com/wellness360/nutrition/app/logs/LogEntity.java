@@ -3,11 +3,10 @@ package com.wellness360.nutrition.app.logs;
 import java.time.LocalDate;
 import java.util.Objects;
 
-import com.wellness360.nutrition.app.logs.dtos.LogCreatePersistenceDTO;
 import com.wellness360.nutrition.app.logs.dtos.LogUpdatePersistenceDTO;
 import com.wellness360.nutrition.app.recipe.RecipeEntity;
-import com.wellness360.nutrition.common.entities.UniqueIdentifierEntity;
-import com.wellness360.nutrition.common.interfaces.IBaseEntity;
+import com.wellness360.nutrition.packages.crud.entities.UniqueIdentifierEntity;
+import com.wellness360.nutrition.packages.crud.entities.interfaces.CrudEntity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -15,38 +14,31 @@ import lombok.*;
 @Entity
 @Table(name = "recipes_log")
 @Getter
-@Setter(value = AccessLevel.PROTECTED)
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class LogEntity extends UniqueIdentifierEntity implements IBaseEntity<LogUpdatePersistenceDTO>{
+public class LogEntity extends UniqueIdentifierEntity implements CrudEntity<LogUpdatePersistenceDTO>{
 
-  @Column(name = "user_id", nullable = false)
-  protected Long user_id;
+  @Column(name = "user_uuid", nullable = false)
+  String user_uuid;
 
   @Column(name = "date", nullable = false)
-  protected LocalDate date;
+  LocalDate date;
 
   @Column(name = "amount", nullable = false)
-  protected Short amount;
+  Short amount;
 
   // RELATIONSHIPS
   @ManyToOne
   @JoinColumn(name = "recipe_id" )
-  protected RecipeEntity recipe;
-
-  public LogEntity(LogCreatePersistenceDTO dto){
-    this.user_id = 1L;
-    this.amount = dto.getAmount();
-    this.date = dto.getDate();
-    this.recipe = dto.getRecipe();
-  }
+  RecipeEntity recipe;
 
   @Override
   public void update(LogUpdatePersistenceDTO dto) {
-    this.user_id = Objects.requireNonNullElse(1L, this.user_id);
-    this.amount = Objects.requireNonNullElse(dto.getAmount(), this.amount);
-    this.date = Objects.requireNonNullElse(dto.getDate(), this.date);
-    this.recipe = Objects.requireNonNullElse(dto.getRecipe(), this.recipe);
+    user_uuid = Objects.requireNonNullElse("Adadas", user_uuid);
+    amount = Objects.requireNonNullElse(dto.amount(), amount);
+    date = Objects.requireNonNullElse(dto.date(), date);
+    recipe = Objects.requireNonNullElse(dto.recipe(), recipe);
   }
 
 }

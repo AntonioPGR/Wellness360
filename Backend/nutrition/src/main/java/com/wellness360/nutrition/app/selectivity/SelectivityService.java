@@ -5,15 +5,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.wellness360.nutrition.app.category.CategoryEntity;
-import com.wellness360.nutrition.app.category.CategoryRepository;
+import com.wellness360.nutrition.app.category.CategoryService;
 import com.wellness360.nutrition.app.food.FoodEntity;
-import com.wellness360.nutrition.app.food.FoodRepository;
+import com.wellness360.nutrition.app.food.FoodService;
 import com.wellness360.nutrition.app.recipe.RecipeEntity;
-import com.wellness360.nutrition.app.recipe.RecipeRepository;
+import com.wellness360.nutrition.app.recipe.RecipeService;
 import com.wellness360.nutrition.app.selectivity.dtos.SelectivityCreatePersistenceDTO;
 import com.wellness360.nutrition.app.selectivity.dtos.SelectivityCreateRequestDTO;
+import com.wellness360.nutrition.app.selectivity.dtos.SelectivityMapper;
 import com.wellness360.nutrition.app.selectivity.dtos.SelectivityReturnDTO;
-import com.wellness360.nutrition.common.services.ValidateService;
+import com.wellness360.nutrition.validation.Validator;
 
 import jakarta.transaction.Transactional;
 
@@ -26,36 +27,29 @@ public abstract class SelectivityService<
   SelectivityRepository<Entity> repository;
 
   @Autowired
-  RecipeRepository recipe_repository;
+  RecipeService recipe_service;
   @Autowired
-  FoodRepository food_repository;
+  FoodService food_service;
   @Autowired
-  CategoryRepository category_repository;
+  CategoryService category_service;
 
   @Autowired
-  ValidateService validate_service;
+  Validator validate_service;
 
   public abstract Entity createDTOtoEntity(SelectivityCreatePersistenceDTO dto);
   public abstract SelectivityReturnDTO entityToReturnDTO(Entity entity);
 
   public List<SelectivityReturnDTO> getByUserUuid(String uuid) {
-    List<Entity> entities_list = repository.findAllByUserId(1L);
-    return entities_list.stream().map(SelectivityReturnDTO::new).toList();
+    List<Entity> entities_list = repository.findAllByUuid(uuid);
+    return entities_list.stream().map((entity) -> SelectivityMapper.INSTANCE.entityToReturn(entity)).toList();
   }
 
-  public SelectivityReturnDTO create(SelectivityCreateRequestDTO id_dto) {
-    id_dto.validate(validate_service);
-
-    RecipeEntity recipe = recipe_repository.findByUuid(id_dto.getRecipe_uuid())
-      .orElse(null);
-
-    FoodEntity food = food_repository.findByUuid(id_dto.getFood_uuid())
-      .orElse(null);
-
-    CategoryEntity category = category_repository.findByUuid(id_dto.getCategory_uuid())
-      .orElse(null);
-
-    SelectivityCreatePersistenceDTO entities_dto = new SelectivityCreatePersistenceDTO(1L, recipe, food, category);
+  public SelectivityReturnDTO create(SelectivityCreateRequestDTO dto) {
+    dto.validate(validate_service);
+    RecipeEntity recipe = dto.recipe_uuid() != null? recipe_service.getEntityByUuid(dto.recipe_uuid()) : null;
+    FoodEntity food = dto.food_uuid() != null? food_service.getEntityByUuid(dto.food_uuid()) : null;
+    CategoryEntity category = dto.category_uuid() != null? category_service.getEntityByUuid(dto.category_uuid()) : null;
+    SelectivityCreatePersistenceDTO entities_dto = SelectivityMapper.INSTANCE.createRequestToPersistence(1234L, recipe, food, category);
     Entity entity = createDTOtoEntity(entities_dto);
     entity = repository.save(entity);
 

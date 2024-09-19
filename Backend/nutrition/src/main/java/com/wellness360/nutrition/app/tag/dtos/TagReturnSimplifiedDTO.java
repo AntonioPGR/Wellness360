@@ -1,27 +1,11 @@
 package com.wellness360.nutrition.app.tag.dtos;
 
-import com.wellness360.nutrition.app.tag.TagEntity;
+import com.wellness360.nutrition.packages.crud.dtos.CrudReturnDTO;
 
-import jakarta.annotation.Nullable;
-import lombok.Getter;
-import lombok.NonNull;
-
-@Getter
-public class TagReturnSimplifiedDTO{
-  @NonNull
-  String uuid;
-  @NonNull
-  String name; 
-  @Nullable
-  String description;
-  @NonNull
-  String image_url;
-
-  public TagReturnSimplifiedDTO(TagEntity entity) {
-    this.uuid = entity.getUuid();
-    this.name = entity.getName();
-    this.description = entity.getDescription();
-    this.image_url = entity.getImage_url();
-  }
-
+public record TagReturnSimplifiedDTO(
+  String uuid,
+  String name,
+  String description,
+  String image_url
+) implements CrudReturnDTO{
 }

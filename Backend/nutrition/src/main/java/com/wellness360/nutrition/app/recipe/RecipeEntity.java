@@ -3,11 +3,8 @@ package com.wellness360.nutrition.app.recipe;
 import java.util.Objects;
 import java.util.Set;
 
-import com.wellness360.nutrition.common.entities.UniqueIdentifierEntity;
-import com.wellness360.nutrition.common.interfaces.IBaseEntity;
 import com.wellness360.nutrition.app.category.CategoryEntity;
 import com.wellness360.nutrition.app.logs.LogEntity;
-import com.wellness360.nutrition.app.recipe.dtos.RecipeCreatePersistenceDTO;
 import com.wellness360.nutrition.app.recipe.dtos.RecipeUpdatePersistenceDTO;
 import com.wellness360.nutrition.app.recipe.ingredient.IngredientEntity;
 import com.wellness360.nutrition.app.recipe.media.MediaEntity;
@@ -15,6 +12,8 @@ import com.wellness360.nutrition.app.recipe.section.SectionEntity;
 import com.wellness360.nutrition.app.selectivity.preference.PreferenceEntity;
 import com.wellness360.nutrition.app.selectivity.restriction.RestrictionEntity;
 import com.wellness360.nutrition.app.tag.TagEntity;
+import com.wellness360.nutrition.packages.crud.entities.UniqueIdentifierEntity;
+import com.wellness360.nutrition.packages.crud.entities.interfaces.CrudEntity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -22,71 +21,59 @@ import lombok.*;
 @Entity
 @Table(name = "recipes")
 @Getter
-@Setter(value = AccessLevel.PROTECTED)
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RecipeEntity extends UniqueIdentifierEntity implements IBaseEntity<RecipeUpdatePersistenceDTO>{
+public class RecipeEntity extends UniqueIdentifierEntity implements CrudEntity<RecipeUpdatePersistenceDTO>{
 
   // ATTRIBUTES
   @Column(name = "name", unique = true, nullable = false, length = 50)
-  protected String name;
+  String name;
 
   @Column(name = "description", columnDefinition = "TEXT")
-  protected String description;
+  String description;
 
-  @Column(name = "post_user_id", nullable = false)
-  protected Long post_user_id;
+  @Column(name = "post_user_uuid", nullable = false)
+  String post_user_uuid;
 
   // RELATIONSHIPS
   @ManyToOne
   @JoinColumn(name = "tag_id" )
-  protected TagEntity tag;
+  TagEntity tag;
   
   @ManyToOne
   @JoinColumn(name = "category_id")
   @NonNull
-  protected CategoryEntity category;
+  CategoryEntity category;
   
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "recipe")
-  protected Set<IngredientEntity> ingredients;
+  Set<IngredientEntity> ingredients;
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "recipe")
-  protected Set<PreferenceEntity> preferences;
+  Set<PreferenceEntity> preferences;
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "recipe")
-  protected Set<RestrictionEntity> restricions;
+  Set<RestrictionEntity> restricions;
   
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "recipe")
-  protected Set<LogEntity> logs;
+  Set<LogEntity> logs;
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "recipe")
-  protected Set<MediaEntity> media;
+  Set<MediaEntity> media;
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "recipe")
-  protected Set<SectionEntity> sections;
+  Set<SectionEntity> sections;
 
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "included_recipe")
-  protected Set<SectionEntity> included_in_recipes;
-
-  public RecipeEntity(RecipeCreatePersistenceDTO dto) {
-    this.name = dto.getName();
-    this.description = dto.getDescription();
-    this.post_user_id = 1L;
-    this.tag = dto.getTag();
-    this.category = dto.getCategory();
-    this.ingredients = dto.getIngredients();
-    this.media = dto.getMedia();
-    this.sections = dto.getSections();
-  }
+  Set<SectionEntity> included_in_recipes;
 
   @Override
   public void update(RecipeUpdatePersistenceDTO dto) {
-    this.name = Objects.requireNonNullElse(dto.getName(), this.name);
-    this.description = Objects.requireNonNullElse(dto.getDescription(), this.description);
-    this.category = Objects.requireNonNullElse(dto.getCategory(), this.category);
-    this.tag = Objects.requireNonNullElse(dto.getTag(), this.tag);
+    name = Objects.requireNonNullElse(dto.name(), name);
+    description = Objects.requireNonNullElse(dto.description(), description);
+    category = Objects.requireNonNullElse(dto.category(), category);
+    tag = Objects.requireNonNullElse(dto.tag(), tag);
   }
-
 
 }
 

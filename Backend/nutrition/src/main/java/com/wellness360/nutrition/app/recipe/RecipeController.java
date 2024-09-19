@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.wellness360.nutrition.app.recipe.dtos.RecipeCreateRequestDTO;
 import com.wellness360.nutrition.app.recipe.dtos.RecipeReturnDTO;
 import com.wellness360.nutrition.app.recipe.dtos.RecipeUpdateRequestDTO;
-import com.wellness360.nutrition.common.controllers.CrudImageController;
+import com.wellness360.nutrition.packages.crud.controllers.CrudStorageController;
 
 @RestController
 @RequestMapping("${path.recipe}")
-public class RecipeController extends CrudImageController<
+public class RecipeController extends CrudStorageController<
   RecipeCreateRequestDTO,
   RecipeUpdateRequestDTO,
   RecipeReturnDTO,

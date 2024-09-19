@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS recipes (
   id INT AUTO_INCREMENT PRIMARY KEY,
   uuid VARCHAR(36) UNIQUE NOT NULL,
   tag_id INT,
-  post_user_id INT NOT NULL,
+  post_user_uuid CHAR(36) NOT NULL,
   category_id INT NOT NULL,
   name VARCHAR(50) NOT NULL,
   description TEXT,
@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS recipes_log (
   id INT AUTO_INCREMENT PRIMARY KEY,
   uuid VARCHAR(36) UNIQUE NOT NULL,
   recipe_id INT NOT NULL,
-  user_id INT NOT NULL,
+  user_uuid CHAR(36) NOT NULL,
   date DATE NOT NULL,
   FOREIGN KEY (recipe_id) REFERENCES recipes(id) ON DELETE CASCADE
 );
@@ -99,7 +99,7 @@ CREATE TABLE IF NOT EXISTS recipes_ingredients(
 CREATE TABLE IF NOT EXISTS restrictions (
   id INT AUTO_INCREMENT PRIMARY KEY,
   uuid VARCHAR(36) UNIQUE NOT NULL,
-  user_id INT,
+  user_uuid CHAR(36) NOT NULL,
   recipe_id INT,
   food_id INT,
   category_id INT,
@@ -113,7 +113,7 @@ CREATE INDEX idx_uuid ON restrictions (uuid);
 CREATE TABLE IF NOT EXISTS preferences (
   id INT AUTO_INCREMENT PRIMARY KEY,
   uuid VARCHAR(36) UNIQUE NOT NULL,
-  user_id INT,
+  user_uuid CHAR(36) NOT NULL,
   recipe_id INT,
   food_id INT,
   category_id INT,

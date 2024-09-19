@@ -1,29 +1,21 @@
 package com.wellness360.nutrition.app.logs.dtos;
 
-import java.time.LocalDate;
+import java.util.Date;
+import com.wellness360.nutrition.packages.crud.dtos.CrudCreateRequestDTO;
+import com.wellness360.nutrition.validation.Validator;
 
-import com.wellness360.nutrition.common.dtos.ValidatableDTO;
-import com.wellness360.nutrition.common.services.ValidateService;
+public record LogCreateRequestDTO(
+  Date date,
+  Short amount,
+  String recipe_uuid,
+  String user_uuid
+) implements CrudCreateRequestDTO {
 
-import jakarta.annotation.Nonnull;
-import lombok.Getter;
-
-@Getter
-public class LogCreateRequestDTO implements ValidatableDTO {
-  @Nonnull
-  LocalDate date;
-  @Nonnull
-  Short amount;
-  @Nonnull
-  String recipe_uuid;
-  @Nonnull
-  String user_uuid;
-
-  public void validate(ValidateService validator) {
-    validator.validateLogDate(date);
+  public void validate(Validator validator) {
+    validator.date.validatePastOrPresentDate(date);
     validator.validateAmount(amount);
-    validator.validateUuid(recipe_uuid);
-    validator.validateUuid(user_uuid);
+    validator.string.validateUuid(recipe_uuid);
+    validator.string.validateUuid(user_uuid);
   }
 
 }

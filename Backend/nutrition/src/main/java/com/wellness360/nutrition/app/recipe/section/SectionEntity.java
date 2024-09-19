@@ -3,10 +3,9 @@ package com.wellness360.nutrition.app.recipe.section;
 import java.util.Objects;
 
 import com.wellness360.nutrition.app.recipe.RecipeEntity;
-import com.wellness360.nutrition.app.recipe.section.dtos.SectionCreatePersistenceDTO;
 import com.wellness360.nutrition.app.recipe.section.dtos.SectionUpdatePersistenceDTO;
-import com.wellness360.nutrition.common.entities.UniqueIdentifierEntity;
-import com.wellness360.nutrition.common.interfaces.IBaseEntity;
+import com.wellness360.nutrition.packages.crud.entities.UniqueIdentifierEntity;
+import com.wellness360.nutrition.packages.crud.entities.interfaces.CrudEntity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -14,34 +13,27 @@ import lombok.*;
 @Entity
 @Table(name = "recipes_sections")
 @Getter
-@Setter(value = AccessLevel.PROTECTED)
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class SectionEntity extends UniqueIdentifierEntity implements IBaseEntity<SectionUpdatePersistenceDTO>{
+public class SectionEntity extends UniqueIdentifierEntity implements CrudEntity<SectionUpdatePersistenceDTO>{
 
   @Column(name = "text", nullable = false)
-  protected String text;
+  String text;
 
   // RELATIONSHIPS
   @ManyToOne
   @JoinColumn(name = "recipe_id" )
-  protected RecipeEntity recipe;
+  RecipeEntity recipe;
 
   @ManyToOne
   @JoinColumn(name = "included_recipe" )
-  protected RecipeEntity included_recipe;
+  RecipeEntity included_recipe;
 
-  public SectionEntity(SectionCreatePersistenceDTO create_dto) {
-    this.included_recipe = create_dto.getIncluded_recipe();
-    this.text = create_dto.getText();
-    this.recipe = create_dto.getRecipe();
-  }
-
-  @Override
   public void update(SectionUpdatePersistenceDTO dto) {
-    this.text = Objects.requireNonNullElse(dto.getText(), this.text);
-    this.recipe = Objects.requireNonNullElse(dto.getRecipe(), this.recipe);
-    this.included_recipe = Objects.requireNonNullElse(dto.getIncluded_recipe(), this.included_recipe);
+    text = Objects.requireNonNullElse(dto.text(), text);
+    recipe = Objects.requireNonNullElse(dto.recipe(), recipe);
+    included_recipe = Objects.requireNonNullElse(dto.included_recipe(), included_recipe);
   }
 
 }

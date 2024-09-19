@@ -7,7 +7,7 @@ import com.wellness360.nutrition.app.tag.dtos.TagCreateRequestDTO;
 import com.wellness360.nutrition.app.tag.dtos.TagReturnCompleteDTO;
 import com.wellness360.nutrition.app.tag.dtos.TagReturnSimplifiedDTO;
 import com.wellness360.nutrition.app.tag.dtos.TagUpdateRequestDTO;
-import com.wellness360.nutrition.common.controllers.CrudImageController;
+import com.wellness360.nutrition.packages.crud.controllers.CrudStorageController;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 @RequestMapping("${path.tag}")
-public class TagController extends CrudImageController<
+public class TagController extends CrudStorageController<
   TagCreateRequestDTO,
   TagUpdateRequestDTO,
   TagReturnCompleteDTO,
@@ -29,10 +29,9 @@ public class TagController extends CrudImageController<
   @Autowired
   TagService service;
 
-  // NEW METHODS
   @GetMapping("/category/{category_uuid}")
   public ResponseEntity<Page<TagReturnSimplifiedDTO>> getByCategory(Pageable pageable, @PathVariable("category_uuid") String category_uuid) {
-    Page<TagReturnSimplifiedDTO> results = this.service.getTagsByCategory(pageable, category_uuid);
+    Page<TagReturnSimplifiedDTO> results = service.getTagsByCategory(pageable, category_uuid);
     return ResponseEntity.ok().body(results);
   }
 

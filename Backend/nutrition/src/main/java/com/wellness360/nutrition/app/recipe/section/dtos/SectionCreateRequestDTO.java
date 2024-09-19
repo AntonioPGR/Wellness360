@@ -1,23 +1,16 @@
 package com.wellness360.nutrition.app.recipe.section.dtos;
 
-import com.wellness360.nutrition.common.dtos.ValidatableDTO;
-import com.wellness360.nutrition.common.services.ValidateService;
+import com.wellness360.nutrition.packages.crud.dtos.CrudCreateRequestDTO;
+import com.wellness360.nutrition.validation.Validator;
 
-import io.micrometer.common.lang.Nullable;
-import lombok.Getter;
-import lombok.Setter;
+public record SectionCreateRequestDTO(
+  String text,
+  String included_recipe_uuid
+) implements CrudCreateRequestDTO {
 
-@Getter
-@Setter
-public class SectionCreateRequestDTO implements ValidatableDTO {
-  @Nullable
-  String text;
-  @Nullable
-  String included_recipe_uuid;
-
-  public void validate(ValidateService validator) {
-    validator.validateText(text);
-    validator.validateUuid(included_recipe_uuid);
+  public void validate(Validator validator) {
+    validator.string.validateText(text);
+    validator.string.validateUuid(included_recipe_uuid);
   }
   
 }

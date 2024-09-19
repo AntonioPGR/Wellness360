@@ -1,16 +1,11 @@
 package com.wellness360.nutrition.app.category;
 
 import com.wellness360.nutrition.app.category.dtos.*;
-import com.wellness360.nutrition.common.services.CrudStorageService;
-import com.wellness360.nutrition.common.services.StorageEntityFileService;
-import com.wellness360.nutrition.common.tools.EntityRetrieverByUUID;
-import com.wellness360.nutrition.configurations.StorageFolders;
+import com.wellness360.nutrition.packages.storage.services.CrudStorageService;
+import com.wellness360.nutrition.settings.storage.StorageFolders;
 
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -25,43 +20,25 @@ public class CategoryService extends CrudStorageService<
   CategoryEntity
 > {
 
-  @Autowired
-  StorageEntityFileService store_service;
-  @Autowired
-  EntityRetrieverByUUID entity_retriever;
-
-  public CategoryService() {
-    super(StorageFolders.category.name());
+  public String getFolderName() {
+    return StorageFolders.category.name();
   }
 
-  // INHERIT
   public CategoryReturnDTO getReturnDTO(CategoryEntity entity) {
-    return new CategoryReturnDTO(entity);
+    return CategoryMapper.INSTANCE.entityToReturn(entity);
   }
 
   public CategoryEntity getEntity(CategoryCreatePersistenceDTO dto) {
-    return new CategoryEntity(dto);
+    return CategoryMapper.INSTANCE.createPersistenceToEntity(dto);
   }
 
-  public CategoryCreatePersistenceDTO getPersistenceCreateDTO(CategoryCreateRequestDTO request_dto) {
-    String image_path = store_service.create(
-      request_dto.getName(),
-      folder_name,
-      request_dto.getImage()
-    );
-    return new CategoryCreatePersistenceDTO(request_dto, image_path);
+  public CategoryCreatePersistenceDTO getPersistenceCreateDTO(CategoryCreateRequestDTO dto, String image_url) {
+    return CategoryMapper.INSTANCE.createRequestToPersistence(dto, image_url);
   }
 
-  public CategoryUpdatePersistenceDTO getPersistenceUpdateDTO(CategoryUpdateRequestDTO request_dto) {
-    CategoryEntity category = getEntityByUuid(request_dto.getUuid())
-      .orElseThrow(() -> new EntityNotFoundException("Could not find category with passed uuid"));
-    String image_path = store_service.update(
-      request_dto.getName(),
-      folder_name,
-      request_dto.getImage(),
-      category.getName()
-    );
-    return new CategoryUpdatePersistenceDTO(request_dto, image_path);
+  public CategoryUpdatePersistenceDTO getPersistenceUpdateDTO(CategoryUpdateRequestDTO dto, String image_url) {
+    return CategoryMapper.INSTANCE.updateRequestToPersistence(dto, image_url);
   }
+
 
 }

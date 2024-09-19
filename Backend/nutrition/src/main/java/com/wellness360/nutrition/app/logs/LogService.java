@@ -3,16 +3,15 @@ package com.wellness360.nutrition.app.logs;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.wellness360.nutrition.app.logs.dtos.LogCreatePersistenceDTO;
 import com.wellness360.nutrition.app.logs.dtos.LogCreateRequestDTO;
+import com.wellness360.nutrition.app.logs.dtos.LogMapper;
 import com.wellness360.nutrition.app.logs.dtos.LogReturnDTO;
 import com.wellness360.nutrition.app.logs.dtos.LogUpdatePersistenceDTO;
 import com.wellness360.nutrition.app.logs.dtos.LogUpdateRequestDTO;
 import com.wellness360.nutrition.app.recipe.RecipeEntity;
-import com.wellness360.nutrition.common.services.CrudService;
-import com.wellness360.nutrition.common.tools.EntityRetrieverByUUID;
+import com.wellness360.nutrition.app.recipe.RecipeService;
+import com.wellness360.nutrition.packages.crud.service.CrudDtoTransformService;
 
-import jakarta.persistence.EntityNotFoundException;
-
-public class LogService extends CrudService<
+public class LogService extends CrudDtoTransformService<
   LogRepository,
   LogCreateRequestDTO,
   LogCreatePersistenceDTO,
@@ -23,31 +22,24 @@ public class LogService extends CrudService<
 > {
 
   @Autowired
-  EntityRetrieverByUUID uuid_getter;
+  RecipeService recipe_service;
 
-  @Override
-  public LogReturnDTO getReturnDTO(LogEntity entity) {
-    return new LogReturnDTO(entity);
+  public LogReturnDTO buildReturnDTO(LogEntity entity) {
+    return LogMapper.INSTANCE.entityToReturn(entity);
   }
 
-  @Override
-  public LogEntity getEntity(LogCreatePersistenceDTO dto) {
-    return new LogEntity(dto);
+  public LogEntity getEntityByPersistenceDTO(LogCreatePersistenceDTO dto) {
+    return LogMapper.INSTANCE.createPersistenceToEntity(dto);
   }
 
-  public LogCreatePersistenceDTO getPersistenceCreateDTO(LogCreateRequestDTO ids_dto){
-    RecipeEntity recipe = getRecipe(ids_dto.getRecipe_uuid());
-    return new LogCreatePersistenceDTO(ids_dto, recipe);
+  public LogCreatePersistenceDTO getPersistenceCreateDTO(LogCreateRequestDTO dto){
+    RecipeEntity recipe = recipe_service.getEntityByUuid(dto.recipe_uuid());
+    return LogMapper.INSTANCE.createRequestToPersistence(dto, recipe);
   }
 
-  public LogUpdatePersistenceDTO getPersistenceUpdateDTO(LogUpdateRequestDTO ids_dto){
-    RecipeEntity recipe = getRecipe(ids_dto.getRecipe_uuid());
-    return new LogUpdatePersistenceDTO(ids_dto, recipe);
-  }
-
-  private RecipeEntity getRecipe(String uuid){
-    return uuid_getter.getRecipeByUuid(uuid)
-      .orElseThrow(() -> new EntityNotFoundException("Unable to find Recipe with the passed uuid"));
+  public LogUpdatePersistenceDTO getPersistenceUpdateDTO(LogUpdateRequestDTO dto){
+    RecipeEntity recipe = dto.recipe_uuid() != null? recipe_service.getEntityByUuid(dto.recipe_uuid()) : null;
+    return LogMapper.INSTANCE.updateRequestToPersistence(dto, recipe);
   }
 
 }

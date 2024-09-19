@@ -4,8 +4,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
-import com.wellness360.nutrition.common.interfaces.IStorageService;
+import com.wellness360.nutrition.packages.storage.StorageService;
+import com.wellness360.nutrition.settings.storage.StorageFolders;
 
 
 @SpringBootApplication
@@ -16,9 +16,9 @@ public class NutritionApplication {
 	}
 
 	@Bean
-	CommandLineRunner init(IStorageService storage_service){
+	CommandLineRunner init(StorageService storage_service){
 		return (args) -> {
-			storage_service.init();
+			storage_service.init(StorageFolders.class);
 		};
 	}
 }

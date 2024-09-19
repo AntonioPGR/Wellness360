@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.wellness360.nutrition.app.selectivity.SelectivityRepository;
 import com.wellness360.nutrition.app.selectivity.SelectivityService;
 import com.wellness360.nutrition.app.selectivity.dtos.SelectivityCreatePersistenceDTO;
+import com.wellness360.nutrition.app.selectivity.dtos.SelectivityMapper;
 import com.wellness360.nutrition.app.selectivity.dtos.SelectivityReturnDTO;
 
 import jakarta.transaction.Transactional;
@@ -25,7 +26,7 @@ public class RestrictionService extends SelectivityService<RestrictionEntity>{
 
   @Override
   public SelectivityReturnDTO entityToReturnDTO(RestrictionEntity entity) {
-    return new SelectivityReturnDTO(entity);
+    return SelectivityMapper.INSTANCE.entityToReturn(entity);
   }
 
 }

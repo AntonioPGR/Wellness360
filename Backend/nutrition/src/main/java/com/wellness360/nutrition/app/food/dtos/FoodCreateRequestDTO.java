@@ -2,46 +2,30 @@ package com.wellness360.nutrition.app.food.dtos;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.wellness360.nutrition.common.dtos.ValidatableDTO;
-import com.wellness360.nutrition.common.services.ValidateService;
+import com.wellness360.nutrition.packages.storage.dtos.CrudStorageCreateRequestDTO;
+import com.wellness360.nutrition.validation.Validator;
 
-import io.micrometer.common.lang.Nullable;
-import jakarta.annotation.Nonnull;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
+public record FoodCreateRequestDTO(
+  String name,
+  String description,
+  Float carbs,
+  Float proteins,
+  Float fats,
+  Float saturated_fats,
+  Float sodium,
+  Float dietary_fiber,
+  Short serving_amount,
+  MultipartFile file,
+  String tag_uuid,
+  String category_uuid
+) implements CrudStorageCreateRequestDTO{
 
-@Getter
-@Setter(value = AccessLevel.PUBLIC)
-public class FoodCreateRequestDTO implements ValidatableDTO{
-  @Nonnull
-  String name;
-  @Nullable
-  String description;
-  @Nonnull
-  Float carbs;
-  @Nonnull
-  Float proteins;
-  @Nonnull
-  Float fats;
-  @Nonnull
-  Float saturated_fats;
-  @Nonnull
-  Float sodium;
-  @Nonnull
-  Float dietary_fiber;
-  @Nonnull
-  Short serving_amount;
-  @Nonnull
-  MultipartFile image;
-  @Nonnull
-  String tag_uuid;
-  @Nonnull
-  String category_uuid;
-
-  public void validate(ValidateService validator) {
-    validator.validateName(name);
-    validator.validateText(description);
+  public void validate(Validator validator) {
+    validator.string.validateName(name);
+    validator.string.validateText(description, true);
+    validator.string.validateUuid(tag_uuid);
+    validator.string.validateUuid(category_uuid);
+    validator.media.validateImage(file);
     validator.validateNutrient(carbs);
     validator.validateNutrient(proteins);
     validator.validateNutrient(fats);
@@ -49,9 +33,6 @@ public class FoodCreateRequestDTO implements ValidatableDTO{
     validator.validateNutrient(sodium);
     validator.validateNutrient(dietary_fiber);
     validator.validateAmount(serving_amount);
-    validator.validateImage(image);
-    validator.validateUuid(tag_uuid);
-    validator.validateUuid(category_uuid);
   }
 
 }

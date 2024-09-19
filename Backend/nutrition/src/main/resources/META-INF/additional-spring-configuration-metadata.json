@@ -118,5 +118,40 @@
     "name": "validation.image_size",
     "type": "java.lang.String",
     "description": "A description for 'validation.image_size'"
+  },
+  {
+    "name": "path.files_api_url",
+    "type": "java.lang.String",
+    "description": "A description for 'path.files_api_url'"
+  },
+  {
+    "name": "validation.video_extensions",
+    "type": "java.lang.String",
+    "description": "A description for 'validation.video_extensions'"
+  },
+  {
+    "name": "validation.video_size",
+    "type": "java.lang.String",
+    "description": "A description for 'validation.video_size'"
+  },
+  {
+    "name": "files.files_api_url",
+    "type": "java.lang.String",
+    "description": "A description for 'files.files_api_url'"
+  },
+  {
+    "name": "path.storage",
+    "type": "java.lang.String",
+    "description": "A description for 'path.storage'"
+  },
+  {
+    "name": "security.jwt.token_secret",
+    "type": "java.lang.String",
+    "description": "A description for 'security.jwt.token_secret'"
+  },
+  {
+    "name": "path.food",
+    "type": "java.lang.String",
+    "description": "A description for 'path.food'"
   }
 ]}

@@ -2,32 +2,21 @@ package com.wellness360.nutrition.app.category.dtos;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.wellness360.nutrition.common.dtos.UpdateRequestDTO;
-import com.wellness360.nutrition.common.services.ValidateService;
+import com.wellness360.nutrition.packages.storage.dtos.CrudStorageUpdateRequestDTO;
+import com.wellness360.nutrition.validation.Validator;
 
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
-import lombok.Getter;
-import lombok.Setter;
+public record CategoryUpdateRequestDTO(
+  String uuid,
+  String name,
+  String description,
+  MultipartFile file
+) implements CrudStorageUpdateRequestDTO {
 
-@Getter
-@Setter
-public class CategoryUpdateRequestDTO implements UpdateRequestDTO {
-  @Nonnull
-  protected String uuid;
-  @Nullable
-  protected String name;
-  @Nullable
-  protected String description;
-  @Nullable
-  protected MultipartFile image;
-
-  @Override
-  public void validate(ValidateService validator) {
-    validator.validateUuid(uuid);
-    validator.validateName(name, true);
-    validator.validateText(description);
-    validator.validateImage(image, true);
+  public void validate(Validator validator) {
+    validator.string.validateUuid(uuid);
+    validator.string.validateName(name, true);
+    validator.string.validateText(description, true);
+    validator.media.validateImage(file, true);
   }
 
 }

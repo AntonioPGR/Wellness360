@@ -1,19 +1,19 @@
 package com.wellness360.nutrition.app.recipe.section;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wellness360.nutrition.app.recipe.RecipeEntity;
+import com.wellness360.nutrition.app.recipe.RecipeService;
 import com.wellness360.nutrition.app.recipe.section.dtos.SectionCreatePersistenceDTO;
 import com.wellness360.nutrition.app.recipe.section.dtos.SectionCreateRequestDTO;
+import com.wellness360.nutrition.app.recipe.section.dtos.SectionMapper;
 import com.wellness360.nutrition.app.recipe.section.dtos.SectionReturnDTO;
 import com.wellness360.nutrition.app.recipe.section.dtos.SectionUpdatePersistenceDTO;
 import com.wellness360.nutrition.app.recipe.section.dtos.SectionUpdateRequestDTO;
-import com.wellness360.nutrition.common.tools.EntityRetrieverByUUID;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -22,36 +22,33 @@ public class SectionService{
 
   @Autowired
   SectionRepository repository;
+
   @Autowired
-  EntityRetrieverByUUID uuid_getter;
+  RecipeService recipe_service;
   
   public void createAll(List<SectionCreateRequestDTO> dto_list, RecipeEntity recipe){
     dto_list.stream().forEach((dto) -> create(dto, recipe));
   }
   public SectionReturnDTO create(SectionCreateRequestDTO dto, RecipeEntity recipe){
-    String included_recipe_uuid = dto.getIncluded_recipe_uuid();
+    String included_recipe_uuid = dto.included_recipe_uuid();
     RecipeEntity included_recipe = null;
-    if(included_recipe_uuid != null){
-      Optional<RecipeEntity> included_recipe_opt = uuid_getter.getRecipeByUuid(included_recipe_uuid);
-      if(included_recipe_opt.isPresent()) included_recipe = included_recipe_opt.get();
-    }
+    if(included_recipe_uuid != null) included_recipe = recipe_service.getEntityByUuid(included_recipe_uuid);
 
-    SectionCreatePersistenceDTO create_dto = new SectionCreatePersistenceDTO(dto, recipe, included_recipe);
-    SectionEntity entity = new SectionEntity(create_dto);
+    SectionCreatePersistenceDTO create_dto = SectionMapper.INSTANCE.createRequestToPersistence(dto, recipe, included_recipe);
+    SectionEntity entity = SectionMapper.INSTANCE.createPersistenceToEntity(create_dto);
     entity = repository.save(entity);
-    return new SectionReturnDTO(entity);
+    return SectionMapper.INSTANCE.entityToReturn(entity);
   }
 
   public void updateAll(List<SectionUpdateRequestDTO> dto_list, RecipeEntity recipe) {
     dto_list.stream().forEach((dto) -> update(dto, recipe));
   }
   public SectionReturnDTO update(SectionUpdateRequestDTO dto, RecipeEntity recipe){
-    RecipeEntity included_recipe = uuid_getter.getRecipeByUuid(dto.getIncluded_recipe_uuid()).get();
-    SectionUpdatePersistenceDTO update_dto = new SectionUpdatePersistenceDTO(dto, recipe, included_recipe);
-    Optional<SectionEntity> opt_entity = repository.findByUuid(dto.getUuid());
-    if(opt_entity.isEmpty()) return null;
-    SectionEntity entity = opt_entity.get();
+    SectionEntity entity = repository.findByUuid(dto.uuid())
+      .orElseThrow(() -> new EntityNotFoundException("Could not found section with passed uuid"));
+    RecipeEntity included_recipe = recipe_service.getEntityByUuid(dto.included_recipe_uuid());
+    SectionUpdatePersistenceDTO update_dto = SectionMapper.INSTANCE.updateRequestToPersistence(dto, recipe, included_recipe);
     entity.update(update_dto);
-    return new SectionReturnDTO(entity);
+    return SectionMapper.INSTANCE.entityToReturn(entity);
   }
 }

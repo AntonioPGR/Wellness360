@@ -1,0 +1,40 @@
+{
+  "java.configuration.updateBuildConfiguration": "interactive",
+  "hidefiles.configurationType": "local",
+  "hidefiles.globalConfig": {
+    "profiles": [
+      {
+        "name": "Default",
+        "detail": "",
+        "description": "Test",
+        "hidden": [
+          ".vscode/",
+          "flyway.conf",
+          "mvnw",
+          "mvnw.cmd",
+          "pom.xml",
+          ".mvn/",
+          "target/",
+          "src/test/"
+        ]
+      },
+      {
+        "name": "Strict",
+        "detail": "Hide everything not immediately required",
+        "hidden": [
+          "$Default",
+          "src/main/resources/"
+        ]
+      }
+    ]
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true
+  },
+  "hidefiles.selectedProfile": "Show All Files",
+  "java.compile.nullAnalysis.mode": "automatic"
+}

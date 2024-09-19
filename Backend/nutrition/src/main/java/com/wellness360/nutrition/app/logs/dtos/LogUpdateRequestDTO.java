@@ -1,30 +1,23 @@
 package com.wellness360.nutrition.app.logs.dtos;
 
-import java.time.LocalDate;
+import java.util.Date;
 
-import com.wellness360.nutrition.common.dtos.UpdateRequestDTO;
-import com.wellness360.nutrition.common.services.ValidateService;
+import com.wellness360.nutrition.packages.crud.dtos.CrudUpdateRequestDTO;
+import com.wellness360.nutrition.validation.Validator;
 
-import jakarta.annotation.Nonnull;
-import lombok.Getter;
+public record LogUpdateRequestDTO(
+  String uuid,
+  Date date,
+  Short amount,
+  String recipe_uuid,
+  String user_uuid
+) implements CrudUpdateRequestDTO {
 
-@Getter
-public class LogUpdateRequestDTO implements UpdateRequestDTO {
-  @Nonnull
-  String uuid;
-  @Nonnull
-  LocalDate date;
-  @Nonnull
-  Short amount;
-  @Nonnull
-  String recipe_uuid;
-  @Nonnull
-  String user_uuid;
-
-  public void validate(ValidateService validator) {
-    validator.validateLogDate(date, true);
+  public void validate(Validator validator) {
+    validator.date.validatePastOrPresentDate(date, true);
     validator.validateAmount(amount, true);
-    validator.validateUuid(recipe_uuid, true);
-    validator.validateUuid(user_uuid, true);
+    validator.string.validateUuid(recipe_uuid, true);
+    validator.string.validateUuid(user_uuid, true);
   }
+
 }

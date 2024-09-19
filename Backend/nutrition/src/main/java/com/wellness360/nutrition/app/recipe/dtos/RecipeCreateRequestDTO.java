@@ -6,41 +6,27 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.wellness360.nutrition.app.recipe.ingredient.dto.IngredientCreateRequestDTO;
 import com.wellness360.nutrition.app.recipe.section.dtos.SectionCreateRequestDTO;
-import com.wellness360.nutrition.common.dtos.ValidatableDTO;
-import com.wellness360.nutrition.common.services.ValidateService;
+import com.wellness360.nutrition.packages.crud.dtos.CrudCreateRequestDTO;
+import com.wellness360.nutrition.validation.Validator;
 
-import jakarta.annotation.Nullable;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
+public record RecipeCreateRequestDTO(
+  String name,
+  String description,
+  String user_uuid,
+  String tag_uuid,
+  String category_uuid,
+  List<MultipartFile> media,
+  List<IngredientCreateRequestDTO> ingredients,
+  List<SectionCreateRequestDTO> sections
+) implements CrudCreateRequestDTO {
 
-@Getter
-@Setter
-public class RecipeCreateRequestDTO implements ValidatableDTO {
-  @NonNull
-  String name;
-  @Nullable
-  String description;
-  @NonNull
-  String user_uuid;
-  @NonNull
-  String tag_uuid;
-  @NonNull
-  String category_uuid;
-  @NonNull
-  List<IngredientCreateRequestDTO> ingredients;
-  @NonNull
-  List<MultipartFile> media;
-  @NonNull
-  List<SectionCreateRequestDTO> sections;
-
-  public void validate(ValidateService validator) {
-    validator.validateName(name);
-    validator.validateText(description);
-    validator.validateUuid(user_uuid);
-    validator.validateUuid(tag_uuid);
-    validator.validateUuid(category_uuid);
-    media.forEach(image -> validator.validateImage(image));
+  public void validate(Validator validator) {
+    validator.string.validateName(name);
+    validator.string.validateText(description, true);
+    validator.string.validateUuid(user_uuid);
+    validator.string.validateUuid(tag_uuid);
+    validator.string.validateUuid(category_uuid);
+    media.forEach(image -> validator.media.validateImage(image));
     ingredients.forEach(ingredient -> ingredient.validate(validator));
     sections.forEach(sections -> sections.validate(validator));
   }

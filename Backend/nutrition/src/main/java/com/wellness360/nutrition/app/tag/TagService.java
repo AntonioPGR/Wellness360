@@ -8,17 +8,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.wellness360.nutrition.app.category.CategoryEntity;
+import com.wellness360.nutrition.app.category.CategoryService;
 import com.wellness360.nutrition.app.tag.dtos.TagCreatePersistenceDTO;
 import com.wellness360.nutrition.app.tag.dtos.TagCreateRequestDTO;
+import com.wellness360.nutrition.app.tag.dtos.TagMapper;
 import com.wellness360.nutrition.app.tag.dtos.TagReturnCompleteDTO;
 import com.wellness360.nutrition.app.tag.dtos.TagReturnSimplifiedDTO;
 import com.wellness360.nutrition.app.tag.dtos.TagUpdatePersistenceDTO;
 import com.wellness360.nutrition.app.tag.dtos.TagUpdateRequestDTO;
-import com.wellness360.nutrition.common.services.CrudStorageService;
-import com.wellness360.nutrition.common.services.StorageEntityFileService;
-import com.wellness360.nutrition.common.tools.EntityRetrieverByUUID;
-import com.wellness360.nutrition.configurations.StorageFolders;
-
+import com.wellness360.nutrition.packages.storage.services.CrudStorageService;
+import com.wellness360.nutrition.settings.storage.StorageFolders;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -34,57 +33,36 @@ public class TagService extends CrudStorageService<
 >{
 
   @Autowired
-  StorageEntityFileService store_service;
-  @Autowired
-  EntityRetrieverByUUID entity_retriever;
+  CategoryService category_service;
 
-  public TagService(){
-    super(StorageFolders.tag.name());
+  public String getFolderName() {
+    return StorageFolders.tag.name();
   }
 
   public Page<TagReturnSimplifiedDTO> getTagsByCategory(Pageable pageable, String category_uuid) {
-    CategoryEntity category = entity_retriever.getCategoryByUuid(category_uuid).get();
-    Page<TagEntity> entities = this.repository.findAllByCategoryUuid(category.getId(), pageable);
-    Page<TagReturnSimplifiedDTO> return_dto = entities.map(TagReturnSimplifiedDTO::new);
-    return return_dto;
-  }
-
-  // INHERIT
-  public TagReturnCompleteDTO getReturnDTO(TagEntity entity) {
-    return new TagReturnCompleteDTO(entity);
+    CategoryEntity category = category_service.getEntityByUuid(category_uuid);
+    Page<TagEntity> entities = repository.findAllByCategoryUuid(category.getId(), pageable);
+    return entities.map(
+      (tag) -> TagMapper.INSTANCE.entityToReturnSimplified(tag)
+    );
   }
 
   public TagEntity getEntity(TagCreatePersistenceDTO dto) {
-    return new TagEntity(dto);
+    return TagMapper.INSTANCE.createPersistenceToEntity(dto);
   }
 
-  public TagCreatePersistenceDTO getPersistenceCreateDTO(TagCreateRequestDTO request_dto){
-    CategoryEntity category = entity_retriever.getCategoryByUuid(request_dto.getCategory_uuid()).get();
-
-    String media_path = store_service.create(
-      request_dto.getName(), 
-      folder_name, 
-      request_dto.getImage()
-    );
-    return new TagCreatePersistenceDTO(request_dto, media_path, category);
+  public TagReturnCompleteDTO getReturnDTO(TagEntity entity) {
+    return TagMapper.INSTANCE.entityToReturn(entity);
   }
 
-  public TagUpdatePersistenceDTO getPersistenceUpdateDTO(TagUpdateRequestDTO request_dto){
-    CategoryEntity category = entity_retriever.getCategoryByUuid(request_dto.getCategory_uuid())
-      .orElse(null);
-
-    TagEntity tag = entity_retriever.getTagByUuid(request_dto.getUuid()).get();
-    String media_path = store_service.update(
-      request_dto.getName(), 
-      folder_name, 
-      request_dto.getImage(), 
-      tag.getName()
-    );
-    return new TagUpdatePersistenceDTO(request_dto, category, media_path);
+  public TagCreatePersistenceDTO getPersistenceCreateDTO(TagCreateRequestDTO dto, String image_url){
+    CategoryEntity category = category_service.getEntityByUuid(dto.category_uuid());
+    return TagMapper.INSTANCE.createRequestToPersistence(dto, image_url, category);
   }
-  
-  public String getEntityName(TagEntity entity) {
-    return entity.getName();
+
+  public TagUpdatePersistenceDTO getPersistenceUpdateDTO(TagUpdateRequestDTO dto, String image_url){
+    CategoryEntity category = dto.category_uuid() != null? category_service.getEntityByUuid(dto.category_uuid()) : null;
+    return TagMapper.INSTANCE.updateRequestToPersistence(dto, image_url, category);
   }
 
 }
