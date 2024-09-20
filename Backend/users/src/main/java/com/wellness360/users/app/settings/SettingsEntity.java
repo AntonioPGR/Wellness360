@@ -15,10 +15,12 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "settings")
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class SettingsEntity{
@@ -27,19 +29,15 @@ public class SettingsEntity{
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   protected Integer id;
 
-  private short theme = 1;
-  private short two_factor_auth = 1;
-  private short notifications = 1;
-  private short email_notifications = 1;
+  public short theme = 1;
+  public short two_factor_auth = 1;
+  public short notifications = 1;
+  public short email_notifications = 1;
 
   // user_id
   @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "user_id", referencedColumnName = "id")
-  private UserBasicEntity user;
-
-  public SettingsEntity(UserBasicEntity basic_entity) {
-    user = basic_entity;
-  }
+  public UserBasicEntity user;
 
   public void update(SettingsUpdateDTO dto) {
     theme = Objects.requireNonNullElse(dto.theme().shortValue(), theme);

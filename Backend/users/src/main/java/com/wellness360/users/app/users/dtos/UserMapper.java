@@ -9,7 +9,5 @@ public interface UserMapper {
   UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
   
   UserUpdateAdminDTO updateToUpdateAdmin(UserUpdateDTO dto, String uuid);
-
   
-
 }

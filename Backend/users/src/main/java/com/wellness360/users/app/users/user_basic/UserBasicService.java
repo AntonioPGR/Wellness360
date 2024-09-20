@@ -33,7 +33,7 @@ public class UserBasicService extends CrudDtoTransformService<
   StorageService storage_service;
 
   public UserBasicEntity getEntityByPersistenceDTO(UserBasicCreateDTO dto) {
-    return new UserBasicEntity(dto);
+    return UserBasicMapper.INSTANCE.basicCreateToEntity(dto);
   }
 
   public UserBasicCreateDTO getPersistenceCreateDTO(UserCreateDTO dto) {

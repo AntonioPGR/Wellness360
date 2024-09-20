@@ -21,7 +21,7 @@ public class SettingsService {
   UserBasicService user_service;
 
   public SettingsEntity createDefault(UserBasicEntity basic_entity) {
-    SettingsEntity created_entity = new SettingsEntity(basic_entity);
+    SettingsEntity created_entity = SettingsMapper.INSTANCE.userToEntity(basic_entity);
     return save(created_entity);
   }
 

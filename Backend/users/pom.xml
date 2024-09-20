@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.3.3</version>
+		<version>3.3.4</version>
 		<relativePath/> 
 	</parent>
 	<groupId>com.wellness360</groupId>
@@ -13,7 +13,6 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>users</name>
 	<description>User microsservice for wellness 360 project</description>
-	<url/>
 	<licenses>
 		<license/>
 	</licenses>
@@ -29,11 +28,9 @@
 	<properties>
 		<java.version>21</java.version>
 		<spring-security.version>6.3.1</spring-security.version>
+		<org.mapstruct.version>1.6.2</org.mapstruct.version>
 	</properties>
-
-	<!-- DEPENDENCIES -->
 	<dependencies>
-
 		<!-- SPRING STARTERS -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -67,33 +64,15 @@
 			<artifactId>mysql-connector-j</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.derby</groupId>
-			<artifactId>derby</artifactId>
-			<version>10.17.1.0</version>
-			<scope>test</scope>
-		</dependency>
 
-
-		<!-- DOCS -->
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger2</artifactId>
-			<version>3.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.restdocs</groupId>
-			<artifactId>spring-restdocs-mockmvc</artifactId>
-			<scope>test</scope>
-		</dependency>
-
-		<!-- TOOLS -->
+		<!-- LOMBOK -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
+			<version>1.18.34</version>
 			<scope>provided</scope>
 		</dependency>
-
+		
 		<!-- DEV TOOLS -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -112,42 +91,38 @@
 			<version>4.4.0</version>
 		</dependency>
 
-		<!-- DTOS -->
+		<!-- MAPSTRUCT -->
 		<dependency>
 			<groupId>org.mapstruct</groupId>
 			<artifactId>mapstruct</artifactId>
-			<version>1.6.0.Beta1</version> 
+			<version>1.6.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.mapstruct</groupId>
 			<artifactId>mapstruct-processor</artifactId>
-			<version>1.5.5.Final</version>
-			<scope>provided</scope>
+			<version>1.6.2</version>
 		</dependency>
-		
 	</dependencies>
-
-	<!-- PLUGINS -->
 	<build>
 		<plugins>
-
+			<!-- MAPSTRUCT -->
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
-				<configuration>
-					<source>11</source>
-					<target>11</target>
-					<annotationProcessorPaths>
-						<path>
-							<groupId>org.mapstruct</groupId>
-							<artifactId>mapstruct-processor</artifactId>
-							<version>1.5.5.Final</version>
-						</path>
-					</annotationProcessorPaths>
-				</configuration>
-			</plugin>
-		
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.8.1</version>
+					<configuration>
+						<source>1.8</source>
+						<target>1.8</target>
+						<annotationProcessorPaths>
+							<path>
+									<groupId>org.mapstruct</groupId>
+									<artifactId>mapstruct-processor</artifactId>
+									<version>${org.mapstruct.version}</version>
+							</path>
+						</annotationProcessorPaths>
+					</configuration>
+        </plugin>
+
 			<!-- MAVEN ASCII -->
 			<plugin>
 				<groupId>org.asciidoctor</groupId>
@@ -179,9 +154,11 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>3.3.4</version> 
 			</plugin>
-
 		</plugins>
-	</build>
 
+		<!-- NAME-->
+		<finalName>users_application</finalName>
+	</build>
 </project>

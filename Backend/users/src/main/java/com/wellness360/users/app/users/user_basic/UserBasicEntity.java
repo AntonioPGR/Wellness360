@@ -10,7 +10,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.wellness360.users.app.settings.SettingsEntity;
-import com.wellness360.users.app.users.user_basic.dtos.UserBasicCreateDTO;
 import com.wellness360.users.app.users.user_basic.dtos.UserBasicUpdateDTO;
 import com.wellness360.users.app.users.user_full.UserFullEntity;
 import com.wellness360.users.packages.crud.entities.UniqueIdentifierEntity;
@@ -36,28 +35,18 @@ import lombok.Setter;
 @AllArgsConstructor
 public class UserBasicEntity extends UniqueIdentifierEntity implements UserDetails, ICrudEntity<UserBasicUpdateDTO>{
   
-  private String username;
-  private String avatar_url;
-  private String email;
-  private String password;
-  private String role;
-  private int active = 1;
+  public String username;
+  public String avatar_url;
+  public String email;
+  public String password;
+  public String role;
+  public int active = 1;
 
-  // full_id
   @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-  private UserFullEntity full_info;
+  public UserFullEntity full_info;
 
-  // settings_id
   @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-  private SettingsEntity settings;
-
-  public UserBasicEntity(UserBasicCreateDTO dto){
-    username = dto.username();
-    avatar_url = dto.avatar_url();
-    email = dto.email();
-    password = dto.password();
-    role = UserRoles.USER.getRole();
-  }
+  public SettingsEntity settings;
 
   public void update(UserBasicUpdateDTO dto) {
     username = Objects.requireNonNullElse(dto.username(), username);
