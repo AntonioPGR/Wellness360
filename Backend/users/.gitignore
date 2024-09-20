@@ -1,0 +1,5 @@
+target/
+media_uploaded/
+.mvn/
+mvnw.cmd
+mvnw
