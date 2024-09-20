@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project 
+	xmlns="http://maven.apache.org/POM/4.0.0" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
+>
+	<!-- SPRING BOOT SETTINGS -->	
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -8,30 +12,22 @@
 		<version>3.3.4</version>
 		<relativePath/> 
 	</parent>
+
+	<!-- PROJECT SETTINGS -->
 	<groupId>com.wellness360</groupId>
 	<artifactId>nutrition</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>nutrition</name>
-	<description>nutrition microsservice for wellness 360 project</description>
-	<url/>
-	<licenses>
-		<license/>
-	</licenses>
-	<developers>
-		<developer/>
-	</developers>
-	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
-	</scm>
+	<version>0.0.1</version>
+	<name>Nutrition</name>
+	<description>Nutrition application for Wellness360</description>
+
+	<!-- PROJECT PROPERTIES -->
 	<properties>
 		<java.version>21</java.version>
 		<spring-security.version>6.3.1</spring-security.version>
 	</properties>
-	<dependencies>
 
+	<!-- LIBRARIES -->
+	<dependencies>
 		<!-- SPRING STARTERS -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -101,12 +97,17 @@
 			<groupId>org.mapstruct</groupId>
 			<artifactId>mapstruct-processor</artifactId>
 			<version>1.6.2</version>
-			<scope>provided</scope>
 		</dependency>
 	</dependencies>
+
+	<!-- BUILD -->
 	<build>
+		<!-- NAME -->
+		<finalName>nutrition_application</finalName>
+
+		<!-- PLUGINS-->
 		<plugins>
-		<!-- MAPSTRUCT -->
+			<!-- MAPSTRUCT -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -122,7 +123,6 @@
 					</annotationProcessorPaths>
 				</configuration>
 			</plugin>
-
 			<!-- MAVEN ASCII -->
 			<plugin>
 				<groupId>org.asciidoctor</groupId>
@@ -149,14 +149,11 @@
 					</dependency>
 				</dependencies>
 			</plugin>
-
 			<!-- MAVEN BOOT -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
-		
-		<finalName>nutrition_application</finalName>
 	</build>
 </project>
