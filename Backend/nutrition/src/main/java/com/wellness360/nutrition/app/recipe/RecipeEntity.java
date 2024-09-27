@@ -11,7 +11,6 @@ import com.wellness360.nutrition.app.recipe.media.MediaEntity;
 import com.wellness360.nutrition.app.recipe.section.SectionEntity;
 import com.wellness360.nutrition.app.selectivity.preference.PreferenceEntity;
 import com.wellness360.nutrition.app.selectivity.restriction.RestrictionEntity;
-import com.wellness360.nutrition.app.tag.TagEntity;
 import com.wellness360.nutrition.packages.crud.entities.UniqueIdentifierEntity;
 import com.wellness360.nutrition.packages.crud.entities.interfaces.CrudEntity;
 
@@ -22,8 +21,8 @@ import lombok.*;
 @Table(name = "recipes")
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class RecipeEntity extends UniqueIdentifierEntity implements CrudEntity<RecipeUpdatePersistenceDTO>{
 
   // ATTRIBUTES
@@ -34,13 +33,9 @@ public class RecipeEntity extends UniqueIdentifierEntity implements CrudEntity<R
   String description;
 
   @Column(name = "post_user_uuid", nullable = false)
-  String post_user_uuid;
+  String user_uuid;
 
   // RELATIONSHIPS
-  @ManyToOne
-  @JoinColumn(name = "tag_id" )
-  TagEntity tag;
-  
   @ManyToOne
   @JoinColumn(name = "category_id")
   @NonNull
@@ -72,7 +67,6 @@ public class RecipeEntity extends UniqueIdentifierEntity implements CrudEntity<R
     name = Objects.requireNonNullElse(dto.name(), name);
     description = Objects.requireNonNullElse(dto.description(), description);
     category = Objects.requireNonNullElse(dto.category(), category);
-    tag = Objects.requireNonNullElse(dto.tag(), tag);
   }
 
 }

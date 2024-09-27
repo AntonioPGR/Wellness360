@@ -1,8 +1,10 @@
 package com.wellness360.nutrition.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -26,13 +28,24 @@ public class AuthConfiguration {
   @Autowired
   ExceptionFilter exception_filter;
 
+  @Value("${path.category}")
+  private String category_path;
+  @Value("${path.food}")
+  private String food_path;
+  @Value("${path.recipe}")
+  private String recipe_path;
+
   @Bean
   SecurityFilterChain securityFilterChain(HttpSecurity http_security) throws Exception{
     return http_security
       .csrf(csrf -> csrf.disable())
       .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
       .authorizeHttpRequests(authorize -> authorize
-        .anyRequest().permitAll()
+        .requestMatchers(HttpMethod.POST, category_path, food_path).hasRole("ADMIN")
+        .requestMatchers(HttpMethod.PUT, category_path, food_path).hasRole("ADMIN")
+        .requestMatchers(HttpMethod.DELETE, category_path, food_path).hasRole("ADMIN")
+        .requestMatchers(HttpMethod.GET, category_path, category_path + "/*", food_path, food_path + "/*").permitAll()
+        .anyRequest().authenticated()
       )
       .addFilterBefore(exception_filter, LogoutFilter.class)
       .addFilterBefore(security_filter, UsernamePasswordAuthenticationFilter.class)

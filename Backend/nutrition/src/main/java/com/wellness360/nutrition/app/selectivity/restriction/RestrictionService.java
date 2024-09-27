@@ -7,7 +7,6 @@ import com.wellness360.nutrition.app.selectivity.SelectivityRepository;
 import com.wellness360.nutrition.app.selectivity.SelectivityService;
 import com.wellness360.nutrition.app.selectivity.dtos.SelectivityCreatePersistenceDTO;
 import com.wellness360.nutrition.app.selectivity.dtos.SelectivityMapper;
-import com.wellness360.nutrition.app.selectivity.dtos.SelectivityReturnDTO;
 
 import jakarta.transaction.Transactional;
 
@@ -19,14 +18,8 @@ public class RestrictionService extends SelectivityService<RestrictionEntity>{
   @Autowired
   SelectivityRepository<RestrictionEntity> repository;
 
-  @Override
-  public RestrictionEntity createDTOtoEntity(SelectivityCreatePersistenceDTO dto) {
-    return new RestrictionEntity(dto);
-  }
-
-  @Override
-  public SelectivityReturnDTO entityToReturnDTO(RestrictionEntity entity) {
-    return SelectivityMapper.INSTANCE.entityToReturn(entity);
+  public RestrictionEntity persistenceToEntity(SelectivityCreatePersistenceDTO dto) {
+    return SelectivityMapper.INSTANCE.createPersistenceToRestriction(dto);
   }
 
 }

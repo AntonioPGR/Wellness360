@@ -5,11 +5,15 @@ import com.wellness360.nutrition.app.selectivity.dtos.SelectivityCreatePersisten
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "restrictions")
-@AllArgsConstructor
+@Setter
+@Getter
+@NoArgsConstructor
 public class RestrictionEntity extends SelectivityBaseEntity {
 
   public RestrictionEntity(SelectivityCreatePersistenceDTO create_dto) {

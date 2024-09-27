@@ -8,23 +8,11 @@ CREATE TABLE IF NOT EXISTS categories (
 );
 CREATE INDEX idx_uuid ON categories (uuid);
 
--- TAGS
-CREATE TABLE IF NOT EXISTS tags (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  uuid VARCHAR(36) UNIQUE NOT NULL,
-  category_id INT NOT NULL,
-  name VARCHAR(50) NOT NULL,
-  image_url VARCHAR(150) NOT NULL,
-  FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE
-);
-CREATE INDEX idx_uuid ON tags (uuid);
-
 -- FOOD
 CREATE TABLE IF NOT EXISTS food (
   id INT AUTO_INCREMENT PRIMARY KEY,
   uuid VARCHAR(36) UNIQUE NOT NULL,
-  category_id INT NOT NULL,
-  tag_id INT,
+  category_id INT,
   name VARCHAR(50) UNIQUE NOT NULL,
   description TEXT,
   image_url VARCHAR(150) NOT NULL,
@@ -36,8 +24,7 @@ CREATE TABLE IF NOT EXISTS food (
   saturated_fats DECIMAL(8,2) NOT NULL,
   sodium DECIMAL(8,2) NOT NULL,
   dietary_fiber DECIMAL(8,2) NOT NULL,
-  FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE,
-  FOREIGN KEY (tag_id) REFERENCES tags(id) ON DELETE CASCADE
+  FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE
 );
 CREATE INDEX idx_uuid ON food (uuid);
 
@@ -45,12 +32,10 @@ CREATE INDEX idx_uuid ON food (uuid);
 CREATE TABLE IF NOT EXISTS recipes (
   id INT AUTO_INCREMENT PRIMARY KEY,
   uuid VARCHAR(36) UNIQUE NOT NULL,
-  tag_id INT,
   post_user_uuid CHAR(36) NOT NULL,
-  category_id INT NOT NULL,
+  category_id INT,
   name VARCHAR(50) NOT NULL,
   description TEXT,
-  FOREIGN KEY (tag_id) REFERENCES tags(id) ON DELETE SET NULL,
   FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE
 );
 CREATE INDEX idx_uuid ON recipes (uuid);

@@ -6,10 +6,12 @@ import com.wellness360.nutrition.app.selectivity.dtos.SelectivityCreatePersisten
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "preferences")
 @AllArgsConstructor
+@Setter
 public class PreferenceEntity extends SelectivityBaseEntity {
 
   public PreferenceEntity(SelectivityCreatePersistenceDTO create_dto) {

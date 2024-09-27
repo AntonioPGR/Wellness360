@@ -3,6 +3,7 @@ package com.wellness360.nutrition.app.selectivity;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.wellness360.nutrition.app.category.CategoryEntity;
 import com.wellness360.nutrition.app.category.CategoryService;
@@ -36,28 +37,35 @@ public abstract class SelectivityService<
   @Autowired
   Validator validate_service;
 
-  public abstract Entity createDTOtoEntity(SelectivityCreatePersistenceDTO dto);
-  public abstract SelectivityReturnDTO entityToReturnDTO(Entity entity);
+  public abstract Entity persistenceToEntity(SelectivityCreatePersistenceDTO dto);
 
-  public List<SelectivityReturnDTO> getByUserUuid(String uuid) {
-    List<Entity> entities_list = repository.findAllByUuid(uuid);
+  public List<SelectivityReturnDTO> getByUserUuid() {
+    String user_uuid = getUserUuid();
+    List<Entity> entities_list = repository.findAllByUserUuid(user_uuid);
     return entities_list.stream().map((entity) -> SelectivityMapper.INSTANCE.entityToReturn(entity)).toList();
   }
 
   public SelectivityReturnDTO create(SelectivityCreateRequestDTO dto) {
     dto.validate(validate_service);
+
     RecipeEntity recipe = dto.recipe_uuid() != null? recipe_service.getEntityByUuid(dto.recipe_uuid()) : null;
     FoodEntity food = dto.food_uuid() != null? food_service.getEntityByUuid(dto.food_uuid()) : null;
     CategoryEntity category = dto.category_uuid() != null? category_service.getEntityByUuid(dto.category_uuid()) : null;
-    SelectivityCreatePersistenceDTO entities_dto = SelectivityMapper.INSTANCE.createRequestToPersistence(1234L, recipe, food, category);
-    Entity entity = createDTOtoEntity(entities_dto);
+    String user_uuid = getUserUuid();
+
+    SelectivityCreatePersistenceDTO entities_dto = SelectivityMapper.INSTANCE.createRequestToPersistence(user_uuid, recipe, food, category);
+    Entity entity = persistenceToEntity(entities_dto);
     entity = repository.save(entity);
 
-    return entityToReturnDTO(entity);
+    return SelectivityMapper.INSTANCE.entityToReturn(entity);
   }
 
   public void deleteByUuid(String uuid) {
     repository.deleteByUuid(uuid);
+  }
+
+  private String getUserUuid(){
+    return (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
   }
 
 }

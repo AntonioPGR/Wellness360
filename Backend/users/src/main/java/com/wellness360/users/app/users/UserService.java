@@ -14,6 +14,7 @@ import com.wellness360.users.app.users.dtos.UserCreateDTO;
 import com.wellness360.users.app.users.dtos.UserLoginDTO;
 import com.wellness360.users.app.users.dtos.UserMapper;
 import com.wellness360.users.app.users.dtos.UserReturnTokenDTO;
+import com.wellness360.users.app.users.dtos.UserReturnUuidDTO;
 import com.wellness360.users.app.users.dtos.UserUpdateAdminDTO;
 import com.wellness360.users.app.users.dtos.UserUpdateDTO;
 import com.wellness360.users.app.users.user_basic.UserBasicEntity;
@@ -155,6 +156,11 @@ public class UserService implements ICrudBaseService<
 
   private boolean userPasswordMatches(String check_password, String password){
     return new BCryptPasswordEncoder().matches(check_password, password);
+  }
+
+  public UserReturnUuidDTO getCurrentUserUuid() {
+    UserBasicEntity user = getUserFromAuth();
+    return new UserReturnUuidDTO(user.getUuid(), user.getRole());
   }
 
   

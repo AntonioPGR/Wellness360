@@ -20,7 +20,6 @@ public interface CategoryMapper {
   @Mapping(ignore = true, target = "preferences")
   @Mapping(ignore = true, target = "recipes")
   @Mapping(ignore = true, target = "restricions")
-  @Mapping(ignore = true, target = "tags")
   @Mapping(ignore = true, target = "food")
   CategoryEntity createPersistenceToEntity(CategoryCreatePersistenceDTO dto);
 

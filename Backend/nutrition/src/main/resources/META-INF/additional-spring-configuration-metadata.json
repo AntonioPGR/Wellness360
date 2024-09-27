@@ -10,11 +10,6 @@
     "description": "A description for 'url.food'"
   },
   {
-    "name": "url.tag",
-    "type": "java.lang.String",
-    "description": "A description for 'url.tag'"
-  },
-  {
     "name": "url.base",
     "type": "java.lang.String",
     "description": "A description for 'url.base'"
@@ -23,11 +18,6 @@
     "name": "paths.category",
     "type": "java.lang.String",
     "description": "A description for 'paths.category'"
-  },
-  {
-    "name": "path.tag",
-    "type": "java.lang.String",
-    "description": "A description for 'path.tag'"
   },
   {
     "name": "path.category",
@@ -153,5 +143,10 @@
     "name": "path.food",
     "type": "java.lang.String",
     "description": "A description for 'path.food'"
+  },
+  {
+    "name": "path.log",
+    "type": "java.lang.String",
+    "description": "A description for 'path.log'"
   }
 ]}

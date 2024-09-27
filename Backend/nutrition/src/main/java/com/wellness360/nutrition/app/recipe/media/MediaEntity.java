@@ -12,10 +12,10 @@ import lombok.*;
 
 @Entity
 @Table(name = "recipes_media")
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class MediaEntity extends UniqueIdentifierEntity implements CrudEntity<MediaUpdatePersistenceDTO>{
 
   @Column(name = "media_url", nullable = false, length = 150)

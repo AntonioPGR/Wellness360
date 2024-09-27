@@ -17,6 +17,7 @@ import com.wellness360.users.packages.crud.entities.interfaces.ICrudEntity;
 import com.wellness360.users.settings.enums.UserRoles;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
@@ -39,8 +40,9 @@ public class UserBasicEntity extends UniqueIdentifierEntity implements UserDetai
   public String avatar_url;
   public String email;
   public String password;
-  public String role;
   public int active = 1;
+  @Column(name = "role")
+  public String role;
 
   @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
   public UserFullEntity full_info;
@@ -53,6 +55,7 @@ public class UserBasicEntity extends UniqueIdentifierEntity implements UserDetai
     avatar_url = Objects.requireNonNullElse(dto.avatar_url(), avatar_url);
     email = Objects.requireNonNullElse(dto.email(), email);
     password = Objects.requireNonNullElse(dto.password(), password);
+    role = "USER";
   }
 
   public void deactivate(){
@@ -67,7 +70,7 @@ public class UserBasicEntity extends UniqueIdentifierEntity implements UserDetai
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    if(this.role.equals("ADMIN")) return List.of(new SimpleGrantedAuthority("ROLE_"+UserRoles.ADMIN), new SimpleGrantedAuthority("ROLE_"+UserRoles.USER));
+    if(this.role != null && this.role.equals("ADMIN")) return List.of(new SimpleGrantedAuthority("ROLE_"+UserRoles.ADMIN), new SimpleGrantedAuthority("ROLE_"+UserRoles.USER));
     else return List.of(new SimpleGrantedAuthority("ROLE_"+UserRoles.USER));
   }
 

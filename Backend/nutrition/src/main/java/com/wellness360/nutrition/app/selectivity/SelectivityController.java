@@ -21,9 +21,9 @@ public abstract class SelectivityController<
   @Autowired
   SelectivityService<Entity> service;
 
-  @GetMapping("/user/{uuid}")
-  public ResponseEntity<List<SelectivityReturnDTO>> getByUserUUID(@PathVariable("uuid") String uuid) {
-    List<SelectivityReturnDTO> return_dto = service.getByUserUuid(uuid);
+  @GetMapping("/user")
+  public ResponseEntity<List<SelectivityReturnDTO>> getByUserUUID() {
+    List<SelectivityReturnDTO> return_dto = service.getByUserUuid();
     return ResponseEntity.ok().body(return_dto);
   }
 

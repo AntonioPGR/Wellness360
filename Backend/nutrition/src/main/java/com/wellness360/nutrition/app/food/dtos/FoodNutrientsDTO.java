@@ -12,7 +12,6 @@ public class FoodNutrientsDTO{
   public Float dietary_fiber;
   public Short serving_amount = 100;
   public Float calories;
-
   private Short dto_serving_amount;
 
   public FoodNutrientsDTO(FoodCreateRequestDTO dto) {
@@ -23,6 +22,7 @@ public class FoodNutrientsDTO{
     saturated_fats = equalizeAmount(dto.saturated_fats());
     sodium = equalizeAmount(dto.sodium());
     dietary_fiber = equalizeAmount(dto.dietary_fiber());
+    calories = carbs*4 + proteins*4 + fats*9;
   }
 
   public FoodNutrientsDTO(FoodUpdateRequestDTO dto) {

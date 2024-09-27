@@ -8,10 +8,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wellness360.nutrition.packages.crud.validations.UnauthorizedOperation;
 import com.wellness360.nutrition.packages.validation.dtos.ExceptionReturnDTO;
 
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -25,7 +23,7 @@ public class ExceptionFilter extends OncePerRequestFilter{
   throws ServletException, IOException {
     try{
       filterChain.doFilter(request, response);
-    } catch (UnauthorizedOperation | EntityNotFoundException e) {
+    } catch (Exception e) {
       ExceptionReturnDTO dto = new ExceptionReturnDTO(e.getMessage());
       String json = writeObjectASJson(dto);
       configurateUnauthorizedResponse(response, json);

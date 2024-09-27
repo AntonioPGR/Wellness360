@@ -6,7 +6,6 @@ import com.wellness360.nutrition.app.category.dtos.CategoryReturnDTO;
 import com.wellness360.nutrition.app.recipe.ingredient.dto.IngredientReturnDTO;
 import com.wellness360.nutrition.app.recipe.media.dtos.MediaReturnDTO;
 import com.wellness360.nutrition.app.recipe.section.dtos.SectionReturnDTO;
-import com.wellness360.nutrition.app.tag.dtos.TagReturnSimplifiedDTO;
 import com.wellness360.nutrition.packages.crud.dtos.CrudReturnDTO;
 
 public record RecipeReturnDTO(
@@ -14,7 +13,6 @@ public record RecipeReturnDTO(
   String name,
   String description,
   // String user_uuid,
-  TagReturnSimplifiedDTO tag,
   CategoryReturnDTO category,
   List<MediaReturnDTO> media,
   List<IngredientReturnDTO> ingredients,

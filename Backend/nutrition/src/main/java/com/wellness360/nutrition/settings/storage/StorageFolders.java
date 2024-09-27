@@ -4,5 +4,4 @@ public enum StorageFolders {
   category,
   recipe,
   food,
-  tag
 }

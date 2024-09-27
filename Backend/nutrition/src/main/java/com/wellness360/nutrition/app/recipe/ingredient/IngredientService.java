@@ -32,7 +32,7 @@ public class IngredientService{
     dto_list.stream().forEach((dto) -> create(dto, recipe));
   }
   public IngredientReturnDTO create(IngredientCreateRequestDTO dto, RecipeEntity recipe){
-    FoodEntity food = food_service.getEntityByUuid(dto.food_uuid());
+    FoodEntity food = food_service.getEntityByUuid(dto.getFood_uuid());
     IngredientCreatePersistenceDTO create_dto = IngredientMapper.INSTANCE.createRequestToPersistence(dto, food, recipe);
     IngredientEntity entity = IngredientMapper.INSTANCE.createPersistenceToEntity(create_dto);
     repository.save(entity);

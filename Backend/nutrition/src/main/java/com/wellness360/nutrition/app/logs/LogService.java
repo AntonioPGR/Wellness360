@@ -1,6 +1,8 @@
 package com.wellness360.nutrition.app.logs;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.wellness360.nutrition.app.logs.dtos.LogCreatePersistenceDTO;
 import com.wellness360.nutrition.app.logs.dtos.LogCreateRequestDTO;
 import com.wellness360.nutrition.app.logs.dtos.LogMapper;
@@ -11,6 +13,7 @@ import com.wellness360.nutrition.app.recipe.RecipeEntity;
 import com.wellness360.nutrition.app.recipe.RecipeService;
 import com.wellness360.nutrition.packages.crud.service.CrudDtoTransformService;
 
+@Service
 public class LogService extends CrudDtoTransformService<
   LogRepository,
   LogCreateRequestDTO,

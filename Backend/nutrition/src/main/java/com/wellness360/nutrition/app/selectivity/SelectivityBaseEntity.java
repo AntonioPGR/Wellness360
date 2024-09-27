@@ -13,15 +13,17 @@ import jakarta.persistence.MappedSuperclass;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @MappedSuperclass
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public abstract class SelectivityBaseEntity extends UniqueIdentifierEntity {
 
-  @Column(name = "user_uuid", nullable = false)
-  String uuid;
+  @Column(name = "user_uuid")
+  String userUuid;
   
   @ManyToOne
   @JoinColumn(name = "recipe_id", nullable = true)
@@ -36,7 +38,7 @@ public abstract class SelectivityBaseEntity extends UniqueIdentifierEntity {
   CategoryEntity category;
 
   public SelectivityBaseEntity(SelectivityCreatePersistenceDTO create_dto) {
-    uuid = create_dto.user_uuid();
+    userUuid = create_dto.user_uuid();
     food = create_dto.food();
     category = create_dto.category();
     recipe = create_dto.recipe();

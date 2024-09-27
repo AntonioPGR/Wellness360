@@ -1,7 +1,6 @@
 package com.wellness360.nutrition.app.food.dtos;
 
 import com.wellness360.nutrition.app.category.dtos.CategoryReturnDTO;
-import com.wellness360.nutrition.app.tag.dtos.TagReturnSimplifiedDTO;
 import com.wellness360.nutrition.packages.crud.dtos.CrudReturnDTO;
 
 public record FoodReturnDTO(
@@ -17,7 +16,6 @@ public record FoodReturnDTO(
   Float dietary_fiber,
   Short serving_amount,
   String image_url,
-  CategoryReturnDTO category,
-  TagReturnSimplifiedDTO tag
+  CategoryReturnDTO category
 ) implements CrudReturnDTO{
 }

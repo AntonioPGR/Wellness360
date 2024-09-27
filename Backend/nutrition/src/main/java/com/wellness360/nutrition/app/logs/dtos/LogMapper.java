@@ -13,11 +13,13 @@ public interface LogMapper {
 
   LogMapper INSTANCE = Mappers.getMapper(LogMapper.class);
 
+  @Mapping(target = "user_uuid", source = "dto.user_uuid")
   LogCreatePersistenceDTO createRequestToPersistence(LogCreateRequestDTO dto, RecipeEntity recipe);
 
   LogReturnDTO entityToReturn(LogEntity entity);
   
   @Mapping(target = "uuid", source = "dto.uuid")
+  @Mapping(target = "user_uuid", source = "dto.user_uuid")
   LogUpdatePersistenceDTO updateRequestToPersistence(LogUpdateRequestDTO dto, RecipeEntity recipe);
 
   LogEntity createPersistenceToEntity(LogCreatePersistenceDTO dto);

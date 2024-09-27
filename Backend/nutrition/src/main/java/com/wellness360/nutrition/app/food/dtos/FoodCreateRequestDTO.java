@@ -16,15 +16,13 @@ public record FoodCreateRequestDTO(
   Float dietary_fiber,
   Short serving_amount,
   MultipartFile file,
-  String tag_uuid,
   String category_uuid
 ) implements CrudStorageCreateRequestDTO{
 
   public void validate(Validator validator) {
     validator.string.validateName(name);
     validator.string.validateText(description, true);
-    validator.string.validateUuid(tag_uuid);
-    validator.string.validateUuid(category_uuid);
+    validator.string.validateUuid(category_uuid, true);
     validator.media.validateImage(file);
     validator.validateNutrient(carbs);
     validator.validateNutrient(proteins);

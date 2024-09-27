@@ -17,13 +17,11 @@ public record FoodUpdateRequestDTO(
   Float dietary_fiber,
   Short serving_amount,
   MultipartFile file,
-  String tag_uuid,
   String category_uuid
 ) implements CrudStorageUpdateRequestDTO{
 
   public void validate(Validator validator) {
     validator.string.validateUuid(uuid, false);
-    validator.string.validateUuid(tag_uuid, true);
     validator.string.validateUuid(category_uuid, true);
     validator.string.validateName(name, true);
     validator.string.validateText(description, true);

@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Bean;
 import com.wellness360.nutrition.packages.storage.StorageService;
 import com.wellness360.nutrition.settings.storage.StorageFolders;
 
-
 @SpringBootApplication
 public class NutritionApplication {
 

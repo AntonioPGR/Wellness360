@@ -23,7 +23,11 @@
         "detail": "Hide everything not immediately required",
         "hidden": [
           "$Default",
-          "src/main/resources/"
+          "src/main/resources/",
+          "wait-for-it.sh",
+          "Dockerfile",
+          "docker-compose.yaml",
+          ".gitignore"
         ]
       }
     ]
@@ -33,8 +37,21 @@
     "**/.svn": true,
     "**/.hg": true,
     "**/CVS": true,
-    "**/.DS_Store": true
+    "**/.DS_Store": true,
+    ".vscode/": true,
+    "flyway.conf": true,
+    "mvnw": true,
+    "mvnw.cmd": true,
+    "pom.xml": true,
+    ".mvn/": true,
+    "target/": true,
+    "src/test/": true,
+    "src/main/resources/": true,
+    "wait-for-it.sh": true,
+    "Dockerfile": true,
+    "docker-compose.yaml": true,
+    ".gitignore": true
   },
-  "hidefiles.selectedProfile": "Show All Files",
+  "hidefiles.selectedProfile": "Strict",
   "java.compile.nullAnalysis.mode": "automatic"
 }

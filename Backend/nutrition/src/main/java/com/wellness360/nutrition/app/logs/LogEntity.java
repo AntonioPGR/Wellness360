@@ -13,10 +13,8 @@ import lombok.*;
 
 @Entity
 @Table(name = "recipes_log")
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data 
+@EqualsAndHashCode(callSuper=false)
 public class LogEntity extends UniqueIdentifierEntity implements CrudEntity<LogUpdatePersistenceDTO>{
 
   @Column(name = "user_uuid", nullable = false)

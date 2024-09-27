@@ -21,34 +21,36 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "users_full")
 @Getter
-@AllArgsConstructor
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class UserFullEntity {
   
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   protected Integer id;
 
-  private String description;
-  private Date birth;
-  private String backdrop_url;
-  private char gender;
-  private int height;
-  private String full_name;
-  private String work_as;
+  public String description;
+  public Date birth;
+  public String backdrop_url;
+  public char gender;
+  public int height;
+  public String full_name;
+  public String work_as;
 
   @CreatedDate
-  private Date created_at;
+  Date created_at;
 
   // user_id
   @OneToOne
   @MapsId
   @JoinColumn(name = "user_id")
-  private UserBasicEntity user;
+  UserBasicEntity user;
 
   public UserFullEntity(UserFullCreateDTO dto) {
     description = dto.description();

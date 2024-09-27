@@ -9,25 +9,28 @@ import com.wellness360.nutrition.app.recipe.section.dtos.SectionCreateRequestDTO
 import com.wellness360.nutrition.packages.crud.dtos.CrudCreateRequestDTO;
 import com.wellness360.nutrition.validation.Validator;
 
-public record RecipeCreateRequestDTO(
-  String name,
-  String description,
-  String user_uuid,
-  String tag_uuid,
-  String category_uuid,
-  List<MultipartFile> media,
-  List<IngredientCreateRequestDTO> ingredients,
-  List<SectionCreateRequestDTO> sections
-) implements CrudCreateRequestDTO {
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-  public void validate(Validator validator) {
-    validator.string.validateName(name);
-    validator.string.validateText(description, true);
-    validator.string.validateUuid(user_uuid);
-    validator.string.validateUuid(tag_uuid);
-    validator.string.validateUuid(category_uuid);
-    media.forEach(image -> validator.media.validateImage(image));
-    ingredients.forEach(ingredient -> ingredient.validate(validator));
-    sections.forEach(sections -> sections.validate(validator));
-  }
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class RecipeCreateRequestDTO implements CrudCreateRequestDTO {
+    
+    private String name;
+    private String description;
+    private String category_uuid;
+    private List<MultipartFile> media;
+    private List<IngredientCreateRequestDTO> ingredients;
+    private List<SectionCreateRequestDTO> sections;
+
+    public void validate(Validator validator) {
+      validator.string.validateName(name);
+      validator.string.validateText(description, true);
+      validator.string.validateUuid(category_uuid);
+      media.forEach(image -> validator.media.validateImage(image));
+      ingredients.forEach(ingredient -> ingredient.validate(validator));
+      sections.forEach(section -> section.validate(validator));
+    }
 }

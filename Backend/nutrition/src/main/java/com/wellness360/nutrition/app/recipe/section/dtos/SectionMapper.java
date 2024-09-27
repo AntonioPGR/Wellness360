@@ -15,7 +15,7 @@ public interface SectionMapper {
 
   SectionCreatePersistenceDTO createRequestToPersistence(SectionCreateRequestDTO dto, RecipeEntity recipe, RecipeEntity included_recipe);
 
-  @Mapping(target = "included_recipe_uuid", source = "entity.included_recipe")
+  @Mapping(target = "included_recipe_uuid", source = "entity.included_recipe.uuid")
   SectionReturnDTO entityToReturn(SectionEntity entity);
 
   @Mapping(target = "uuid", source = "dto.uuid")

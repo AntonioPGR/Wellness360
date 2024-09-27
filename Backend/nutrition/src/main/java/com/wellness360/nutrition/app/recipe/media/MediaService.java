@@ -31,14 +31,13 @@ public class MediaService{
   StorageFolders folder = StorageFolders.recipe;
   
   public void createAll(List<MultipartFile> dto_list, RecipeEntity recipe){
-    IntStream.range(0, dto_list.size()-1)
-      .forEach(index -> create(dto_list.get(index), recipe, index));
+    dto_list.stream().forEach(file -> create(file, recipe));
   }
-  public MediaReturnDTO create(MultipartFile file, RecipeEntity recipe, Integer id){
+  public MediaReturnDTO create(MultipartFile file, RecipeEntity recipe){
     String media_url = storage_service.store(
       file,
       folder.name(),
-      recipe.getName()+"_"+id
+      recipe.getName()
     );
     MediaCreatePersistenceDTO create_dto = new MediaCreatePersistenceDTO(media_url, recipe);
     MediaEntity entity = MediaMappers.INSTANCE.createPersistenceToEntity(create_dto);

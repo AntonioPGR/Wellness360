@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Validated
-@RequestMapping("/categories")
+@RequestMapping("${path.category}")
 public class CategoryController extends CrudStorageController<
   CategoryCreateRequestDTO,
   CategoryUpdateRequestDTO,

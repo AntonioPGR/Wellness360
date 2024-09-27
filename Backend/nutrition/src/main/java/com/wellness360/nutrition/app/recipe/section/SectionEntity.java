@@ -12,10 +12,8 @@ import lombok.*;
 
 @Entity
 @Table(name = "recipes_sections")
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data 
+@EqualsAndHashCode(callSuper=false)
 public class SectionEntity extends UniqueIdentifierEntity implements CrudEntity<SectionUpdatePersistenceDTO>{
 
   @Column(name = "text", nullable = false)

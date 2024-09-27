@@ -30,10 +30,9 @@ public class SectionService{
     dto_list.stream().forEach((dto) -> create(dto, recipe));
   }
   public SectionReturnDTO create(SectionCreateRequestDTO dto, RecipeEntity recipe){
-    String included_recipe_uuid = dto.included_recipe_uuid();
+    String included_recipe_uuid = dto.getIncluded_recipe_uuid();
     RecipeEntity included_recipe = null;
     if(included_recipe_uuid != null) included_recipe = recipe_service.getEntityByUuid(included_recipe_uuid);
-
     SectionCreatePersistenceDTO create_dto = SectionMapper.INSTANCE.createRequestToPersistence(dto, recipe, included_recipe);
     SectionEntity entity = SectionMapper.INSTANCE.createPersistenceToEntity(create_dto);
     entity = repository.save(entity);

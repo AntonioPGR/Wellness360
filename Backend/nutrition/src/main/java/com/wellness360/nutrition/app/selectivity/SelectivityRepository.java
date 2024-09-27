@@ -8,5 +8,5 @@ import com.wellness360.nutrition.packages.crud.repositories.CrudRepository;
 
 @NoRepositoryBean
 public abstract interface SelectivityRepository<Entity> extends CrudRepository<Entity> {
-  List<Entity> findAllByUuid(String uuid);
+  List<Entity> findAllByUserUuid(String uuid);
 }

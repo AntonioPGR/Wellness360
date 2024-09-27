@@ -1,3 +1,49 @@
 {
-  "java.configuration.updateBuildConfiguration": "automatic"
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "hidefiles.configurationType": "local",
+  "hidefiles.globalConfig": {
+    "profiles": [
+      {
+        "name": "Default",
+        "detail": "",
+        "description": "Test",
+        "hidden": [
+          "nutrition/target/",
+          "nutrition/flyway.conf",
+          "nutrition/.gitignore",
+          "nutrition/wait-for-it.sh",
+          "nutrition/src/test/",
+          "nutrition/src/main/resources/META-INF/",
+          "users/.gitignore",
+          "users/wait-for-it.sh",
+          "users/target/",
+          "users/src/test/",
+          "users/src/main/resources/META-INF/"
+        ]
+      },
+      {
+        "name": "Strict",
+        "detail": "Hide everything not immediately required",
+        "hidden": [
+          "$Default",
+          "users/docker-compose.yaml",
+          "users/Dockerfile",
+          "users/pom.xml",
+          "users/media_uploaded/",
+          "nutrition/media_uploaded/",
+          "nutrition/pom.xml",
+          "nutrition/Dockerfile",
+          "nutrition/docker-compose.yaml"
+        ]
+      }
+    ]
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true
+  },
+  "hidefiles.selectedProfile": "Show All Files"
 }

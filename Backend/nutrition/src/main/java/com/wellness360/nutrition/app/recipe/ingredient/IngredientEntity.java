@@ -11,10 +11,8 @@ import com.wellness360.nutrition.packages.crud.entities.interfaces.CrudEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data 
+@EqualsAndHashCode(callSuper=false)
 @Table(name = "recipes_ingredients")
 @Entity
 public class IngredientEntity extends UniqueIdentifierEntity implements CrudEntity<IngredientUpdatePersistenceDTO>{

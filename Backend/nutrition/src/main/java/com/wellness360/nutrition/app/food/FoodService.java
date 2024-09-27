@@ -13,8 +13,6 @@ import com.wellness360.nutrition.app.food.dtos.FoodNutrientsDTO;
 import com.wellness360.nutrition.app.food.dtos.FoodReturnDTO;
 import com.wellness360.nutrition.app.food.dtos.FoodUpdatePersistenceDTO;
 import com.wellness360.nutrition.app.food.dtos.FoodUpdateRequestDTO;
-import com.wellness360.nutrition.app.tag.TagEntity;
-import com.wellness360.nutrition.app.tag.TagService;
 import com.wellness360.nutrition.packages.storage.services.CrudStorageService;
 import com.wellness360.nutrition.settings.storage.StorageFolders;
 
@@ -29,9 +27,6 @@ public class FoodService extends CrudStorageService<
   FoodReturnDTO,
   FoodEntity
 > {
-
-  @Autowired
-  TagService tag_service;
 
   @Autowired
   CategoryService category_service;
@@ -49,17 +44,15 @@ public class FoodService extends CrudStorageService<
   }
 
   public FoodCreatePersistenceDTO getPersistenceCreateDTO(FoodCreateRequestDTO dto, String image_url) {
-    TagEntity tag_entity = tag_service.getEntityByUuid(dto.tag_uuid());
-    CategoryEntity category_entity = category_service.getEntityByUuid(dto.category_uuid());
+    CategoryEntity category_entity = dto.category_uuid() != null? category_service.getEntityByUuid(dto.category_uuid()) : null;
     FoodNutrientsDTO nutrients = new FoodNutrientsDTO(dto);
-    return FoodMapper.INSTANCE.createRequestToPersistence(dto, nutrients, image_url, tag_entity, category_entity);
+    return FoodMapper.INSTANCE.createRequestToPersistence(dto, nutrients, image_url, category_entity);
   }
 
   public FoodUpdatePersistenceDTO getPersistenceUpdateDTO(FoodUpdateRequestDTO dto, String image_url) {
-    TagEntity tag_entity = dto.tag_uuid() != null? tag_service.getEntityByUuid(dto.tag_uuid()) : null;
     CategoryEntity category_entity = dto.category_uuid() != null? category_service.getEntityByUuid(dto.category_uuid()) : null;
     FoodNutrientsDTO nutrients = new FoodNutrientsDTO(dto);
-    return FoodMapper.INSTANCE.updateRequestToPersistence(dto, nutrients, image_url, tag_entity, category_entity);
+    return FoodMapper.INSTANCE.updateRequestToPersistence(dto, nutrients, image_url, category_entity);
   }
 
 

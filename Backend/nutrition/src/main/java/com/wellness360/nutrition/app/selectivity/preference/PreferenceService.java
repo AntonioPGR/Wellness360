@@ -7,8 +7,6 @@ import com.wellness360.nutrition.app.selectivity.SelectivityRepository;
 import com.wellness360.nutrition.app.selectivity.SelectivityService;
 import com.wellness360.nutrition.app.selectivity.dtos.SelectivityCreatePersistenceDTO;
 import com.wellness360.nutrition.app.selectivity.dtos.SelectivityMapper;
-import com.wellness360.nutrition.app.selectivity.dtos.SelectivityReturnDTO;
-
 import jakarta.transaction.Transactional;
 
 
@@ -19,13 +17,8 @@ public class PreferenceService extends SelectivityService<PreferenceEntity>{
   @Autowired
   SelectivityRepository<PreferenceEntity> repository;
 
-  @Override
-  public PreferenceEntity createDTOtoEntity(SelectivityCreatePersistenceDTO dto){
-    return new PreferenceEntity(dto);
-  }
-
-  public SelectivityReturnDTO entityToReturnDTO(PreferenceEntity entity) {
-    return SelectivityMapper.INSTANCE.entityToReturn(entity);
+  public PreferenceEntity persistenceToEntity(SelectivityCreatePersistenceDTO dto){
+    return SelectivityMapper.INSTANCE.createPersistenceToPreference(dto);
   }
 
 }

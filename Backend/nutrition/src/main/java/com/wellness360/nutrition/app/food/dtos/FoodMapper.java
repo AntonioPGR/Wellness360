@@ -7,10 +7,8 @@ import org.mapstruct.factory.Mappers;
 import com.wellness360.nutrition.app.category.CategoryEntity;
 import com.wellness360.nutrition.app.category.dtos.CategoryMapper;
 import com.wellness360.nutrition.app.food.FoodEntity;
-import com.wellness360.nutrition.app.tag.TagEntity;
-import com.wellness360.nutrition.app.tag.dtos.TagMapper;
 
-@Mapper(uses = {CategoryMapper.class, TagMapper.class})
+@Mapper(uses = {CategoryMapper.class})
 public interface FoodMapper {
 
   FoodMapper INSTANCE = Mappers.getMapper(FoodMapper.class);
@@ -18,8 +16,7 @@ public interface FoodMapper {
   @Mapping(source = "dto.name", target = "name")
   @Mapping(source = "dto.description", target = "description")
   @Mapping(source = "image_url", target = "image_url")
-  @Mapping(source = "tag", target = "tag")
-  FoodCreatePersistenceDTO createRequestToPersistence(FoodCreateRequestDTO dto, FoodNutrientsDTO nutrients, String image_url, TagEntity tag, CategoryEntity category);
+  FoodCreatePersistenceDTO createRequestToPersistence(FoodCreateRequestDTO dto, FoodNutrientsDTO nutrients, String image_url, CategoryEntity category);
 
   FoodReturnDTO entityToReturn(FoodEntity entity);
 
@@ -27,8 +24,7 @@ public interface FoodMapper {
   @Mapping(source = "dto.name", target = "name")
   @Mapping(source = "dto.description", target = "description")
   @Mapping(source = "image_url", target = "image_url")
-  @Mapping(source = "tag", target = "tag")
-  FoodUpdatePersistenceDTO updateRequestToPersistence(FoodUpdateRequestDTO dto, FoodNutrientsDTO nutrients, String image_url, TagEntity tag, CategoryEntity category);
+  FoodUpdatePersistenceDTO updateRequestToPersistence(FoodUpdateRequestDTO dto, FoodNutrientsDTO nutrients, String image_url, CategoryEntity category);
 
   
   @Mapping(source="dto.nutrients.calories", target="calories") 

@@ -21,8 +21,8 @@ import lombok.Setter;
 @Table(name = "settings")
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class SettingsEntity{
 
   @Id

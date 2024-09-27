@@ -8,7 +8,6 @@ import com.wellness360.nutrition.app.food.dtos.FoodUpdatePersistenceDTO;
 import com.wellness360.nutrition.app.recipe.ingredient.IngredientEntity;
 import com.wellness360.nutrition.app.selectivity.preference.PreferenceEntity;
 import com.wellness360.nutrition.app.selectivity.restriction.RestrictionEntity;
-import com.wellness360.nutrition.app.tag.TagEntity;
 import com.wellness360.nutrition.packages.crud.entities.NamedDescribedImageEntity;
 import com.wellness360.nutrition.packages.storage.services.interfaces.StorageEntity;
 
@@ -19,8 +18,8 @@ import lombok.*;
 @Table(name = "food")
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class FoodEntity extends NamedDescribedImageEntity implements StorageEntity<FoodUpdatePersistenceDTO>{
 
   // COLUMNS
@@ -48,14 +47,7 @@ public class FoodEntity extends NamedDescribedImageEntity implements StorageEnti
   @Column(name = "serving_amount", nullable = false)
   Short serving_amount = 100;
 
-  // RELATIONSHIPS
   @ManyToOne
-  @NonNull
-  @JoinColumn(name = "tag_id" )
-  TagEntity tag;
-
-  @ManyToOne
-  @NonNull
   @JoinColumn(name = "category_id")
   CategoryEntity category;
 

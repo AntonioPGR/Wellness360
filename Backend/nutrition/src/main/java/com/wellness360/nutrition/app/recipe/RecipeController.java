@@ -1,6 +1,5 @@
 package com.wellness360.nutrition.app.recipe;
 
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,4 +15,5 @@ public class RecipeController extends CrudStorageController<
   RecipeUpdateRequestDTO,
   RecipeReturnDTO,
   RecipeService
->{}
+>{
+}

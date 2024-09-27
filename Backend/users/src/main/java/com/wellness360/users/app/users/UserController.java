@@ -15,6 +15,7 @@ import com.wellness360.users.app.users.dtos.UserCreateDTO;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators.None;
 import com.wellness360.users.app.users.dtos.UserLoginDTO;
 import com.wellness360.users.app.users.dtos.UserReturnTokenDTO;
+import com.wellness360.users.app.users.dtos.UserReturnUuidDTO;
 import com.wellness360.users.app.users.dtos.UserUpdateDTO;
 import com.wellness360.users.app.users.user_basic.dtos.UserBasicReturnDTO;
 import com.wellness360.users.app.users.user_full.dtos.UserFullReturnDTO;
@@ -98,4 +99,10 @@ public class UserController extends CrudStorageController<
     return ResponseEntity.ok().body(token);
   }
   
+  @PostMapping("/authenticate")
+  public UserReturnUuidDTO authenticate() {
+    return service.getCurrentUserUuid();
+  }
+  
+
 }
