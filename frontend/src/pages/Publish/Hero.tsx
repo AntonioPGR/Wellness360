@@ -27,7 +27,7 @@ const StyledTitle = styled.div`
   p{
     font-family: ${p => p.theme.fonts.default};
     font-size: 1.8rem;
-    font-weight: 500;
+    font-weight: normal;
   }
 `
 

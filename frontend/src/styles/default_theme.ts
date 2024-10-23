@@ -12,5 +12,8 @@ export const default_theme : DefaultTheme = {
   fonts: {
     default: '"Gabarito", sans-serif',
     quotes: "",
+  },
+  text_style: {
+    semibold: 500
   }
 } 

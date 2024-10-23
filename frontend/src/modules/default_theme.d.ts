@@ -17,6 +17,9 @@ interface IColors {
 declare module 'styled-components' {
   export interface DefaultTheme {
     colors: IColors,
-    fonts: IFonts
+    fonts: IFonts,
+    text_style: {
+      semibold: number
+    }
   }
 }

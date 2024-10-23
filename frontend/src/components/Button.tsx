@@ -1,22 +1,30 @@
 import styled from "styled-components";
+import { getColor } from "styles/style_functions";
 
-interface ButtonProps{
+interface IButtonProps{
   label: string,
-  onClick: () => void;
+  onClick: () => void,
+  bg?: color_options,
+  text?: color_options,
 }
 
-const StyledButton = styled.button`
+interface IStyledProps{
+  bg: color_options,
+  text: color_options,
+}
+
+const StyledButton = styled.button<IStyledProps>`
   padding: 1.8rem 2.2rem;
-  background-color: ${p => p.theme.colors.Green};
+  background-color: ${p => getColor(p.bg, p.theme)};
   font-family: ${p => p.theme.fonts.default};
   font-size: 2rem;
-  font-weight: 500;
-  color: ${p => p.theme.colors.White};
+  font-weight: ${p => p.theme.text_style.semibold};
+  color: ${p => getColor(p.text, p.theme)};
   border-radius: 1.6rem;
 `
 
-export default function Button(props:ButtonProps){
+export default function Button(props:IButtonProps){
   return <div>
-    <StyledButton onClick={props.onClick}>{props.label}</StyledButton>
+    <StyledButton onClick={props.onClick} bg={props.bg || "green"} text={props.text || "white"}>{props.label}</StyledButton>
   </div>
 }
