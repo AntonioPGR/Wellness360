@@ -1,0 +1,45 @@
+{
+  "hidefiles.configurationType": "local",
+  "hidefiles.globalConfig": {
+    "profiles": [
+      {
+        "name": "Default",
+        "detail": "",
+        "description": "Test",
+        "hidden": [
+          ".vscode/",
+          "README.md",
+          "package.json",
+          "package-lock.json",
+          ".gitignore",
+          "node_modules/"
+        ]
+      },
+      {
+        "name": "Strict",
+        "detail": "Hide everything not immediately required",
+        "hidden": [
+          "$Default",
+          "public/",
+          "tsconfig.json"
+        ]
+      }
+    ]
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    ".vscode/": true,
+    "README.md": true,
+    "package.json": true,
+    "package-lock.json": true,
+    ".gitignore": true,
+    "node_modules/": true,
+    "public/": true,
+    "tsconfig.json": true
+  },
+  "hidefiles.selectedProfile": "Strict"
+}
