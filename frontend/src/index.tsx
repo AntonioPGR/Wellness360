@@ -5,7 +5,10 @@ import "styles/reset.css"
 import { ThemeProvider } from 'styled-components';
 import { default_theme } from 'styles/default_theme';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import PublishPage from 'pages/Publish/Index';
+import LandingPage from 'pages/Landing/Index';
+import LoginPage from 'pages/Session/LoginPage';
+import RegisterPage from 'pages/Session/RegisterPage';
+import RegisterPage2 from 'pages/Session/RegisterPage2';
 
 const router = createBrowserRouter([
   {
@@ -14,7 +17,19 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <PublishPage />
+        element: <LandingPage />
+      },
+      {
+        path: "/login",
+        element: <LoginPage />
+      },
+      {
+        path: "/register",
+        element: <RegisterPage />
+      },
+      {
+        path: "/register2",
+        element: <RegisterPage2 />
       }
     ]
   }

@@ -14,7 +14,6 @@ const StyledTitle = styled.div`
   flex-direction: column;
   gap: 2rem;
   h1{
-    font-family: ${p => p.theme.fonts.default};
     font-size: 6rem;
     font-weight: bold;
     .first{
@@ -25,7 +24,6 @@ const StyledTitle = styled.div`
     }
   }
   p{
-    font-family: ${p => p.theme.fonts.default};
     font-size: 1.8rem;
     font-weight: normal;
   }
@@ -39,7 +37,6 @@ const StyledTags = styled.div`
     border: 1px solid ${p => p.theme.colors.Black};
     padding: 1rem;
     border-radius: 2rem;
-    font-family: ${p => p.theme.fonts.default};
     font-size: 1.2rem;
     font-weight: normal;
   }

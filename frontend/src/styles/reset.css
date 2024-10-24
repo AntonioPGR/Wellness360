@@ -19,6 +19,8 @@ time, mark, audio, video, button, input {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+	font-family: "Gabarito", sans-serif;
+	color: #2C2C2C;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
