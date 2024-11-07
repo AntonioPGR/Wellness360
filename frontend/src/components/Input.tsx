@@ -1,7 +1,7 @@
 import { HTMLInputTypeAttribute } from "react"
 import styled from "styled-components"
 
-interface InputProps{
+export interface InputProps{
   type: HTMLInputTypeAttribute,
   placeholder?: string,
   label?: string
@@ -26,9 +26,9 @@ const StyledDiv = styled.div`
   }
 `
 
-export default function Input(p:InputProps){
+export default function Input({type, label, placeholder}:InputProps){
   return <StyledDiv>
-    {p.label && <label htmlFor={p.label}>{p.label}</label>}
-    <input type={p.type} placeholder={p.placeholder} name={p.label} />
+    {label && <label htmlFor={label}>{label[0].toUpperCase() + label.slice(1) + ":"}</label>}
+    <input type={type} placeholder={placeholder} name={label} />
   </StyledDiv>
 }

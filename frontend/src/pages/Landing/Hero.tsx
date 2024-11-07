@@ -3,7 +3,6 @@ import styled from "styled-components"
 
 const StyledSection = styled.section`
   padding: 64px 32px;
-  max-width: 66rem;
   display: flex;
   flex-direction: column;
   gap: 6rem;
@@ -51,7 +50,7 @@ export default function Hero(){
         about <span className="first">your health</span> <br/> 
         Into <span className="second">your hand</span>
       </h1>
-      <p> Empower your journey to better health with tailored nutrition and fitness guidance. Take control of your well-being, one step at a time, all at your fingertips. </p>
+      <p> Empower your journey to better health with tailored nutrition and fitness guidance. <br/> Take control of your well-being, one step at a time, all at your fingertips. </p>
       <Button label="Get Started" onClick={() => console.log("opa")} />
     </StyledTitle>
 

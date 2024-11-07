@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { getColor } from "styles/style_functions";
+import { getColor } from "styles/StyleFunctions";
 
-interface IButtonProps{
+export interface IButtonProps{
   label: string,
   onClick: () => void,
   bg?: color_options,

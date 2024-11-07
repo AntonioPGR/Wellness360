@@ -1,7 +1,7 @@
 import Button from "components/Button"
 import Input from "components/Input";
 import styled from "styled-components"
-import { getAlign, getColor } from "styles/style_functions"
+import { getAlign, getColor } from "styles/StyleFunctions"
 
 interface ILandingSectProps{
   title: string,
